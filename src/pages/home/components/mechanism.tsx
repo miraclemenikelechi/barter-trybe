@@ -35,7 +35,22 @@ export default function Component() {
                     </div>
                 </section>
 
-                <section className="home__mechanism__right"></section>
+                <section className="home__mechanism__right">
+                    <h3>how barterTrybe works for you</h3>
+                    <span>
+                        <img src="/qr.png" alt="" />
+                    </span>
+
+                    <hr />
+
+                    <p>
+                        Bartertrybe simplifies business management for Nigerian
+                        SMEs. Ditch manual entry with our scannable QR codes!
+                        Track sales, gain AI insights, and connect with other
+                        entrepreneurs. Enjoy features to unlock even more
+                        growth. Sign up today!
+                    </p>
+                </section>
             </div>
         </section>
     );

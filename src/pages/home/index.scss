@@ -135,9 +135,12 @@
         gap: 1.75rem;
         height: 16rem;
         padding: 2rem 1rem;
-        width: 17.875rem;
+        width: 18rem;
 
         @include flex($d: column, $j: flex-start);
+        @include r-bp($type: max, $bp: map.get($map: $desktop, $key: screen-width)) {
+            @include r-w($type: min, $w: 18rem);
+        }
     }
 
     i {
@@ -151,6 +154,8 @@
 
     span {
         color: var(--blue--300);
+        text-align: center;
+
         @include font($f: poppins, $s: base, $w: bold);
     }
 
@@ -169,12 +174,15 @@
     &__wrapper {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+
+        > section {
+            width: 100%;
+        }
     }
 
     &__left {
         background-color: var(--black--100);
         padding-right: 7.5rem;
-        width: 100%;
 
         @include flex($j: flex-end);
 
@@ -234,6 +242,52 @@
 
         figure {
             position: absolute;
+        }
+    }
+
+    &__right {
+        padding: 0 6.25rem 0 3.75rem;
+        gap: 2rem;
+
+        @include flex($d: column, $a: flex-start);
+
+        h3 {
+            $size: map.get(
+                    $map: $fz,
+                    $key: xl
+                ) + 0.25rem;
+
+            color: var(--black--200);
+            text-transform: capitalize;
+
+            @include font($f: poppins, $s: $size, $w: bold);
+        }
+
+        span {
+            border-radius: 0.75rem;
+            height: 23.25rem;
+            overflow: hidden;
+
+            @include flex;
+            @include r-w($type: min, $w: 35rem);
+
+            img {
+                object-fit: cover;
+            }
+        }
+
+        hr {
+            background-color: var(--white--200);
+            height: 0.0625rem;
+
+            @include r-w($type: min, $w: 35rem);
+        }
+
+        p {
+            color: var(--blue--500);
+
+            @include font($f: poppins, $s: base, $w: medium);
+            @include r-w($type: min, $w: 34rem);
         }
     }
 }
