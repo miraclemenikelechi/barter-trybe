@@ -2,6 +2,7 @@ import "./index.scss";
 
 import Features from "./components/features";
 import Header from "./components/header";
+import Mechanism from "./components/mechanism";
 
 export default function Page() {
     return (
@@ -12,6 +13,8 @@ export default function Page() {
                 <main className="home__main">
                     <div className="home__main__wrapper">
                         <Features />
+
+                        <Mechanism />
                     </div>
                 </main>
 

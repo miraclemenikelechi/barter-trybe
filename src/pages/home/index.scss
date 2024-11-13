@@ -96,12 +96,12 @@
     padding: 6.75rem 0 5.5rem 0;
 
     &__wrapper {
-        @include flex;
+        @include flex($d: column);
     }
 }
 
 .home__features {
-    padding-inline: 6.5rem;
+    padding-inline: 6.25rem;
     @include flex;
 
     &__wrapper {
@@ -135,7 +135,7 @@
         gap: 1.75rem;
         height: 16rem;
         padding: 2rem 1rem;
-        width: 288px;
+        width: 17.875rem;
 
         @include flex($d: column, $j: flex-start);
     }
@@ -146,6 +146,7 @@
 
     div {
         @include flex($d: column);
+        width: 100%;
     }
 
     span {
@@ -158,5 +159,81 @@
         text-align: center;
 
         @include font($f: poppins, $s: base, $w: normal);
+    }
+}
+
+.home__mechanism {
+    margin: 10.75rem 0 4.75rem 0;
+    width: 100%;
+
+    &__wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &__left {
+        background-color: var(--black--100);
+        padding-right: 7.5rem;
+        width: 100%;
+
+        @include flex($j: flex-end);
+
+        > div {
+            gap: 4.5rem;
+            height: 49.75rem;
+            position: relative;
+            width: 32rem;
+
+            @include flex($d: column);
+        }
+
+        article {
+            color: var(--white--100);
+            display: grid;
+            grid-template-columns: 1fr 5rem 1fr;
+
+            span {
+                position: relative;
+                @include font($f: inter, $s: xl, $w: medium);
+
+                &:nth-of-type(1) {
+                    text-align: right;
+                }
+
+                &:nth-of-type(2) {
+                    @include flex;
+
+                    &::before {
+                        background-color: var(--blue--100);
+                        border-radius: 50%;
+                        content: attr(data-content);
+                        font-weight: 700;
+                        position: absolute;
+
+                        @include flex;
+                        @include equal(3rem);
+                    }
+                }
+
+                &:nth-of-type(3) {
+                    text-align: left;
+                }
+            }
+
+            &:nth-of-type(2) span {
+                &:nth-of-type(1) {
+                    padding-right: 0.5rem;
+                }
+
+                :nth-of-type(2) &::before {
+                    border: 0.0625rem solid var(--white--100);
+                    @include equal(4.75rem);
+                }
+            }
+        }
+
+        figure {
+            position: absolute;
+        }
     }
 }

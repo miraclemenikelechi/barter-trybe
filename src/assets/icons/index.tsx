@@ -74,3 +74,40 @@ export const FEATURE_CONNECT: FC = () => {
         </svg>
     );
 };
+
+export const MECHANISM_LINE: FC = () => {
+    return (
+        <svg
+            width={2}
+            height={795}
+            viewBox="0 0 2 795"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                stroke="url(#paint0_linear_482_9411)"
+                d="M0.530029 4.01359e-8L0.53001 795"
+            />
+            <defs>
+                <linearGradient
+                    id="paint0_linear_482_9411"
+                    x1={0.029653}
+                    y1={-19.4143}
+                    x2={0.0365855}
+                    y2={813.427}
+                    gradientUnits="userSpaceOnUse"
+                >
+                    <stop
+                        offset={0.0348936}
+                        stopColor="#0C0C0C"
+                        stopOpacity={0.0478094}
+                    />
+                    <stop offset={0.0456297} stopOpacity={0} />
+                    <stop offset={0.382481} stopColor="#fff" />
+                    <stop offset={0.687124} stopColor="#fff" />
+                    <stop offset={0.923324} />
+                </linearGradient>
+            </defs>
+        </svg>
+    );
+};
