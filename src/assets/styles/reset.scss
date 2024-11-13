@@ -1,0 +1,46 @@
+@use "mixins" as *;
+@use "variables" as *;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    // background: rgba(139, 0, 0, 0.1) !important;
+}
+
+html {
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+button,
+input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+
+    @include flex;
+}
+
+img,
+svg {
+    @include equal;
+}
+
+i {
+    @include flex;
+}

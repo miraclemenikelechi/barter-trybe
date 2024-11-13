@@ -12,7 +12,7 @@
 - Initialize the project with React.
 - Install necessary dependencies and tools.
 
-### 2. Landing Page Development (Weeks 2)
+### 2. Landing Page Development (Week 2)
 -  Implement the main layout and structure of the landing page.
 -  Integrate images, icons and animations.
 - Ensure cross-browser compatibility.
@@ -30,7 +30,7 @@
 - Implement layout and components for inventory management.
 - Develop features for adding, editing, and deleting inventory items.
 
-### 6. Community-Features (Weeks 8)
+### 6. Community-Features (Week 8)
 - Create customer-facing UI components.
 - Ensure seamless user experience and intuitive navigation.
 

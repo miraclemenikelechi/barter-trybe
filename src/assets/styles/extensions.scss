@@ -1,0 +1,7 @@
+@use "sass:map";
+@use "mixins" as *;
+@use "variables" as *;
+
+%section-container {
+    @include r-w($type: min, $w: map.get($map: $desktop, $key: home-section-width));
+}

@@ -1,0 +1,80 @@
+// this mixin will generate css variables from scss variables
+// see "mixins.scss/generate-css-vars" for definition
+@mixin generate-css-variables($map: null, $prefix: null) {
+    @each $key, $value in $map {
+        @if $prefix {
+            --#{$prefix}-#{$key}: #{$value};
+        } @else {
+            --#{$key}: #{$value};
+        }
+    }
+}
+
+// scss variables
+$colors: (
+    "blue--100":
+        rgba(
+            $color: #0070ff,
+            $alpha: 100%
+        ),
+    "blue--200":
+        rgba(
+            $color: #1b3c55,
+            $alpha: 20%
+        ),
+    "black--100":
+        rgba(
+            $color: #000000,
+            $alpha: 100%
+        ),
+    "white--100":
+        rgba(
+            $color: #ffffff,
+            $alpha: 100%
+        )
+);
+
+// breakpoints
+$desktop: (
+    "screen-width": 90rem,
+    "home-section-width": 77.5rem
+);
+
+// fonts
+$fw: (
+    // font-weight
+    "thin": 100,
+    "light": 300,
+    "regular": 400,
+    "medium": 500,
+    "semibold": 600,
+    "bold": 700,
+    "extrabold": 800,
+    "black": 900
+);
+
+$fz: (
+    "xs": 0.75rem,
+    "sm": 0.875rem,
+    "base": 1rem
+);
+
+$ff: (
+    "sans": (
+        "DM Sans",
+        sans-serif
+    ),
+    "poppins": (
+        "Poppins",
+        sans-serif
+    ),
+    "inter": (
+        "Inter",
+        sans-serif
+    )
+);
+
+:root {
+    @include generate-css-variables($map: $colors);
+    @include generate-css-variables($map: $desktop, $prefix: desktop);
+}
