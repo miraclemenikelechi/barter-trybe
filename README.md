@@ -9,8 +9,8 @@
 
 ### 1. Project Setup (Week 1)
 - **Task**: Set up the project repository and environment.
--- Initialize the project with React.
--- Install necessary dependencies and tools.
+- Initialize the project with React.
+- Install necessary dependencies and tools.
 
 ### 2. Landing Page Development (Weeks 2)
 -  Implement the main layout and structure of the landing page.
