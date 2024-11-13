@@ -91,3 +91,72 @@
         @include font($f: inter, $s: $size, $w: medium);
     }
 }
+
+.home__main {
+    padding: 6.75rem 0 5.5rem 0;
+
+    &__wrapper {
+        @include flex;
+    }
+}
+
+.home__features {
+    padding-inline: 6.5rem;
+    @include flex;
+
+    &__wrapper {
+        gap: 2.75rem;
+
+        @extend %section-container;
+        @include flex($d: column);
+    }
+
+    h3 {
+        $size: map.get(
+                $map: $fz,
+                $key: xl
+            ) + 0.25rem;
+
+        color: var(--black--200);
+        text-transform: capitalize;
+
+        @include font($f: poppins, $s: $size, $w: bold);
+    }
+
+    ul {
+        gap: 2rem;
+        @include flex;
+    }
+
+    li {
+        border-radius: 0.75rem;
+        border: 0.0625rem solid rgba(0, 0, 0, 0.1);
+        box-shadow: 0rem 0.125rem 0.25rem 0rem rgba(0, 0, 0, 0.125);
+        gap: 1.75rem;
+        height: 16rem;
+        padding: 2rem 1rem;
+        width: 288px;
+
+        @include flex($d: column, $j: flex-start);
+    }
+
+    i {
+        @include equal(2.25rem);
+    }
+
+    div {
+        @include flex($d: column);
+    }
+
+    span {
+        color: var(--blue--300);
+        @include font($f: poppins, $s: base, $w: bold);
+    }
+
+    p {
+        color: var(--blue--400);
+        text-align: center;
+
+        @include font($f: poppins, $s: base, $w: normal);
+    }
+}

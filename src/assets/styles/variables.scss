@@ -22,9 +22,24 @@ $colors: (
             $color: #1b3c55,
             $alpha: 20%
         ),
+    "blue--300":
+        rgba(
+            $color: #252b42,
+            $alpha: 100%
+        ),
+    "blue--400":
+        rgba(
+            $color: #374754,
+            $alpha: 100%
+        ),
     "black--100":
         rgba(
             $color: #000000,
+            $alpha: 100%
+        ),
+    "black--200":
+        rgba(
+            $color: #060505,
             $alpha: 100%
         ),
     "white--100":
