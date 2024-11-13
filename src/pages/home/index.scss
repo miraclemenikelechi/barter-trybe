@@ -28,6 +28,7 @@
         z-index: 5;
 
         @extend %section-container;
+        @include space($type: v, $size: 35vh);
     }
 
     &__logo {
@@ -63,5 +64,30 @@
 
         @include flex;
         @include font($f: poppins, $s: sm, $w: medium);
+    }
+
+    &__hero {
+        @include flex($d: column);
+    }
+
+    h1 {
+        color: var(--white--100);
+        line-height: map.get($map: $fz, $key: xxl);
+        text-transform: capitalize;
+        white-space: nowrap;
+
+        @include font($f: inter, $s: xxl, $w: extrabold);
+    }
+
+    p {
+        $size: map.get(
+                $map: $fz,
+                $key: lg
+            ) + 0.25rem;
+
+        color: var(--white--100);
+        margin: 1rem 0 2rem 0;
+
+        @include font($f: inter, $s: $size, $w: medium);
     }
 }

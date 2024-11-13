@@ -17,6 +17,17 @@ export default function Component() {
                         <Link to={""}>get started</Link>
                     </div>
                 </nav>
+
+                <section className="home__header__hero">
+                    <h1>unlock actionable insights with BarterTrybe</h1>
+                    <p>
+                        Transform your busniess with our comprehensive Busniess
+                        Intelligence platform
+                    </p>
+                    <Link to={""} className="home__header__cta">
+                        get started
+                    </Link>
+                </section>
             </div>
         </header>
     );
