@@ -1,6 +1,11 @@
-import { FEATURE_CONNECT, FEATURE_INSIGHTS, FEATURE_SALES, FEATURE_TRUST } from "@/assets/icons";
+import {
+    FeatureConnect,
+    FeatureInsights,
+    FeatureSales,
+    FeatureTrust,
+} from "@/assets/icons";
 
-import { Feature, NavigationLink, Step } from "./types";
+import { Feature, NavigationLink, Step, Testimonial } from "./types";
 
 export const NAVIGATION_LINKS: NavigationLink[] = [
     { href: "", label: "home" },
@@ -11,24 +16,28 @@ export const NAVIGATION_LINKS: NavigationLink[] = [
 
 export const FEATURES: Feature[] = [
     {
-        icon: FEATURE_INSIGHTS,
+        icon: FeatureInsights,
         title: "AI-Powered Insights",
-        description: "Gain valuable customer trends, product performance & sales forecasts."
+        description:
+            "Gain valuable customer trends, product performance & sales forecasts.",
     },
     {
-        icon: FEATURE_SALES,
+        icon: FeatureSales,
         title: "Effortless Sales Tracking",
-        description: "Ditch manual entries! Use unique scan codes to digitize your sales data."
+        description:
+            "Ditch manual entries! Use unique scan codes to digitize your sales data.",
     },
     {
-        icon: FEATURE_TRUST,
+        icon: FeatureTrust,
         title: "Build Trust & Credibility",
-        description: "Earn a Trust Score based on customer reviews and performance."
+        description:
+            "Earn a Trust Score based on customer reviews and performance.",
     },
     {
-        icon: FEATURE_CONNECT,
+        icon: FeatureConnect,
         title: "Connect & Grow Your Business",
-        description: "Network with other entrepreneurs and explore new opportunities."
+        description:
+            "Network with other entrepreneurs and explore new opportunities.",
     },
 ];
 
@@ -36,26 +45,74 @@ export const MECHANISM_STEPS: Step[] = [
     {
         after: "Register Your Business",
         before: "",
-        content: "1"
+        content: "1",
     },
     {
         after: "",
         before: "Get Your Unique <br> Scan Code",
-        content: "2"
+        content: "2",
     },
     {
         after: "Customers Scan Qr <br> and fill form",
         before: "",
-        content: "3"
+        content: "3",
     },
     {
         after: "",
         before: "Track Sales <br> with Ease",
-        content: "4"
+        content: "4",
     },
     {
         after: "Unlock AI-powered <br> Insights",
         before: "",
-        content: "5"
+        content: "5",
+    },
+];
+
+export const TESTIMONIES: Testimonial[] = [
+    {
+        content: `
+        BarterTrybe has helped me take charge of my business data, i can now make
+        informed decisions and increase profit
+        `,
+        image: "yusuf.png",
+        job: "Hanel Supermarket",
+        name: "Ali Yusuf",
+    },
+    {
+        content: `
+        BarterTrybe has made it easy for me to track my sales and know where to
+        improve upon
+        `,
+        image: "mike.png",
+        job: "Jubilee Mart",
+        name: "Mike Mayor",
+    },
+    {
+        content: `
+        BarterTrybe has made it easy to get my business analytics, and receive
+        proper sales data
+        `,
+        image: "ugo.png",
+        job: "Uche and Sons Global ",
+        name: "Uche Mogalu",
+    },
+    {
+        content: `
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+        eirmod tempor invidunt ut labore et dolore magna
+        `,
+        image: "doe.png",
+        job: "JohnDoe Company",
+        name: "John Doe",
+    },
+    {
+        content: `
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas tenetur
+        veritatis unde deleniti magnam omnis? Explicabo id recusandae commodi ad.
+        `,
+        image: "doe.png",
+        job: "JaneDoe Company",
+        name: "Jane Doe",
     },
 ];

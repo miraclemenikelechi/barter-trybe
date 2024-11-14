@@ -16,3 +16,10 @@ export type Step = {
     before: string;
     content: string;
 };
+
+export type Testimonial = {
+    content: string;
+    image: string;
+    job: string;
+    name: string;
+};

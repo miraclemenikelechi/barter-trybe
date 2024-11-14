@@ -1,4 +1,4 @@
-import { MECHANISM_LINE } from "@/assets/icons";
+import { MechanismLine } from "@/assets/icons";
 import { purifyMarkup } from "@/utils/purify-markup";
 
 import { MECHANISM_STEPS } from "../config";
@@ -10,7 +10,7 @@ export default function Component() {
                 <section className="home__mechanism__left">
                     <div>
                         <figure>
-                            <MECHANISM_LINE />
+                            <MechanismLine />
                         </figure>
 
                         {MECHANISM_STEPS.map(function (value, index) {

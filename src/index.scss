@@ -1,10 +1,14 @@
 // this file is the main entry point of css styles
 @use "@styles/" as *;
 
-// import tailwindcss in scss
+// tailwindcss
 @use "tailwindcss/base";
 @use "tailwindcss/components";
 @use "tailwindcss/utilities";
+
+// slick carousel
+@use "slick-carousel/slick/slick.css";
+@use "slick-carousel/slick/slick-theme.css";
 
 @layer base {
     :root {
@@ -32,7 +36,7 @@
         --chart-3: 197 37% 24%;
         --chart-4: 43 74% 66%;
         --chart-5: 27 87% 67%;
-        --radius: 0.5rem
+        --radius: 0.5rem;
     }
 
     .dark {
@@ -59,7 +63,7 @@
         --chart-2: 160 60% 45%;
         --chart-3: 30 80% 55%;
         --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%
+        --chart-5: 340 75% 55%;
     }
 }
 

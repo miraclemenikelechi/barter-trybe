@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-export const FEATURE_INSIGHTS: FC = () => {
+export const FeatureInsights: FC = () => {
     return (
         <svg
             width={40}
@@ -24,7 +24,7 @@ export const FEATURE_INSIGHTS: FC = () => {
     );
 };
 
-export const FEATURE_SALES: FC = () => {
+export const FeatureSales: FC = () => {
     return (
         <svg
             width={36}
@@ -41,7 +41,7 @@ export const FEATURE_SALES: FC = () => {
     );
 };
 
-export const FEATURE_TRUST: FC = () => {
+export const FeatureTrust: FC = () => {
     return (
         <svg
             width={36}
@@ -58,7 +58,7 @@ export const FEATURE_TRUST: FC = () => {
     );
 };
 
-export const FEATURE_CONNECT: FC = () => {
+export const FeatureConnect: FC = () => {
     return (
         <svg
             width={36}
@@ -75,7 +75,7 @@ export const FEATURE_CONNECT: FC = () => {
     );
 };
 
-export const MECHANISM_LINE: FC = () => {
+export const MechanismLine: FC = () => {
     return (
         <svg
             width={2}
@@ -108,6 +108,46 @@ export const MECHANISM_LINE: FC = () => {
                     <stop offset={0.923324} />
                 </linearGradient>
             </defs>
+        </svg>
+    );
+};
+
+export const ArrowRight: FC = () => {
+    return (
+        <svg
+            width={15}
+            height={14}
+            viewBox="0 0 15 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M8.25 13l6-6-6-6M13.25 7H.75"
+                stroke="#000"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};
+
+export const ArrowLeft: FC = () => {
+    return (
+        <svg
+            width={15}
+            height={14}
+            viewBox="0 0 15 14"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M6.75 1l-6 6 6 6M1.75 7h12.5"
+                stroke="#000"
+                strokeWidth={1.5}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
         </svg>
     );
 };
