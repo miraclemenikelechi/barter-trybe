@@ -37,6 +37,11 @@ $colors: (
             $color: #33384E,
             $alpha: 100%
         ),
+    "blue--600":
+        rgba(
+            $color: #B1D4FF,
+            $alpha: 100%
+        ),
     "black--100":
         rgba(
             $color: #000000,
@@ -45,6 +50,11 @@ $colors: (
     "black--200":
         rgba(
             $color: #060505,
+            $alpha: 100%
+        ),
+    "black--300":
+        rgba(
+            $color: #868686,
             $alpha: 100%
         ),
     "white--100":

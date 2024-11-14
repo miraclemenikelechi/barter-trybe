@@ -3,6 +3,7 @@ import "./index.scss";
 import Features from "./components/features";
 import Header from "./components/header";
 import Mechanism from "./components/mechanism";
+import Pricing from "./components/pricing";
 import Testimonials from "./components/testimonials";
 
 export default function Page() {
@@ -18,6 +19,8 @@ export default function Page() {
                         <Mechanism />
 
                         <Testimonials />
+
+                        <Pricing />
                     </div>
                 </main>
 

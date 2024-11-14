@@ -5,7 +5,7 @@ import {
     FeatureTrust,
 } from "@/assets/icons";
 
-import { Feature, NavigationLink, Step, Testimonial } from "./types";
+import { Feature, NavigationLink, PricingPlan, Step, Testimonial } from "./types";
 
 export const NAVIGATION_LINKS: NavigationLink[] = [
     { href: "", label: "home" },
@@ -114,5 +114,42 @@ export const TESTIMONIES: Testimonial[] = [
         image: "doe.png",
         job: "JaneDoe Company",
         name: "Jane Doe",
+    },
+];
+
+
+export const PRICING_PLANS: PricingPlan[] = [
+    {
+        description: "Best for Lorem",
+        features: [
+            `Feature Here`,
+            `Feature Here`,
+            `Feature Here`,
+        ],
+        href: "",
+        price: 0,
+        title: "barter lite",
+    },
+    {
+        description: "Best for Lorem",
+        features: [
+            `Feature Here`,
+            `Feature Here`,
+            `Feature Here`,
+        ],
+        href: "#",
+        price: 1300,
+        title: "barter pro",
+    },
+    {
+        description: "Best for Lorem",
+        features: [
+            `Feature Here`,
+            `Feature Here`,
+            `Feature Here`,
+        ],
+        href: "#",
+        price: 4000,
+        title: "barter max",
     },
 ];

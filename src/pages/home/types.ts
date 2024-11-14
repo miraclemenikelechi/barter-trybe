@@ -23,3 +23,11 @@ export type Testimonial = {
     job: string;
     name: string;
 };
+
+export type PricingPlan = {
+    description: string;
+    features: string[];
+    href: string;
+    price: number;
+    title: string;
+};
