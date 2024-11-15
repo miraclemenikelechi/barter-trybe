@@ -1,6 +1,7 @@
 import "./index.scss";
 
 import Features from "./components/features";
+import Footer from "./components/footer";
 import Header from "./components/header";
 import Mechanism from "./components/mechanism";
 import Partners from "./components/partners";
@@ -27,7 +28,7 @@ export default function Page() {
                     </div>
                 </main>
 
-                <footer></footer>
+                <Footer />
             </div>
         </section>
     );

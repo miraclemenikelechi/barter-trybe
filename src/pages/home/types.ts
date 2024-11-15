@@ -31,3 +31,8 @@ export type PricingPlan = {
     price: number;
     title: string;
 };
+
+export type Social = {
+    href: string;
+    icon: FC;
+};

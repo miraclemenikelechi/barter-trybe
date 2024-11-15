@@ -3,9 +3,13 @@ import {
     FeatureInsights,
     FeatureSales,
     FeatureTrust,
+    Instagram,
+    LinkedIn,
+    X,
+    Youtube,
 } from "@/assets/icons";
 
-import { Feature, NavigationLink, PricingPlan, Step, Testimonial } from "./types";
+import { Feature, NavigationLink, PricingPlan, Social, Step, Testimonial } from "./types";
 
 export const NAVIGATION_LINKS: NavigationLink[] = [
     { href: "", label: "home" },
@@ -151,5 +155,39 @@ export const PRICING_PLANS: PricingPlan[] = [
         href: "#",
         price: 4000,
         title: "barter max",
+    },
+];
+
+export const FOOTER_LINKS: NavigationLink[] = [
+    {
+        href: "",
+        label: "Privacy Policy",
+    },
+    {
+        href: "",
+        label: "Terms of Service",
+    },
+    {
+        href: "",
+        label: "Cookies Settings",
+    }
+];
+
+export const FOOTER_SOCIALS: Social[] = [
+    {
+        href: "",
+        icon: X,
+    },
+    {
+        href: "",
+        icon: LinkedIn,
+    },
+    {
+        href: "",
+        icon: Instagram,
+    },
+    {
+        href: "",
+        icon: Youtube,
     },
 ];

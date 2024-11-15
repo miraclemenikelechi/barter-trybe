@@ -566,6 +566,54 @@
     }
 }
 
+.home__footer {
+    background-color: var(--black--100);
+    padding: 2.5rem 6.25rem 5rem 6.25rem;
+    @include flex;
+
+    &__wrapper {
+        @extend %section-container;
+    }
+
+    &__top {
+        span {
+            width: 9rem;
+            height: 2.75rem;
+        }
+
+        ul {
+            gap: 0.75rem;
+        }
+
+        li {
+            @include flex;
+            @include equal(2rem);
+        }
+    }
+
+    hr {
+        margin: 2.25rem 0 1rem 0;
+    }
+
+    &__bottom {
+        @include font($f: inter, $s: sm, $w: normal);
+
+        ul {
+            gap: 1.5rem;
+        }
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+    section,
+    ul {
+        color: var(--white--400);
+        @include flex($j: space-between);
+    }
+}
+
 .home__features h3,
 .home__mechanism h3,
 .home__partners h3,
@@ -582,6 +630,7 @@
     @include font($f: poppins, $s: $size, $w: bold);
 }
 
+.home__footer hr,
 .home__mechanism hr,
 .home__testimonials hr {
     background-color: var(--white--200);
