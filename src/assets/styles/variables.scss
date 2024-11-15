@@ -34,12 +34,12 @@ $colors: (
         ),
     "blue--500":
         rgba(
-            $color: #33384E,
+            $color: #33384e,
             $alpha: 100%
         ),
     "blue--600":
         rgba(
-            $color: #B1D4FF,
+            $color: #b1d4ff,
             $alpha: 100%
         ),
     "black--100":
@@ -64,17 +64,22 @@ $colors: (
         ),
     "white--200":
         rgba(
-            $color: #D9D9D9,
+            $color: #d9d9d9,
             $alpha: 100%
         ),
     "white--300":
         rgba(
-            $color: #F4F4F4,
+            $color: #f4f4f4,
             $alpha: 100%
         ),
     "white--400":
         rgba(
-            $color: #F8F9FA,
+            $color: #f8f9fa,
+            $alpha: 100%
+        ),
+    "white--500":
+        rgba(
+            $color: #f0f0f0,
             $alpha: 100%
         )
 );

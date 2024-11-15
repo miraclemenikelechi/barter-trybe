@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { FC } from "react";
 
 export const FeatureInsights: FC = () => {
@@ -256,6 +257,136 @@ export const Youtube: FC = () => {
                 d="M22.149 2.17c.363.365.623.818.755 1.316.489 1.835.489 5.661.489 5.661s0 3.827-.489 5.662a2.936 2.936 0 01-2.066 2.079c-1.827.491-9.13.491-9.13.491s-7.302 0-9.13-.491a2.937 2.937 0 01-2.065-2.08c-.489-1.834-.489-5.66-.489-5.66s0-3.827.489-5.662a2.937 2.937 0 012.066-2.08c1.827-.491 9.13-.491 9.13-.491s7.302 0 9.129.491c.496.136.948.399 1.31.764zm-6.723 6.973L9.318 5.67v6.95l6.108-3.476z"
                 fill="#F8F9FA"
             />
+        </svg>
+    );
+};
+
+export const Auth_Decoration: FC = () => {
+    return (
+        <svg
+            width={486}
+            height={422}
+            viewBox="0 0 486 422"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <g opacity={0.7} clipPath="url(#clip0_76_16487)">
+                <g filter="url(#filter0_b_76_16487)">
+                    <path
+                        d="M445.76 517.844c0 261.791-225.339 477.843-508.168 477.843-282.828 0-508.167-216.052-508.167-477.843C-570.575 256.052-345.236 40-62.408 40 220.421 40 445.76 256.052 445.76 517.844z"
+                        stroke="url(#paint0_radial_76_16487)"
+                        strokeOpacity={0.7}
+                        strokeWidth={80}
+                    />
+                </g>
+                <g filter="url(#filter1_b_76_16487)">
+                    <path
+                        d="M351.452 515.747c0 213.422-183.66 389.307-413.86 389.307-230.2 0-413.861-175.885-413.861-389.307 0-213.422 183.661-389.307 413.86-389.307 230.201 0 413.861 175.885 413.861 389.307z"
+                        stroke="url(#paint1_radial_76_16487)"
+                        strokeWidth={60}
+                    />
+                </g>
+                <path
+                    d="M252.681 515.745c0 161.056-138.895 295.445-315.089 295.445-176.193 0-315.088-134.389-315.088-295.445 0-161.056 138.895-295.445 315.088-295.445 176.194 0 315.089 134.389 315.089 295.445z"
+                    stroke="url(#paint2_radial_76_16487)"
+                    strokeOpacity={0.81}
+                    strokeWidth={80}
+                />
+            </g>
+            <defs>
+                <filter
+                    id="filter0_b_76_16487"
+                    x={-620.575}
+                    y={-10}
+                    width={1116.34}
+                    height={1055.69}
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolationFilters="sRGB"
+                >
+                    <feFlood floodOpacity={0} result="BackgroundImageFix" />
+                    <feGaussianBlur in="BackgroundImageFix" stdDeviation={5} />
+                    <feComposite
+                        in2="SourceAlpha"
+                        operator="in"
+                        result="effect1_backgroundBlur_76_16487"
+                    />
+                    <feBlend
+                        in="SourceGraphic"
+                        in2="effect1_backgroundBlur_76_16487"
+                        result="shape"
+                    />
+                </filter>
+                <filter
+                    id="filter1_b_76_16487"
+                    x={-516.269}
+                    y={86.4404}
+                    width={907.721}
+                    height={858.613}
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolationFilters="sRGB"
+                >
+                    <feFlood floodOpacity={0} result="BackgroundImageFix" />
+                    <feGaussianBlur in="BackgroundImageFix" stdDeviation={5} />
+                    <feComposite
+                        in2="SourceAlpha"
+                        operator="in"
+                        result="effect1_backgroundBlur_76_16487"
+                    />
+                    <feBlend
+                        in="SourceGraphic"
+                        in2="effect1_backgroundBlur_76_16487"
+                        result="shape"
+                    />
+                </filter>
+                <radialGradient
+                    id="paint0_radial_76_16487"
+                    cx={0}
+                    cy={0}
+                    r={1}
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(15.4167 689.37964 -729.70856 16.31857 -77.825 540.499)"
+                >
+                    <stop
+                        offset={0.654764}
+                        stopColor="#E2F6FC"
+                        stopOpacity={0.36}
+                    />
+                    <stop offset={1} stopColor="#FC9" stopOpacity={0.84} />
+                </radialGradient>
+                <radialGradient
+                    id="paint1_radial_76_16487"
+                    cx={0}
+                    cy={0}
+                    r={1}
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="rotate(88.719 -310.53 228.753) scale(558.341 591.005)"
+                >
+                    <stop
+                        offset={0.654764}
+                        stopColor="#E2F6FC"
+                        stopOpacity={0.36}
+                    />
+                    <stop offset={1} stopColor="#FC9" stopOpacity={0.84} />
+                </radialGradient>
+                <radialGradient
+                    id="paint2_radial_76_16487"
+                    cx={0}
+                    cy={0}
+                    r={1}
+                    gradientUnits="userSpaceOnUse"
+                    gradientTransform="rotate(88.719 -307.405 228.195) scale(446.673 472.804)"
+                >
+                    <stop
+                        offset={0.654764}
+                        stopColor="#E2F6FC"
+                        stopOpacity={0.36}
+                    />
+                    <stop offset={1} stopColor="#48B7D6" stopOpacity={0} />
+                </radialGradient>
+                <clipPath id="clip0_76_16487">
+                    <path fill="#fff" d="M0 0H486V422H0z" />
+                </clipPath>
+            </defs>
         </svg>
     );
 };
