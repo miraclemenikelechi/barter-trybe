@@ -3,23 +3,15 @@
 
 .home__header {
     background-image: url("/hero.jpeg");
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
     height: 100vh;
     padding-inline: 6.25rem;
-    position: relative;
 
+    @extend %image-with-dark-overlay;
     @include flex($a: flex-start);
 
     &::before {
         background: linear-gradient(0deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1));
-        content: "";
-        opacity: 0.75;
-        position: absolute;
-
-        @include equal;
-        @include flex;
+        opacity: 90%;
     }
 
     &__wrapper {
@@ -174,8 +166,6 @@
     &__left {
         background-color: var(--black--100);
         padding-right: 7.5rem;
-        border-top-right-radius: 1.5rem;
-        border-bottom-right-radius: 1.5rem;
 
         @include flex($j: flex-end);
 
@@ -520,26 +510,12 @@
     }
 
     section {
-        background-image: url("footer.jpeg");
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background-image: url("/footer.jpeg");
         border-radius: 2.5rem;
         gap: 1.75rem;
         height: 22.5rem;
-        position: relative;
-        overflow: hidden;
 
-        &::before {
-            background-color: rgba(0, 0, 0, 0.5);
-            content: "";
-            left: 0;
-            position: absolute;
-            top: 0;
-
-            @include equal;
-        }
-
+        @extend %image-with-dark-overlay;
         @extend %section-container;
         @include flex($d: column);
 

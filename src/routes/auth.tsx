@@ -1,19 +1,15 @@
 import { RouteObject } from "react-router-dom";
 
+import SignIn from "@/pages/authentication/signin";
 import AuthLayout from "@/views/auth";
 
 export const AUTHENTICATION: RouteObject[] = [
     {
-        path: "auth",
         element: <AuthLayout />,
         children: [
             {
-                index: true,
-                element: <>oauth</>,
-            },
-            {
                 path: "login",
-                element: <>login</>,
+                element: <SignIn />,
             },
             {
                 path: "signup",

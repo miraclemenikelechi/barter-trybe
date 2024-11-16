@@ -1,5 +1,12 @@
-import { Fragment, ReactNode } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactNode } from "react";
+
+const queryClient: QueryClient = new QueryClient();
 
 export default function Component({ children }: { children: ReactNode }) {
-    return <Fragment>{children}</Fragment>;
+    return (
+        <QueryClientProvider client={queryClient}>
+            {children}
+        </QueryClientProvider>
+    );
 }

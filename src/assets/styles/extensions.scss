@@ -5,3 +5,21 @@
 %section-container {
     @include r-w($type: min, $w: map.get($map: $desktop, $key: home-section-width));
 }
+
+%image-with-dark-overlay {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        background-color: rgba(0, 0, 0, 0.5);
+        content: "";
+        left: 0;
+        position: absolute;
+        top: 0;
+
+        @include equal;
+    }
+}

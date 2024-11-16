@@ -1,0 +1,47 @@
+@use "extensions" as *;
+@use "mixins" as *;
+
+.authentication {
+    &__wrapper {
+        gap: 6.5rem;
+        height: 100vh;
+        padding: 1rem 1.5rem;
+
+        @include flex();
+    }
+
+    &__left {
+        background-image: url("/auth.jpeg");
+        border-radius: 1.25rem;
+
+        @extend %image-with-dark-overlay;
+        @include equal;
+        @include r-w($type: min, $p: 50%, $w: 44.5rem);
+
+        span {
+            height: 6.25rem;
+            margin-inline: auto;
+            margin-top: 17.75rem;
+            position: relative;
+            width: 21rem;
+            z-index: 2;
+
+            @include flex;
+        }
+
+        figure {
+            bottom: -2rem;
+            left: -2rem;
+            position: absolute;
+        }
+    }
+
+    &__right {
+        @include flex;
+        @include r-w($type: min, $p: 50%, $w: 32.75rem);
+
+        > * {
+            width: 100%;
+        }
+    }
+}

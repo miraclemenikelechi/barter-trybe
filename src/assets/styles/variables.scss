@@ -42,6 +42,16 @@ $colors: (
             $color: #b1d4ff,
             $alpha: 100%
         ),
+    "blue--700":
+        rgba(
+            $color: #6e7191,
+            $alpha: 100%
+        ),
+    "blue--800":
+        rgba(
+            $color: #d0d5dd,
+            $alpha: 100%
+        ),
     "black--100":
         rgba(
             $color: #000000,
@@ -123,6 +133,10 @@ $ff: (
     ),
     "inter": (
         "Inter",
+        sans-serif
+    ),
+    "ubuntu": (
+        "Ubuntu",
         sans-serif
     )
 );
