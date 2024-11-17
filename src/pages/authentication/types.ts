@@ -5,7 +5,11 @@ import {
 } from "react";
 import { z } from "zod";
 
-import { ForgotPasswordSchema, SigninSchema } from "./utils/validation";
+import {
+    ForgotPasswordSchema,
+    ResetPasswordSchema,
+    SigninSchema,
+} from "./utils/validation";
 
 export type FormInputProps = InputHTMLAttributes<HTMLInputElement> & {
     error?: string;
@@ -43,3 +47,5 @@ export type ForgotPasswordResponse = {
         token: string;
     };
 };
+
+export type ResetPasswordRequest = z.infer<typeof ResetPasswordSchema>;

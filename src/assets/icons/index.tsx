@@ -390,3 +390,30 @@ export const Auth_Decoration: FC = () => {
         </svg>
     );
 };
+
+export const PasswordResetCheck: FC = () => {
+    return (
+        <svg
+            width={120}
+            height={120}
+            viewBox="0 0 120 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <rect
+                width={120}
+                height={120}
+                rx={60}
+                fill="#34A853"
+                fillOpacity={0.05}
+            />
+            <path
+                d="M47.5 60l8.333 8.333L72.5 51.667M97.5 60c0 20.71-16.79 37.5-37.5 37.5S22.5 80.71 22.5 60 39.29 22.5 60 22.5 97.5 39.29 97.5 60z"
+                stroke="#34A853"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+            />
+        </svg>
+    );
+};

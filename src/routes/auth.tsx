@@ -1,6 +1,7 @@
 import { RouteObject } from "react-router-dom";
 
 import ForgotPassword from "@/pages/authentication/forgot-passowrd";
+import ResetPassword from "@/pages/authentication/reset-password";
 import SignIn from "@/pages/authentication/signin";
 import VerifyEmail from "@/pages/authentication/verify-email";
 import AuthLayout from "@/views/auth";
@@ -27,7 +28,7 @@ export const AUTHENTICATION: RouteObject[] = [
             },
             {
                 path: "reset-password",
-                element: <>reset password</>,
+                element: <ResetPassword />,
             },
         ],
     },

@@ -17,35 +17,18 @@
             @include font($f: inter, $s: base, $w: bold);
         }
     }
-
-    &__input {
-        gap: 0.5rem;
-        @include flex($d: column, $a: flex-start);
-
-        label {
-            text-transform: capitalize;
-            @include font($f: inter, $s: base, $w: normal);
-        }
-
-        input {
-            border-radius: 0.5rem;
-            border: 0.0625rem solid var(--blue--800);
-            height: 3rem;
-            padding: 1rem 1.5rem;
-            width: 100%;
-
-            @include font($f: inter, $s: base, $w: normal);
-
-            &::placeholder {
-                color: var(--blue--700);
-            }
-        }
-    }
 }
 
 .verify-email {
     b {
         @include font($f: inter, $s: lg, $w: bold);
+    }
+}
+
+.reset-password {
+    i {
+        margin-inline: auto;
+        @include equal(6.25rem);
     }
 }
 
@@ -72,8 +55,9 @@
     }
 }
 
-.signin,
 .forgot-password,
+.reset-password,
+.signin,
 .verify-email {
     &__wrapper {
         @include space($type: v, $size: 1.5rem);
@@ -112,8 +96,36 @@
 }
 
 .forgot-password,
+.reset-password,
 .verify-email {
     footer {
         @include space($type: v, $size: 2rem);
+    }
+}
+
+.reset-password,
+.signin {
+    &__input {
+        gap: 0.5rem;
+        @include flex($d: column, $a: flex-start);
+
+        label {
+            text-transform: capitalize;
+            @include font($f: inter, $s: base, $w: normal);
+        }
+
+        input {
+            border-radius: 0.5rem;
+            border: 0.0625rem solid var(--blue--800);
+            height: 3rem;
+            padding: 1rem 1.5rem;
+            width: 100%;
+
+            @include font($f: inter, $s: base, $w: normal);
+
+            &::placeholder {
+                color: var(--blue--700);
+            }
+        }
     }
 }
