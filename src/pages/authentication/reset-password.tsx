@@ -1,12 +1,14 @@
 import "./index.scss";
 
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { PasswordResetCheck } from "@/assets/icons";
+
 import FormButton from "./components/button";
 import FormInput from "./components/input";
 import { useForm } from "./hooks/useForm";
 import { ResetPasswordSchema } from "./utils/validation";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { PasswordResetCheck } from "@/assets/icons";
 
 export default function Page() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);

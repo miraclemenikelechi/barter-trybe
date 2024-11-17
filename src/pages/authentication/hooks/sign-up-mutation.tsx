@@ -2,16 +2,11 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "sonner";
 
-import { signinAction } from "../utils/signin";
+import { signupAction } from "../utils/signup";
 
-/**
- * Custom hook for handling signin mutations.
- *
- * @returns Mutation hook with signin functionality.
- */
-export function useSigninMutation() {
+export function useSignupMutation() {
     return useMutation({
-        mutationFn: signinAction,
+        mutationFn: signupAction,
 
         onSuccess: function (data, variables) {
             console.log(data);

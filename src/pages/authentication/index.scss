@@ -32,7 +32,74 @@
     }
 }
 
+.signup {
+    max-height: 80vh;
+    overflow: hidden;
+
+    footer {
+        overflow: auto;
+        height: 70vh;
+        padding-bottom: 4%;
+
+        @extend %scroll-bar;
+    }
+
+    form {
+        margin-bottom: 1.5rem;
+    }
+
+    &__logo {
+        i {
+            @include equal(2.25rem);
+        }
+
+        label {
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+
+            @include font($f: inter, $s: base, $w: regular);
+        }
+    }
+
+    &__dropzone {
+        p {
+            @include font($f: inter, $s: base, $w: regular);
+
+            span {
+                color: var(--blue--100);
+                cursor: pointer;
+                font-weight: bold;
+            }
+        }
+
+        > span {
+            color: var(--blue--700);
+            @include font($f: poppins, $s: xs, $w: regular);
+        }
+    }
+
+    &__preview {
+        img {
+            object-fit: contain;
+        }
+    }
+
+    &__dropzone,
+    &__preview {
+        border-radius: 0.75rem;
+        border: 1px dashed var(--black--400);
+        gap: 1rem;
+        height: 8.5rem;
+        position: relative;
+        width: 15.5rem;
+
+        @include flex($d: column);
+    }
+}
+
 .signin,
+.signup,
 .verify-email {
     footer {
         > div {
@@ -44,7 +111,7 @@
             }
 
             span {
-                @include font($f: ubuntu, $s: base, $w: normal);
+                @include font($f: ubuntu, $s: base, $w: regular);
             }
 
             a {
@@ -58,6 +125,7 @@
 .forgot-password,
 .reset-password,
 .signin,
+.signup,
 .verify-email {
     &__wrapper {
         @include space($type: v, $size: 1.5rem);
@@ -104,14 +172,15 @@
 }
 
 .reset-password,
-.signin {
+.signin,
+.signup {
     &__input {
         gap: 0.5rem;
         @include flex($d: column, $a: flex-start);
 
         label {
             text-transform: capitalize;
-            @include font($f: inter, $s: base, $w: normal);
+            @include font($f: inter, $s: base, $w: regular);
         }
 
         input {
@@ -121,7 +190,7 @@
             padding: 1rem 1.5rem;
             width: 100%;
 
-            @include font($f: inter, $s: base, $w: normal);
+            @include font($f: inter, $s: base, $w: regular);
 
             &::placeholder {
                 color: var(--blue--700);

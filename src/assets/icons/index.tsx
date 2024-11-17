@@ -417,3 +417,21 @@ export const PasswordResetCheck: FC = () => {
         </svg>
     );
 };
+
+export const BusinessLogoUpload: FC = () => {
+    return (
+        <svg
+            width={38}
+            height={38}
+            viewBox="0 0 38 38"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                d="M16.625 28.5V9.144l-6.175 6.175-3.325-3.444L19 0l11.875 11.875-3.325 3.444-6.175-6.175V28.5h-4.75zM4.75 38c-1.306 0-2.425-.465-3.356-1.397-.93-.93-1.396-2.048-1.394-3.353v-7.125h4.75v7.125h28.5v-7.125H38v7.125c0 1.306-.465 2.425-1.397 3.356-.93.93-2.048 1.396-3.353 1.394H4.75z"
+                fill="#000"
+                fillOpacity={0.52}
+            />
+        </svg>
+    );
+};

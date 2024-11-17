@@ -60,6 +60,8 @@ export function useForm<T>({ initialData, schema, onSubmit }: UseFormProps<T>) {
                     validationErrors[error.path[0] as string] = error.message;
             });
 
+            console.log(validationErrors);
+
             setErrors(validationErrors);
             return;
         }
@@ -75,5 +77,6 @@ export function useForm<T>({ initialData, schema, onSubmit }: UseFormProps<T>) {
         formData,
         handleChange,
         handleSubmit,
+        setFormData,
     };
 }

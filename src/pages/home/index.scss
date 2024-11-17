@@ -147,7 +147,7 @@
         color: var(--blue--400);
         text-align: center;
 
-        @include font($f: poppins, $s: base, $w: normal);
+        @include font($f: poppins, $s: base, $w: regular);
     }
 }
 
@@ -303,7 +303,7 @@
         }
 
         p {
-            @include font($f: poppins, $s: base, $w: normal);
+            @include font($f: poppins, $s: base, $w: regular);
         }
 
         section {
@@ -417,7 +417,7 @@
             color: var(--black--300);
             margin: 0.5rem 0 1rem 0;
 
-            @include font($f: inter, $s: lg, $w: normal);
+            @include font($f: inter, $s: lg, $w: regular);
         }
     }
 
@@ -483,7 +483,7 @@
         text-transform: capitalize;
         width: 8.5rem;
 
-        @include font($f: inter, $s: base, $w: normal);
+        @include font($f: inter, $s: base, $w: regular);
     }
 
     p {
@@ -537,7 +537,7 @@
             text-transform: capitalize;
             width: 8rem;
 
-            @include font($f: inter, $s: base, $w: normal);
+            @include font($f: inter, $s: base, $w: regular);
         }
     }
 }
@@ -572,7 +572,7 @@
     }
 
     &__bottom {
-        @include font($f: inter, $s: sm, $w: normal);
+        @include font($f: inter, $s: sm, $w: regular);
 
         ul {
             gap: 1.5rem;

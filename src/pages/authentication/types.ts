@@ -9,6 +9,7 @@ import {
     ForgotPasswordSchema,
     ResetPasswordSchema,
     SigninSchema,
+    SignupSchema,
 } from "./utils/validation";
 
 export type FormInputProps = InputHTMLAttributes<HTMLInputElement> & {
@@ -49,3 +50,14 @@ export type ForgotPasswordResponse = {
 };
 
 export type ResetPasswordRequest = z.infer<typeof ResetPasswordSchema>;
+
+export type SignupRequest = z.infer<typeof SignupSchema>;
+
+export type SignupResponse = {
+    message: string;
+};
+
+export type BusniessOption = {
+    label: string;
+    value: string;
+};
