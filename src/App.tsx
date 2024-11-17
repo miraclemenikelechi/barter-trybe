@@ -1,5 +1,6 @@
 import { Fragment } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import ContextProvider from "@/contexts";
 import { ROUTES } from "@/routes";
@@ -25,6 +26,7 @@ export default function App() {
                     }}
                 />
             </ContextProvider>
+            <Toaster richColors />
         </Fragment>
     );
 }

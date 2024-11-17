@@ -58,9 +58,7 @@ export async function makeRequest<T>({
          * Handle Axios errors.
          */
         if (axios.isAxiosError(error)) {
-            console.error(
-                `Axios error: ${error.response?.data || error.message}`
-            );
+            console.error(error);
         } else {
             /**
              * Handle non-Axios errors.

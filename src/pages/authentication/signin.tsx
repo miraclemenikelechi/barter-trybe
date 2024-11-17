@@ -4,11 +4,23 @@ import { Link } from "react-router-dom";
 
 import FormButton from "./components/button";
 import FormInput from "./components/input";
-import { useSignin } from "./hooks/useSignin";
+import { useSigninMutation } from "./hooks/sign-in-mutation";
+import { useForm } from "./hooks/useForm";
+import { SigninRequest } from "./types";
+import { SigninSchema } from "./utils/validation";
 
 export default function Page() {
-    const { errors, handleChange, handleSubmit, userData, isLoading } =
-        useSignin();
+    const { mutate, isPending } = useSigninMutation();
+
+    const { errors, formData, handleChange, handleSubmit } =
+        useForm<SigninRequest>({
+            initialData: {
+                email: "",
+                password: "",
+            },
+            schema: SigninSchema,
+            onSubmit: (data) => mutate(data),
+        });
 
     return (
         <section className="signin">
@@ -28,7 +40,7 @@ export default function Page() {
                             onChange={handleChange}
                             placeholder="Enter your username"
                             type="email"
-                            value={userData.email}
+                            value={formData.email}
                         />
 
                         <FormInput
@@ -39,23 +51,23 @@ export default function Page() {
                             onChange={handleChange}
                             placeholder="Enter your password"
                             type="password"
-                            value={userData.password}
+                            value={formData.password}
                         />
 
-                        <Link to={""}>Forgot Password?</Link>
+                        <Link to={"../forgot-password"}>Forgot Password?</Link>
 
                         <FormButton
                             type="submit"
                             filled={true}
-                            label="Login"
+                            label={isPending ? "Logging In..." : "Log In"}
                             className="signin__button"
-                            disabled={isLoading}
+                            disabled={isPending}
                         />
                     </form>
 
                     <div>
                         <span>Don't have an account?</span>
-                        <Link to={""}>Sign Up</Link>
+                        <Link to={"../signup"}>Sign Up</Link>
                     </div>
                 </footer>
             </div>
