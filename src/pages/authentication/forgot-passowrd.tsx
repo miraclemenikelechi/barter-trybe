@@ -1,12 +1,13 @@
 import "./index.scss";
 
+import { useNavigate } from "react-router-dom";
+
 import FormButton from "./components/button";
 import FormInput from "./components/input";
 import { useForgotPasswordMutation } from "./hooks/forgot-password-mutation";
 import { useForm } from "./hooks/useForm";
 import { ForgotPasswordRequest } from "./types";
 import { ForgotPasswordSchema } from "./utils/validation";
-import { useNavigate } from "react-router-dom";
 
 export default function Page() {
     const navigate = useNavigate();

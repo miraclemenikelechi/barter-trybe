@@ -3,24 +3,6 @@
 .signin {
     footer {
         @include space($type: v, $size: 3.5rem);
-
-        > div {
-            gap: 0.5rem;
-            @include flex;
-
-            > * {
-                letter-spacing: 0.125rem;
-            }
-
-            span {
-                @include font($f: ubuntu, $s: base, $w: normal);
-            }
-
-            a {
-                color: var(--blue--100);
-                @include font($f: ubuntu, $s: base, $w: bold);
-            }
-        }
     }
 
     form {
@@ -61,14 +43,38 @@
     }
 }
 
-.forgot-password {
-    footer {
-        @include space($type: v, $size: 2rem);
+.verify-email {
+    b {
+        @include font($f: inter, $s: lg, $w: bold);
     }
 }
 
 .signin,
-.forgot-password {
+.verify-email {
+    footer {
+        > div {
+            gap: 0.5rem;
+            @include flex;
+
+            > * {
+                letter-spacing: 0.125rem;
+            }
+
+            span {
+                @include font($f: ubuntu, $s: base, $w: normal);
+            }
+
+            a {
+                color: var(--blue--100);
+                @include font($f: ubuntu, $s: base, $w: bold);
+            }
+        }
+    }
+}
+
+.signin,
+.forgot-password,
+.verify-email {
     &__wrapper {
         @include space($type: v, $size: 1.5rem);
     }
@@ -102,5 +108,12 @@
         span {
             @include font($f: inter, $s: base, $w: medium);
         }
+    }
+}
+
+.forgot-password,
+.verify-email {
+    footer {
+        @include space($type: v, $size: 2rem);
     }
 }
