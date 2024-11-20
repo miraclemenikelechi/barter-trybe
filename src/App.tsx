@@ -2,11 +2,14 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Fragment } from "react";
 import { Toaster } from "sonner";
 
-import ContextProvider from "@/contexts";
+import ContextWrapper from "@/contexts";
+import { useAuthenticationContext } from "@/hooks/authentication";
+import { routeTree } from "@/routeTree.gen";
 
-import { routeTree } from "./routeTree.gen";
-
-const router = createRouter({ routeTree });
+const router = createRouter({
+    routeTree,
+    context: { authentication: undefined! },
+});
 
 declare module "@tanstack/react-router" {
     interface Register {
@@ -17,10 +20,15 @@ declare module "@tanstack/react-router" {
 export default function App() {
     return (
         <Fragment>
-            <ContextProvider>
-                <RouterProvider router={router} />
-            </ContextProvider>
+            <ContextWrapper>
+                <ContextProvider />
+            </ContextWrapper>
             <Toaster richColors />
         </Fragment>
     );
+}
+
+function ContextProvider() {
+    const authentication = useAuthenticationContext();
+    return <RouterProvider router={router} context={{ authentication }} />;
 }

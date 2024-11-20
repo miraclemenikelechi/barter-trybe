@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet } from "@tanstack/react-router";
 
 import DashboardNavigation from "@/components/ui/dashboard-navigation";
+import { useDashboardPagesTitle } from "@/hooks/dashboard-pages-title";
 
 export default function Component() {
-    const [title, setTitle] = useState<string | null>(null);
+    const { title } = useDashboardPagesTitle();
 
     return (
         <section className="busniess-owner">
@@ -23,7 +23,7 @@ export default function Component() {
                 </header>
 
                 <footer className="busniess-owner__footer">
-                    <Outlet context={{ setTitle }} />
+                    <Outlet />
                 </footer>
             </div>
         </section>

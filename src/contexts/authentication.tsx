@@ -1,34 +1,39 @@
-import { createContext, PropsWithChildren,useContext } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 import { User } from "@/types/user";
 
-type AuthenticationContextType = PropsWithChildren & {
-    user?: User;
+export type AuthenticationContextType = {
+    user: User | null;
     isAuthenticated: boolean;
+    login: () => Promise<null>;
+    logout: () => Promise<null>;
 };
 
-const AuthenticationContext = createContext<
-    AuthenticationContextType | undefined
->(undefined);
+const AuthenticationContext = createContext<AuthenticationContextType | null>(
+    null
+);
 
-export function useAuthenticationContext() {
-    const context = useContext(AuthenticationContext);
-    if (context === undefined || context === null || !context) {
-        throw new Error(
-            "useAuthenticationContext must be used within a AuthenticationContextProvider"
-        );
+function AuthenticationContextProvider({ children }: { children: ReactNode }) {
+    const [user, setUser] = useState<User | null>(null);
+
+    const isAuthenticated: boolean = !!user;
+
+    async function login(): Promise<null> {
+        setUser(null);
+        return null;
     }
 
-    return context;
-}
+    async function logout(): Promise<null> {
+        return null;
+    }
 
-export function AuthenticationContextProvider({
-    children,
-    isAuthenticated,
-}: AuthenticationContextType) {
     return (
-        <AuthenticationContext.Provider value={{ isAuthenticated }}>
+        <AuthenticationContext.Provider
+            value={{ isAuthenticated, logout, login, user }}
+        >
             {children}
         </AuthenticationContext.Provider>
     );
 }
+
+export { AuthenticationContext, AuthenticationContextProvider };

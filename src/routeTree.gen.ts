@@ -8,17 +8,41 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
+import { Route as authenticationLayoutImport } from './routes/(authentication)/_layout'
+import { Route as authenticationLayoutLoginImport } from './routes/(authentication)/_layout.login'
+
+// Create Virtual Routes
+
+const authenticationImport = createFileRoute('/(authentication)')()
 
 // Create/Update Routes
+
+const authenticationRoute = authenticationImport.update({
+  id: '/(authentication)',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const authenticationLayoutRoute = authenticationLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => authenticationRoute,
+} as any)
+
+const authenticationLayoutLoginRoute = authenticationLayoutLoginImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => authenticationLayoutRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -32,39 +56,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/(authentication)': {
+      id: '/(authentication)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authenticationImport
+      parentRoute: typeof rootRoute
+    }
+    '/(authentication)/_layout': {
+      id: '/(authentication)/_layout'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof authenticationLayoutImport
+      parentRoute: typeof authenticationRoute
+    }
+    '/(authentication)/_layout/login': {
+      id: '/(authentication)/_layout/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof authenticationLayoutLoginImport
+      parentRoute: typeof authenticationLayoutImport
+    }
   }
 }
 
 // Create and export the route tree
 
+interface authenticationLayoutRouteChildren {
+  authenticationLayoutLoginRoute: typeof authenticationLayoutLoginRoute
+}
+
+const authenticationLayoutRouteChildren: authenticationLayoutRouteChildren = {
+  authenticationLayoutLoginRoute: authenticationLayoutLoginRoute,
+}
+
+const authenticationLayoutRouteWithChildren =
+  authenticationLayoutRoute._addFileChildren(authenticationLayoutRouteChildren)
+
+interface authenticationRouteChildren {
+  authenticationLayoutRoute: typeof authenticationLayoutRouteWithChildren
+}
+
+const authenticationRouteChildren: authenticationRouteChildren = {
+  authenticationLayoutRoute: authenticationLayoutRouteWithChildren,
+}
+
+const authenticationRouteWithChildren = authenticationRoute._addFileChildren(
+  authenticationRouteChildren,
+)
+
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
+  '/': typeof authenticationLayoutRouteWithChildren
+  '/login': typeof authenticationLayoutLoginRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
+  '/': typeof authenticationLayoutRouteWithChildren
+  '/login': typeof authenticationLayoutLoginRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/(authentication)': typeof authenticationRouteWithChildren
+  '/(authentication)/_layout': typeof authenticationLayoutRouteWithChildren
+  '/(authentication)/_layout/login': typeof authenticationLayoutLoginRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/login'
+  id:
+    | '__root__'
+    | '/'
+    | '/(authentication)'
+    | '/(authentication)/_layout'
+    | '/(authentication)/_layout/login'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  authenticationRoute: typeof authenticationRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  authenticationRoute: authenticationRouteWithChildren,
 }
 
 export const routeTree = rootRoute
@@ -77,11 +157,29 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
-        "/"
+        "/",
+        "/(authentication)"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/(authentication)": {
+      "filePath": "(authentication)",
+      "children": [
+        "/(authentication)/_layout"
+      ]
+    },
+    "/(authentication)/_layout": {
+      "filePath": "(authentication)/_layout.tsx",
+      "parent": "/(authentication)",
+      "children": [
+        "/(authentication)/_layout/login"
+      ]
+    },
+    "/(authentication)/_layout/login": {
+      "filePath": "(authentication)/_layout.login.tsx",
+      "parent": "/(authentication)/_layout"
     }
   }
 }
