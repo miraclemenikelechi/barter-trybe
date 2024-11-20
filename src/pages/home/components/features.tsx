@@ -2,7 +2,7 @@ import { FEATURES } from "../config";
 
 export default function Component() {
     return (
-        <section className="home__features">
+        <section className="home__features" id="features">
             <div className="home__features__wrapper">
                 <h3>supercharge your busniess with powerful features</h3>
 

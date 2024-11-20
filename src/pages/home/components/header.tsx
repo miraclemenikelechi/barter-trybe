@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 import { NAVIGATION_LINKS } from "../config";
 
 export default function Component() {
     return (
-        <header className="home__header">
+        <header className="home__header" id="home">
             <div className="home__header__wrapper">
                 <nav className="home__header__navigation">
                     <i className="home__header__logo">
@@ -14,7 +14,7 @@ export default function Component() {
                     <NavigationButtons />
 
                     <div className="home__header__cta">
-                        <Link to={""}>get started</Link>
+                        <Link to={"."}>get started</Link>
                     </div>
                 </nav>
 
@@ -24,7 +24,7 @@ export default function Component() {
                         Transform your busniess with our comprehensive Busniess
                         Intelligence platform
                     </p>
-                    <Link to={""} className="home__header__cta">
+                    <Link to={"."} className="home__header__cta">
                         get started
                     </Link>
                 </section>
@@ -39,7 +39,7 @@ function NavigationButtons() {
             {NAVIGATION_LINKS.map(function (value, index) {
                 return (
                     <li key={index}>
-                        <Link to={value.href}>{value.label}</Link>
+                        <Link hash={value.href}>{value.label}</Link>
                     </li>
                 );
             })}

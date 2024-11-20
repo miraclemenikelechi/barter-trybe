@@ -4,7 +4,6 @@
 .home__header {
     background-image: url("/hero.jpeg");
     height: 100vh;
-    padding-inline: 6.25rem;
 
     @extend %image-with-dark-overlay;
     @include flex($a: flex-start);
@@ -15,12 +14,12 @@
     }
 
     &__wrapper {
-        padding-block: 1.5rem;
+        // padding-block: 1.5rem;
         position: relative;
         z-index: 5;
 
         @extend %section-container;
-        @include space($type: v, $size: 35vh);
+        @include space($type: v, $size: 45vh);
     }
 
     &__logo {
@@ -29,6 +28,15 @@
     }
 
     &__navigation {
+        backdrop-filter: blur(1vw);
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding-inline: 6.25rem;
+        padding-block: 1rem;
+
         @include flex($j: space-between);
     }
 
@@ -98,6 +106,8 @@
 
 .home__features {
     padding-inline: 6.25rem;
+    scroll-padding-top: 5rem;
+
     @include flex;
 
     &__wrapper {

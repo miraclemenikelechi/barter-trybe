@@ -27,6 +27,7 @@ export const SignupSchema = z.object({
         .min(3, { message: "Location must be at least 3 characters" })
         .max(100, { message: "Location must be at most 100 characters" }),
 });
+
 export const ForgotPasswordSchema = z.object({
     email: z.string().email("Invalid email"),
 });

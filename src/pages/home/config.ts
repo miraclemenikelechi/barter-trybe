@@ -9,13 +9,20 @@ import {
     Youtube,
 } from "@/assets/icons";
 
-import { Feature, NavigationLink, PricingPlan, Social, Step, Testimonial } from "./types";
+import {
+    Feature,
+    NavigationLink,
+    PricingPlan,
+    Social,
+    Step,
+    Testimonial,
+} from "./types";
 
 export const NAVIGATION_LINKS: NavigationLink[] = [
-    { href: "", label: "home" },
-    { href: "", label: "features" },
-    { href: "", label: "pricing" },
-    { href: "", label: "testimonials" },
+    { href: "home", label: "home" },
+    { href: "features", label: "features" },
+    { href: "pricing", label: "pricing" },
+    { href: "testimonials", label: "testimonials" },
 ];
 
 export const FEATURES: Feature[] = [
@@ -121,37 +128,24 @@ export const TESTIMONIES: Testimonial[] = [
     },
 ];
 
-
 export const PRICING_PLANS: PricingPlan[] = [
     {
         description: "Best for Lorem",
-        features: [
-            `Feature Here`,
-            `Feature Here`,
-            `Feature Here`,
-        ],
+        features: [`Feature Here`, `Feature Here`, `Feature Here`],
         href: "",
         price: 0,
         title: "barter lite",
     },
     {
         description: "Best for Lorem",
-        features: [
-            `Feature Here`,
-            `Feature Here`,
-            `Feature Here`,
-        ],
+        features: [`Feature Here`, `Feature Here`, `Feature Here`],
         href: "#",
         price: 1300,
         title: "barter pro",
     },
     {
         description: "Best for Lorem",
-        features: [
-            `Feature Here`,
-            `Feature Here`,
-            `Feature Here`,
-        ],
+        features: [`Feature Here`, `Feature Here`, `Feature Here`],
         href: "#",
         price: 4000,
         title: "barter max",
@@ -170,7 +164,7 @@ export const FOOTER_LINKS: NavigationLink[] = [
     {
         href: "",
         label: "Cookies Settings",
-    }
+    },
 ];
 
 export const FOOTER_SOCIALS: Social[] = [

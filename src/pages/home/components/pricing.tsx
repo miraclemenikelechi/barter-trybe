@@ -1,5 +1,5 @@
+import { Link } from "@tanstack/react-router";
 import { Fragment } from "react";
-import { Link } from "react-router-dom";
 
 import { Check } from "@/assets/icons";
 
@@ -7,7 +7,7 @@ import { PRICING_PLANS } from "../config";
 
 export default function Component() {
     return (
-        <section className="home__pricing">
+        <section className="home__pricing" id="pricing">
             <div className="home__pricing__wrapper">
                 <h3>
                     unlock your full busniess potential with barterTrybe pro

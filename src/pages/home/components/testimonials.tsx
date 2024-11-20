@@ -21,7 +21,7 @@ export default function Component() {
     const sliderRef = useRef<Slider | null>(null);
 
     return (
-        <section className="home__testimonials">
+        <section className="home__testimonials" id="testimonials">
             <div className="home__testimonials__wrapper">
                 <h3>what people say about us</h3>
 

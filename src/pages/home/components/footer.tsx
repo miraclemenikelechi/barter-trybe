@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 import { FOOTER_LINKS, FOOTER_SOCIALS } from "../config";
 

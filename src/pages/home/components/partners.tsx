@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 import { LogoPre } from "@/assets/icons";
 
@@ -11,7 +11,7 @@ export default function Component() {
                 <ul>
                     {[...Array(8)].map(function () {
                         return (
-                            <li>
+                            <li key={Math.random()}>
                                 <i>
                                     <LogoPre />
                                 </i>
@@ -26,7 +26,7 @@ export default function Component() {
                         level and <br /> experience the difference
                     </h3>
 
-                    <Link to={""}>get started</Link>
+                    <Link to={"."}>get started</Link>
                 </section>
             </div>
         </section>

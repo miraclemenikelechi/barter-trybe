@@ -45,3 +45,76 @@
         }
     }
 }
+
+.busniess-owner {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+
+    &__wrapper {
+        background-color: var(--white--500);
+        display: grid;
+        grid-template-columns: 7rem 1fr;
+        grid-template-rows: 6rem 1fr;
+
+        @include equal;
+    }
+
+    &__navigation {
+        background-color: var(--black--500);
+        grid-column: 1/2;
+        grid-row: 1/3;
+        width: 100%;
+
+        @include flex($j: flex-start, $d: column);
+
+        > span {
+            height: 1.5rem;
+            margin: 3rem 0 3.25rem 0;
+            width: 5.5rem;
+
+            @include flex;
+        }
+
+        ul {
+            @include space($type: v, $size: 0.5rem);
+        }
+
+        li {
+            border-radius: 1rem;
+            height: 4.5rem;
+            width: 5.75rem;
+            overflow: hidden;
+
+            a {
+                gap: 0.5rem;
+                letter-spacing: 0.0625rem;
+
+                @include equal;
+                @include flex($d: column);
+                @include font($f: ubuntu, $s: sm, $w: medium);
+            }
+        }
+    }
+
+    &__header {
+        grid-column: 2/3;
+        grid-row: 1/2;
+        padding-inline: 3.5rem;
+
+        @include debug(dark);
+        @include flex($j: space-between);
+
+        h1 {
+            color: var(--blue--900);
+            @include font($f: inter, $s: xl, $w: semibold);
+        }
+    }
+
+    &__footer {
+        grid-column: 2/3;
+        grid-row: 2/3;
+        padding-inline: 3.5rem;
+        overflow: auto;
+    }
+}

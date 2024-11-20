@@ -10,6 +10,9 @@
 @use "slick-carousel/slick/slick.css";
 @use "slick-carousel/slick/slick-theme.css";
 
+// nprogress
+@use "nprogress/nprogress.css";
+
 @layer base {
     :root {
         --background: 0 0% 100%;

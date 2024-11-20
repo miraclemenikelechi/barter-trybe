@@ -52,6 +52,11 @@ $colors: (
             $color: #d0d5dd,
             $alpha: 100%
         ),
+    "blue--900":
+        rgba(
+            $color: #101828,
+            $alpha: 100%
+        ),
     "black--100":
         rgba(
             $color: #000000,
@@ -69,7 +74,12 @@ $colors: (
         ),
     "black--400":
         rgba(
-            $color: #E8E9EA,
+            $color: #e8e9ea,
+            $alpha: 100%
+        ),
+    "black--500":
+        rgba(
+            $color: #111111,
             $alpha: 100%
         ),
     "white--100":
@@ -95,6 +105,11 @@ $colors: (
     "white--500":
         rgba(
             $color: #f0f0f0,
+            $alpha: 100%
+        ),
+    "orange--100":
+        rgba(
+            $color: #ffcc99,
             $alpha: 100%
         )
 );

@@ -1,30 +1,24 @@
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Fragment } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Toaster } from "sonner";
 
 import ContextProvider from "@/contexts";
-import { ROUTES } from "@/routes";
 
-const router = createBrowserRouter(ROUTES, {
-    future: {
-        v7_relativeSplatPath: true,
-        v7_fetcherPersist: true,
-        v7_normalizeFormMethod: true,
-        v7_partialHydration: true,
-        v7_skipActionErrorRevalidation: true,
-    },
-});
+import { routeTree } from "./routeTree.gen";
+
+const router = createRouter({ routeTree });
+
+declare module "@tanstack/react-router" {
+    interface Register {
+        router: typeof router;
+    }
+}
 
 export default function App() {
     return (
         <Fragment>
             <ContextProvider>
-                <RouterProvider
-                    router={router}
-                    future={{
-                        v7_startTransition: true,
-                    }}
-                />
+                <RouterProvider router={router} />
             </ContextProvider>
             <Toaster richColors />
         </Fragment>
