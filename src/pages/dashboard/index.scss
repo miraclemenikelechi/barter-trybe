@@ -17,6 +17,10 @@
             transition: all 150ms ease-in-out;
 
             @include font($f: inter, $s: sm, $w: regular);
+
+            &:hover:not(.active) {
+                background-color: var(--white--500);
+            }
         }
     }
 }

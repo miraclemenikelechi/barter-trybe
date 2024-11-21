@@ -41,8 +41,6 @@ export default function Page() {
 
                 {activeLink.summary ? <span>stuff here temp</span> : null}
             </header>
-            {/* <main className="dashboard__main"></main>
-            <footer className="dashboard__footer"></footer> */}
 
             <Outlet />
         </section>

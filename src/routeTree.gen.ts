@@ -21,13 +21,15 @@ import { Route as authenticationAuthenticationSignupImport } from './routes/(aut
 import { Route as authenticationAuthenticationResetPasswordImport } from './routes/(authentication)/_authentication.reset-password'
 import { Route as authenticationAuthenticationLoginImport } from './routes/(authentication)/_authentication.login'
 import { Route as authenticationAuthenticationForgotPasswordImport } from './routes/(authentication)/_authentication.forgot-password'
-import { Route as appAppDashboardImport } from './routes/(app)/_app.dashboard'
-import { Route as appAppDashboardChartsImport./routes/(app)/_app..dashboard.chartspp..dashboard.charts'
+import { Route as appAppDashboardLayoutImport } from './routes/(app)/_app.dashboard/_layout'
+import { Route as appAppDashboardLayoutIndexImport } from './routes/(app)/_app.dashboard/_layout.index'
+import { Route as appAppDashboardLayoutChartsImport } from './routes/(app)/_app.dashboard/_layout.charts'
 
 // Create Virtual Routes
 
 const authenticationImport = createFileRoute('/(authentication)')()
 const appImport = createFileRoute('/(app)')()
+const appAppDashboardImport = createFileRoute('/(app)/_app/dashboard')()
 
 // Create/Update Routes
 
@@ -57,6 +59,12 @@ const authenticationAuthenticationRoute =
 const appAppRoute = appAppImport.update({
   id: '/_app',
   getParentRoute: () => appRoute,
+} as any)
+
+const appAppDashboardRoute = appAppDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => appAppRoute,
 } as any)
 
 const authenticationAuthenticationVerifyRoute =
@@ -94,17 +102,25 @@ const authenticationAuthenticationForgotPasswordRoute =
     getParentRoute: () => authenticationAuthenticationRoute,
   } as any)
 
-const appAppDashboardRoute = appAppDashboardImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => appAppRoute,
-} as any)
-
-const appAppDashboardChartsRoute = appAppDashboardChartsImport.update({
-  id: '/charts',
-  path: '/charts',
+const appAppDashboardLayoutRoute = appAppDashboardLayoutImport.update({
+  id: '/_layout',
   getParentRoute: () => appAppDashboardRoute,
 } as any)
+
+const appAppDashboardLayoutIndexRoute = appAppDashboardLayoutIndexImport.update(
+  {
+    id: '/',
+    path: '/',
+    getParentRoute: () => appAppDashboardLayoutRoute,
+  } as any,
+)
+
+const appAppDashboardLayoutChartsRoute =
+  appAppDashboardLayoutChartsImport.update({
+    id: '/charts',
+    path: '/charts',
+    getParentRoute: () => appAppDashboardLayoutRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -145,13 +161,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authenticationAuthenticationImport
       parentRoute: typeof authenticationRoute
     }
-    '/(app)/_app/dashboard': {
-      id: '/(app)/_app/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof appAppDashboardImport
-      parentRoute: typeof appAppImport
-    }
     '/(authentication)/_authentication/forgot-password': {
       id: '/(authentication)/_authentication/forgot-password'
       path: '/forgot-password'
@@ -187,24 +196,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authenticationAuthenticationVerifyImport
       parentRoute: typeof authenticationAuthenticationImport
     }
-    '/(app)/_app/dashboard/charts': {
-      id: '/(app)/_app/dashboard/charts'
+    '/(app)/_app/dashboard': {
+      id: '/(app)/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appAppDashboardImport
+      parentRoute: typeof appAppImport
+    }
+    '/(app)/_app/dashboard/_layout': {
+      id: '/(app)/_app/dashboard/_layout'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appAppDashboardLayoutImport
+      parentRoute: typeof appAppDashboardRoute
+    }
+    '/(app)/_app/dashboard/_layout/charts': {
+      id: '/(app)/_app/dashboard/_layout/charts'
       path: '/charts'
       fullPath: '/dashboard/charts'
-      preLoaderRoute: typeof appAppDashboardChartsImport
-      parentRoute: typeof appAppDashboardImport
+      preLoaderRoute: typeof appAppDashboardLayoutChartsImport
+      parentRoute: typeof appAppDashboardLayoutImport
+    }
+    '/(app)/_app/dashboard/_layout/': {
+      id: '/(app)/_app/dashboard/_layout/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof appAppDashboardLayoutIndexImport
+      parentRoute: typeof appAppDashboardLayoutImport
     }
   }
 }
 
 // Create and export the route tree
 
+interface appAppDashboardLayoutRouteChildren {
+  appAppDashboardLayoutChartsRoute: typeof appAppDashboardLayoutChartsRoute
+  appAppDashboardLayoutIndexRoute: typeof appAppDashboardLayoutIndexRoute
+}
+
+const appAppDashboardLayoutRouteChildren: appAppDashboardLayoutRouteChildren = {
+  appAppDashboardLayoutChartsRoute: appAppDashboardLayoutChartsRoute,
+  appAppDashboardLayoutIndexRoute: appAppDashboardLayoutIndexRoute,
+}
+
+const appAppDashboardLayoutRouteWithChildren =
+  appAppDashboardLayoutRoute._addFileChildren(
+    appAppDashboardLayoutRouteChildren,
+  )
+
 interface appAppDashboardRouteChildren {
-  appAppDashboardChartsRoute: typeof appAppDashboardChartsRoute
+  appAppDashboardLayoutRoute: typeof appAppDashboardLayoutRouteWithChildren
 }
 
 const appAppDashboardRouteChildren: appAppDashboardRouteChildren = {
-  appAppDashboardChartsRoute: appAppDashboardChartsRoute,
+  appAppDashboardLayoutRoute: appAppDashboardLayoutRouteWithChildren,
 }
 
 const appAppDashboardRouteWithChildren = appAppDashboardRoute._addFileChildren(
@@ -274,24 +319,25 @@ const authenticationRouteWithChildren = authenticationRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof authenticationAuthenticationRouteWithChildren
-  '/dashboard': typeof appAppDashboardRouteWithChildren
   '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/login': typeof authenticationAuthenticationLoginRoute
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
-  '/dashboard/charts': typeof appAppDashboardChartsRoute
+  '/dashboard': typeof appAppDashboardLayoutRouteWithChildren
+  '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
+  '/dashboard/': typeof appAppDashboardLayoutIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof authenticationAuthenticationRouteWithChildren
-  '/dashboard': typeof appAppDashboardRouteWithChildren
   '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/login': typeof authenticationAuthenticationLoginRoute
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
-  '/dashboard/charts': typeof appAppDashboardChartsRoute
+  '/dashboard': typeof appAppDashboardLayoutIndexRoute
+  '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
 }
 
 export interface FileRoutesById {
@@ -301,35 +347,38 @@ export interface FileRoutesById {
   '/(app)/_app': typeof appAppRouteWithChildren
   '/(authentication)': typeof authenticationRouteWithChildren
   '/(authentication)/_authentication': typeof authenticationAuthenticationRouteWithChildren
-  '/(app)/_app/dashboard': typeof appAppDashboardRouteWithChildren
   '/(authentication)/_authentication/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/(authentication)/_authentication/login': typeof authenticationAuthenticationLoginRoute
   '/(authentication)/_authentication/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/(authentication)/_authentication/signup': typeof authenticationAuthenticationSignupRoute
   '/(authentication)/_authentication/verify': typeof authenticationAuthenticationVerifyRoute
-  '/(app)/_app/dashboard/charts': typeof appAppDashboardChartsRoute
+  '/(app)/_app/dashboard': typeof appAppDashboardRouteWithChildren
+  '/(app)/_app/dashboard/_layout': typeof appAppDashboardLayoutRouteWithChildren
+  '/(app)/_app/dashboard/_layout/charts': typeof appAppDashboardLayoutChartsRoute
+  '/(app)/_app/dashboard/_layout/': typeof appAppDashboardLayoutIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/dashboard'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/dashboard'
     | '/dashboard/charts'
+    | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/dashboard'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/dashboard'
     | '/dashboard/charts'
   id:
     | '__root__'
@@ -338,13 +387,15 @@ export interface FileRouteTypes {
     | '/(app)/_app'
     | '/(authentication)'
     | '/(authentication)/_authentication'
-    | '/(app)/_app/dashboard'
     | '/(authentication)/_authentication/forgot-password'
     | '/(authentication)/_authentication/login'
     | '/(authentication)/_authentication/reset-password'
     | '/(authentication)/_authentication/signup'
     | '/(authentication)/_authentication/verify'
-    | '/(app)/_app/dashboard/charts'
+    | '/(app)/_app/dashboard'
+    | '/(app)/_app/dashboard/_layout'
+    | '/(app)/_app/dashboard/_layout/charts'
+    | '/(app)/_app/dashboard/_layout/'
   fileRoutesById: FileRoutesById
 }
 
@@ -408,13 +459,6 @@ export const routeTree = rootRoute
         "/(authentication)/_authentication/verify"
       ]
     },
-    "/(app)/_app/dashboard": {
-      "filePath": "(app)/_app.dashboard.tsx",
-      "parent": "/(app)/_app",
-      "children": [
-        "/(app)/_app/dashboard/charts"
-      ]
-    },
     "/(authentication)/_authentication/forgot-password": {
       "filePath": "(authentication)/_authentication.forgot-password.tsx",
       "parent": "/(authentication)/_authentication"
@@ -435,9 +479,28 @@ export const routeTree = rootRoute
       "filePath": "(authentication)/_authentication.verify.tsx",
       "parent": "/(authentication)/_authentication"
     },
-    "/(app)/_app/dashboard/charts": {
-      "filePath": "(app)/_app..dashboard.charts.tsx",
-      "parent": "/(app)/_app/dashboard"
+    "/(app)/_app/dashboard": {
+      "filePath": "(app)/_app.dashboard",
+      "parent": "/(app)/_app",
+      "children": [
+        "/(app)/_app/dashboard/_layout"
+      ]
+    },
+    "/(app)/_app/dashboard/_layout": {
+      "filePath": "(app)/_app.dashboard/_layout.tsx",
+      "parent": "/(app)/_app/dashboard",
+      "children": [
+        "/(app)/_app/dashboard/_layout/charts",
+        "/(app)/_app/dashboard/_layout/"
+      ]
+    },
+    "/(app)/_app/dashboard/_layout/charts": {
+      "filePath": "(app)/_app.dashboard/_layout.charts.tsx",
+      "parent": "/(app)/_app/dashboard/_layout"
+    },
+    "/(app)/_app/dashboard/_layout/": {
+      "filePath": "(app)/_app.dashboard/_layout.index.tsx",
+      "parent": "/(app)/_app/dashboard/_layout"
     }
   }
 }
