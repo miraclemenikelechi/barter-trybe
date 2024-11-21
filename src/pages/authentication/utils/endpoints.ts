@@ -7,6 +7,7 @@ import { APP_CONSTANTS } from "@/lib/constants";
 import { HttpMethod, makeRequest } from "@/utils/make-requests";
 import { sleep } from "@/utils/sleep";
 
+import { useApiMutation } from "../hooks/mutation";
 import {
     ResendVerificationEmailRequest,
     ResendVerificationEmailResponse,
@@ -20,68 +21,56 @@ export const API = {
     SIGN_UP: function () {
         const navigate = useNavigate({ from: "/signup" });
 
-        return useMutation({
-            mutationFn: async function (request: SignupRequest) {
-                return await makeRequest<SignupResponse>({
-                    data: {
-                        businessname: request.businessName,
-                        businesstype: request.businessType,
-                        email: request.businessEmail,
-                        password: request.password,
-                    },
-                    method: APP_CONSTANTS.ENDPOINTS.SIGN_UP
-                        .METHOD as HttpMethod,
-                    url: APP_CONSTANTS.ENDPOINTS.SIGN_UP.URL,
-                });
+        return useApiMutation(
+            {
+                METHOD: APP_CONSTANTS.ENDPOINTS.SIGN_UP.METHOD as HttpMethod,
+                URL: APP_CONSTANTS.ENDPOINTS.SIGN_UP.URL,
             },
-
-            onSuccess: async function (data, variables) {
-                toast.success(data.message);
-                await sleep(1500);
-                navigate({
-                    to: "/verify",
-                    state: {
-                        verifyEmail: { email: variables.businessEmail },
-                    },
-                });
+            {
+                onSuccess: async function (data: SignupResponse, variables) {
+                    toast.success(data.message);
+                    await sleep(1500);
+                    navigate({
+                        to: "/verify",
+                        state: {
+                            verifyEmail: {
+                                email: variables.businessEmail as string,
+                            },
+                        },
+                    });
+                },
             },
-
-            onError: async function (error: Error) {
-                if (axios.isAxiosError(error)) {
-                    toast.error(error.response?.data.message);
-                } else {
-                    console.error(error);
-                }
-            },
-        });
+            function (variables: Record<string, unknown>) {
+                const signupRequest = variables as SignupRequest;
+                return {
+                    businessname: signupRequest.businessName,
+                    businesstype: signupRequest.businessType,
+                    email: signupRequest.businessEmail,
+                    password: signupRequest.password,
+                };
+            }
+        );
     },
 
     VERIFY_TOKEN: function () {
-        return useMutation({
-            mutationFn: async function (request: VerifyTokenRequest) {
-                return await makeRequest<VerifyTokenResponse>({
-                    data: {
-                        verificationCode: request.token,
-                        email: request.email,
-                    },
-                    method: APP_CONSTANTS.ENDPOINTS.VERIFY_TOKEN
-                        .METHOD as HttpMethod,
-                    url: APP_CONSTANTS.ENDPOINTS.VERIFY_TOKEN.URL,
-                });
+        return useApiMutation(
+            {
+                URL: APP_CONSTANTS.ENDPOINTS.VERIFY_TOKEN.URL,
+                METHOD: APP_CONSTANTS.ENDPOINTS.VERIFY_TOKEN
+                    .METHOD as HttpMethod,
             },
-
-            onSuccess: async function (data) {
-                toast.success(data.message);
+            {
+                onSuccess: async function (data: VerifyTokenResponse) {
+                    toast.success(data.message);
+                },
             },
-
-            onError: async function (error: Error) {
-                if (axios.isAxiosError(error)) {
-                    toast.error(error.response?.data.message);
-                } else {
-                    console.error(error);
-                }
-            },
-        });
+            function (variables: VerifyTokenRequest) {
+                return {
+                    verificationCode: variables.token,
+                    email: variables.email,
+                };
+            }
+        );
     },
 
     RESEND_VERIFICATION_EMAIL: function () {

@@ -52,7 +52,7 @@ export async function makeRequest<T>({
         /**
          * Return the response data.
          */
-        return response.data;
+        return response.data as T;
     } catch (error) {
         /**
          * Handle Axios errors.
