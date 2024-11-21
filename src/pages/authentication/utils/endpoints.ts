@@ -29,9 +29,8 @@ export const API = {
             },
 
             onSuccess: async function (data, variables) {
-                console.log(data);
                 toast.success(data.message);
-                await sleep(2000);
+                await sleep(1500);
                 navigate({
                     to: "/verify",
                     state: {
@@ -47,6 +46,16 @@ export const API = {
                     console.error(error);
                 }
             },
+        });
+    },
+
+    VERIFY_TOKEN: function () {
+        return useMutation({
+            mutationFn: async function () {},
+
+            onSuccess: async function () {},
+
+            onError: async function () {},
         });
     },
 };

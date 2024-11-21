@@ -23,6 +23,28 @@
     b {
         @include font($f: inter, $s: lg, $w: bold);
     }
+
+    footer div {
+        @include flex;
+        gap: 1rem;
+    }
+
+    &__input {
+        border-radius: 0.75rem;
+        border: 0.0625rem solid var(--black--400);
+        text-align: center;
+
+        @include equal(4rem);
+
+        &:focus {
+            border: 0.0625rem solid var(--blue--100);
+        }
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+            appearance: none;
+        }
+    }
 }
 
 .reset-password {
