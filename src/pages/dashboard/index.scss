@@ -1,7 +1,15 @@
 @use "@styles" as *;
 
 .dashboard {
+    margin-inline: auto;
+    @include r-w($type: min, $w: 76.5rem);
+
     &__header {
+        background-color: var(--white--500);
+        padding-block: 0.5rem;
+        position: sticky;
+        top: 0;
+
         @include flex($j: space-between);
     }
 
@@ -25,6 +33,38 @@
     }
 }
 
-.dashboard__navigation {
-    // @include flex;
+.dashboard-summary {
+    &__top {
+        margin-block: 2rem;
+
+        ul {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            place-items: center;
+        }
+
+        li {
+            height: 9.5rem;
+            border-radius: 1rem;
+            background-color: var(--white--100);
+
+            @include r-w($type: min, $w: 24.5rem);
+        }
+    }
+
+    &__bottom {
+        background-color: var(--orange--100);
+        border-radius: 1rem;
+        height: 7.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+
+        @include space($type: v, $size: 1.25rem);
+
+        h3{
+            @include font($f: inter, $s: sm, $w: bold);
+            color: var(--black--100);
+        }
+    }
 }
