@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "@tanstack/react-router";
 
 import FormButton from "./components/button";
 import FormInput from "./components/input";
@@ -10,7 +10,7 @@ import { ForgotPasswordRequest } from "./types";
 import { ForgotPasswordSchema } from "./utils/validation";
 
 export default function Page() {
-    const navigate = useNavigate();
+    const navigate = useNavigate({ from: "/forgot-password" });
 
     const { mutate, isPending } = useForgotPasswordMutation();
 
@@ -55,7 +55,7 @@ export default function Page() {
                         type="button"
                         label="Back to Login"
                         className="forgot-password__button"
-                        onClick={() => navigate("../login")}
+                        onClick={() => navigate({ to: "/login" })}
                     />
                 </footer>
             </div>

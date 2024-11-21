@@ -15,6 +15,9 @@ declare module "@tanstack/react-router" {
     interface Register {
         router: typeof router;
     }
+    interface HistoryState {
+        verifyEmail?: { email: string };
+    }
 }
 
 export default function App() {

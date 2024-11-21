@@ -21,7 +21,7 @@ export default function Component() {
                 <section className="home__header__hero">
                     <h1>unlock actionable insights with BarterTrybe</h1>
                     <p>
-                        Transform your busniess with our comprehensive Busniess
+                        Transform your business with our comprehensive business
                         Intelligence platform
                     </p>
                     <Link to={"."} className="home__header__cta">

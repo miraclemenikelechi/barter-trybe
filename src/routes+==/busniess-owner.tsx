@@ -7,7 +7,7 @@ import DashboardLayout from "@/views/dashboard";
 const LazyDashboard = lazy(() => import("@/pages/dashboard"));
 const LazyAnalytics = lazy(() => import("@/pages/analytics"));
 
-export const BUSNIESS_OWNER: RouteObject[] = [
+export const business_OWNER: RouteObject[] = [
     {
         element: <DashboardLayout />,
         children: [
@@ -20,7 +20,6 @@ export const BUSNIESS_OWNER: RouteObject[] = [
                         fallback={<div>Loading...</div>}
                     />
                 ),
-                
             },
             {
                 path: "analytics",

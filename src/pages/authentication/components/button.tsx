@@ -22,6 +22,7 @@ export default function Component({
         <button
             {...rest}
             className={cn(styles.button, styles.disabled, className)}
+            disabled={disabled}
         >
             <span className={styles.span}>{label}</span>
             {disabled ? <Spinner /> : null}

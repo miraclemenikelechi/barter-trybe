@@ -3,7 +3,7 @@ import { RouteObject } from "react-router-dom";
 import Home from "@/pages/home";
 
 import { AUTHENTICATION } from "./auth";
-import { BUSNIESS_OWNER } from "./busniess-owner";
+import { business_OWNER } from "./business-owner";
 
 export const ROUTES: RouteObject[] = [
     {
@@ -11,5 +11,5 @@ export const ROUTES: RouteObject[] = [
         element: <Home />,
     },
     ...AUTHENTICATION,
-    ...BUSNIESS_OWNER,
+    ...business_OWNER,
 ];

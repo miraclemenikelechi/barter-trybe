@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from "@tanstack/react-router";
 
 import { Auth_Decoration } from "@/assets/icons";
 

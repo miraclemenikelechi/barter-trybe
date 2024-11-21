@@ -10,7 +10,7 @@ export default function Component() {
         <section className="home__pricing" id="pricing">
             <div className="home__pricing__wrapper">
                 <h3>
-                    unlock your full busniess potential with barterTrybe pro
+                    unlock your full business potential with barterTrybe pro
                 </h3>
 
                 <ul>

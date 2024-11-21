@@ -22,7 +22,7 @@ export default function Component() {
 
                 <section>
                     <h3>
-                        sign up for barterTrybe, take your busniess to the next
+                        sign up for barterTrybe, take your business to the next
                         level and <br /> experience the difference
                     </h3>
 

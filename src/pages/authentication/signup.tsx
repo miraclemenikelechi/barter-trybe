@@ -1,37 +1,37 @@
+import { Link } from "@tanstack/react-router";
 import { Fragment, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Link } from "react-router-dom";
-import Select, {
-    CSSObjectWithLabel,
-    SingleValue,
-    StylesConfig,
-} from "react-select";
+import Select, { SingleValue } from "react-select";
 
 import { BusinessLogoUpload } from "@/assets/icons";
 import { APP_CONSTANTS } from "@/lib/constants";
 
 import FormButton from "./components/button";
 import FormInput from "./components/input";
+import { dropdownStyles } from "./config";
 import { useForm } from "./hooks/useForm";
-import { BusniessOption, SignupRequest } from "./types";
+import { businessOption, SignupRequest } from "./types";
+import { API } from "./utils/endpoints";
 import { SignupSchema } from "./utils/validation";
 
 export default function Page() {
+    const { mutate, isPending } = API.SIGN_UP();
+
     const [image, setImage] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
     const { errors, formData, handleChange, handleSubmit, setFormData } =
         useForm<SignupRequest>({
             initialData: {
-                busniessEmail: "",
-                busniessLocation: "",
-                busniessLogo: new File([], ""),
-                busniessName: "",
-                busniessType: "",
+                businessEmail: "",
+                businessLocation: "",
+                businessLogo: new File([], ""),
+                businessName: "",
+                businessType: "",
                 password: "",
             },
             schema: SignupSchema,
-            onSubmit: () => {},
+            onSubmit: (data) => mutate(data),
         });
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -45,8 +45,11 @@ export default function Page() {
                 setImagePreview(URL.createObjectURL(acceptedFiles[0]));
                 setFormData((previous) => ({
                     ...previous,
-                    busniessLogo: acceptedFiles[0],
+                    businessLogo: acceptedFiles[0],
                 }));
+                errors.businessLogo = "";
+            } else {
+                errors.businessLogo = "Please select a valid image";
             }
         },
         accept: { "image/*": [".png", ".jpg", ".jpeg"] },
@@ -54,82 +57,22 @@ export default function Page() {
     });
 
     /**
-     * Busniess type options for select input.
+     * business type options for select input.
      */
-    const busniessTypeOptions: BusniessOption[] = [
+    const businessTypeOptions: businessOption[] = [
         { label: "oo", value: "oo" },
     ];
 
     /**
-     * Handle busniess type change.
+     * Handle business type change.
      */
-    function handleBusniessTypeChange(option: SingleValue<BusniessOption>) {
+    function handlebusinessTypeChange(option: SingleValue<businessOption>) {
         setFormData((previous) => ({
             ...previous,
-            busniessType: option?.value ?? "",
+            businessType: option?.value ?? "",
         }));
+        errors.businessType = "";
     }
-
-    /**
-     * Custom styles for select input.
-     */
-    const dropdownStyles: StylesConfig<BusniessOption, false> = {
-        /**
-         * Styles for the container (outermost) element of the Select component.
-         * @param base - The base styles provided by the Select component.
-         * @returns The new styles object with the desired width and height.
-         */
-        container: function (base: CSSObjectWithLabel) {
-            return {
-                ...base,
-                width: "100%",
-                height: "3rem",
-            };
-        },
-        /**
-         * Styles for the control element (the visible part of the Select component).
-         * @param base - The base styles provided by the Select component.
-         * @returns The new styles object with the desired height.
-         */
-        control: (base: CSSObjectWithLabel) => ({
-            ...base,
-            height: "3rem",
-        }),
-        /**
-         * Styles for the value container element (the container for the selected value
-         * or placeholder text). This styles the container to have a fixed height and
-         * aligns the content vertically to the center.
-         * @param base - The base styles provided by the Select component.
-         * @returns The new styles object with the desired height and alignment.
-         */
-        valueContainer: (base: CSSObjectWithLabel) => ({
-            ...base,
-            height: "3rem",
-            alignContent: "center",
-        }),
-        /**
-         * Styles for the indicators container element (the container for dropdown indicators
-         * such as the dropdown arrow). This sets the height to occupy the full height of
-         * the select component, ensuring proper alignment of the indicators.
-         * @param base - The base styles provided by the Select component.
-         * @returns The new styles object with the desired height.
-         */
-        indicatorsContainer: (base: CSSObjectWithLabel) => ({
-            ...base,
-            height: "100%",
-        }),
-        /**
-         * Styles for the indicators separator element (the separator between the selected
-         * value and the dropdown indicators). This sets the display to "none" to hide the
-         * separator, as it is not needed in this select component.
-         * @param base - The base styles provided by the Select component.
-         * @returns The new styles object with the desired display.
-         */
-        indicatorSeparator: (base: CSSObjectWithLabel) => ({
-            ...base,
-            display: "none",
-        }),
-    };
 
     return (
         <section className="signup">
@@ -142,7 +85,7 @@ export default function Page() {
                 <footer>
                     <form onSubmit={handleSubmit}>
                         <div className="signup__logo">
-                            <label htmlFor="busniessLogo">Busniess Logo</label>
+                            <label htmlFor="businessLogo">business Logo</label>
 
                             <div
                                 {...getRootProps({
@@ -176,52 +119,52 @@ export default function Page() {
                                 )}
                             </div>
 
-                            {errors.busniessLogo ? (
+                            {errors.businessLogo ? (
                                 <span className="-mt-2 text-sm text-red-400">
-                                    {errors.busniessLogo}
+                                    {errors.businessLogo}
                                 </span>
                             ) : null}
                         </div>
 
                         <FormInput
                             className="signup__input"
-                            error={errors.busniessEmail}
-                            label="busniess Email"
-                            name="busniessEmail"
+                            error={errors.businessEmail}
+                            label="business Email"
+                            name="businessEmail"
                             onChange={handleChange}
-                            placeholder="Enter your Busniess email"
+                            placeholder="Enter your business email"
                             type="email"
-                            value={formData.busniessEmail}
+                            value={formData.businessEmail}
                         />
 
                         <FormInput
                             className="signup__input"
-                            error={errors.busniessName}
-                            label="busniess Name"
-                            name="busniessName"
+                            error={errors.businessName}
+                            label="business Name"
+                            name="businessName"
                             onChange={handleChange}
-                            placeholder="Enter your Busniess name"
+                            placeholder="Enter your business name"
                             type="email"
-                            value={formData.busniessName}
+                            value={formData.businessName}
                         />
 
                         <div className="signup__input">
-                            <label htmlFor="busniessType">Busniess Type</label>
+                            <label htmlFor="businessType">business Type</label>
 
                             <Select
-                                options={busniessTypeOptions}
-                                value={busniessTypeOptions.find(
-                                    (option) =>
-                                        option.value === formData.busniessType
-                                )}
-                                onChange={handleBusniessTypeChange}
-                                placeholder="Select your Busniess type"
+                                onChange={handlebusinessTypeChange}
+                                options={businessTypeOptions}
+                                placeholder="Select your business type"
                                 styles={dropdownStyles}
+                                value={businessTypeOptions.find(
+                                    (option) =>
+                                        option.value === formData.businessType
+                                )}
                             />
 
-                            {errors.busniessType ? (
+                            {errors.businessType ? (
                                 <span className="-mt-2 text-sm text-red-400">
-                                    {errors.busniessType}
+                                    {errors.businessType}
                                 </span>
                             ) : null}
                         </div>
@@ -239,26 +182,27 @@ export default function Page() {
 
                         <FormInput
                             className="signup__input"
-                            error={errors.busniessLocation}
-                            label="busniess Location"
-                            name="busniessLocation"
+                            error={errors.businessLocation}
+                            label="business Location"
+                            name="businessLocation"
                             onChange={handleChange}
-                            placeholder="Enter your Busniess location"
+                            placeholder="Enter your business location"
                             type="text"
-                            value={formData.busniessLocation}
+                            value={formData.businessLocation ?? ""}
                         />
 
                         <FormButton
                             className="signup__button"
+                            disabled={isPending}
+                            filled={true}
                             label="Sign Up"
                             type="submit"
-                            filled={true}
                         />
                     </form>
 
                     <div>
                         <span>Already have an account?</span>
-                        <Link to={"../login"}>Sign In</Link>
+                        <Link to={"/login"}>Sign In</Link>
                     </div>
                 </footer>
             </div>

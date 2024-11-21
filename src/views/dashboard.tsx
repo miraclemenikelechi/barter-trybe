@@ -7,9 +7,9 @@ export default function Component() {
     const { title } = useDashboardPagesTitle();
 
     return (
-        <section className="busniess-owner">
-            <div className="busniess-owner__wrapper">
-                <nav className="busniess-owner__navigation">
+        <section className="business-owner">
+            <div className="business-owner__wrapper">
+                <nav className="business-owner__navigation">
                     <span>
                         <img src="/logo.png" alt="logo" />
                     </span>
@@ -17,12 +17,12 @@ export default function Component() {
                     <DashboardNavigation />
                 </nav>
 
-                <header className="busniess-owner__header">
+                <header className="business-owner__header">
                     <h1>{title}</h1>
                     <h2>Owner</h2>
                 </header>
 
-                <footer className="busniess-owner__footer">
+                <footer className="business-owner__footer">
                     <Outlet />
                 </footer>
             </div>

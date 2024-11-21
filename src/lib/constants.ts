@@ -12,7 +12,7 @@ export const APP_CONSTANTS = {
             METHOD: "POST",
             URL: "/auth/signup",
         },
-        FORGOT_PASSWORD: {
+        RETRIEVE_PASSWORD_TOKEN: {
             METHOD: "POST",
             URL: "/auth/sendPasswordResetToken",
         },

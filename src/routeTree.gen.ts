@@ -14,8 +14,12 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
-import { Route as authenticationLayoutImport } from './routes/(authentication)/_layout'
-import { Route as authenticationLayoutLoginImport } from './routes/(authentication)/_layout.login'
+import { Route as authenticationAuthenticationImport } from './routes/(authentication)/_authentication'
+import { Route as authenticationAuthenticationVerifyImport } from './routes/(authentication)/_authentication.verify'
+import { Route as authenticationAuthenticationSignupImport } from './routes/(authentication)/_authentication.signup'
+import { Route as authenticationAuthenticationResetPasswordImport } from './routes/(authentication)/_authentication.reset-password'
+import { Route as authenticationAuthenticationLoginImport } from './routes/(authentication)/_authentication.login'
+import { Route as authenticationAuthenticationForgotPasswordImport } from './routes/(authentication)/_authentication.forgot-password'
 
 // Create Virtual Routes
 
@@ -34,16 +38,46 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const authenticationLayoutRoute = authenticationLayoutImport.update({
-  id: '/_layout',
-  getParentRoute: () => authenticationRoute,
-} as any)
+const authenticationAuthenticationRoute =
+  authenticationAuthenticationImport.update({
+    id: '/_authentication',
+    getParentRoute: () => authenticationRoute,
+  } as any)
 
-const authenticationLayoutLoginRoute = authenticationLayoutLoginImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => authenticationLayoutRoute,
-} as any)
+const authenticationAuthenticationVerifyRoute =
+  authenticationAuthenticationVerifyImport.update({
+    id: '/verify',
+    path: '/verify',
+    getParentRoute: () => authenticationAuthenticationRoute,
+  } as any)
+
+const authenticationAuthenticationSignupRoute =
+  authenticationAuthenticationSignupImport.update({
+    id: '/signup',
+    path: '/signup',
+    getParentRoute: () => authenticationAuthenticationRoute,
+  } as any)
+
+const authenticationAuthenticationResetPasswordRoute =
+  authenticationAuthenticationResetPasswordImport.update({
+    id: '/reset-password',
+    path: '/reset-password',
+    getParentRoute: () => authenticationAuthenticationRoute,
+  } as any)
+
+const authenticationAuthenticationLoginRoute =
+  authenticationAuthenticationLoginImport.update({
+    id: '/login',
+    path: '/login',
+    getParentRoute: () => authenticationAuthenticationRoute,
+  } as any)
+
+const authenticationAuthenticationForgotPasswordRoute =
+  authenticationAuthenticationForgotPasswordImport.update({
+    id: '/forgot-password',
+    path: '/forgot-password',
+    getParentRoute: () => authenticationAuthenticationRoute,
+  } as any)
 
 // Populate the FileRoutesByPath interface
 
@@ -63,42 +97,87 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authenticationImport
       parentRoute: typeof rootRoute
     }
-    '/(authentication)/_layout': {
-      id: '/(authentication)/_layout'
+    '/(authentication)/_authentication': {
+      id: '/(authentication)/_authentication'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof authenticationLayoutImport
+      preLoaderRoute: typeof authenticationAuthenticationImport
       parentRoute: typeof authenticationRoute
     }
-    '/(authentication)/_layout/login': {
-      id: '/(authentication)/_layout/login'
+    '/(authentication)/_authentication/forgot-password': {
+      id: '/(authentication)/_authentication/forgot-password'
+      path: '/forgot-password'
+      fullPath: '/forgot-password'
+      preLoaderRoute: typeof authenticationAuthenticationForgotPasswordImport
+      parentRoute: typeof authenticationAuthenticationImport
+    }
+    '/(authentication)/_authentication/login': {
+      id: '/(authentication)/_authentication/login'
       path: '/login'
       fullPath: '/login'
-      preLoaderRoute: typeof authenticationLayoutLoginImport
-      parentRoute: typeof authenticationLayoutImport
+      preLoaderRoute: typeof authenticationAuthenticationLoginImport
+      parentRoute: typeof authenticationAuthenticationImport
+    }
+    '/(authentication)/_authentication/reset-password': {
+      id: '/(authentication)/_authentication/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof authenticationAuthenticationResetPasswordImport
+      parentRoute: typeof authenticationAuthenticationImport
+    }
+    '/(authentication)/_authentication/signup': {
+      id: '/(authentication)/_authentication/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof authenticationAuthenticationSignupImport
+      parentRoute: typeof authenticationAuthenticationImport
+    }
+    '/(authentication)/_authentication/verify': {
+      id: '/(authentication)/_authentication/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof authenticationAuthenticationVerifyImport
+      parentRoute: typeof authenticationAuthenticationImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface authenticationLayoutRouteChildren {
-  authenticationLayoutLoginRoute: typeof authenticationLayoutLoginRoute
+interface authenticationAuthenticationRouteChildren {
+  authenticationAuthenticationForgotPasswordRoute: typeof authenticationAuthenticationForgotPasswordRoute
+  authenticationAuthenticationLoginRoute: typeof authenticationAuthenticationLoginRoute
+  authenticationAuthenticationResetPasswordRoute: typeof authenticationAuthenticationResetPasswordRoute
+  authenticationAuthenticationSignupRoute: typeof authenticationAuthenticationSignupRoute
+  authenticationAuthenticationVerifyRoute: typeof authenticationAuthenticationVerifyRoute
 }
 
-const authenticationLayoutRouteChildren: authenticationLayoutRouteChildren = {
-  authenticationLayoutLoginRoute: authenticationLayoutLoginRoute,
-}
+const authenticationAuthenticationRouteChildren: authenticationAuthenticationRouteChildren =
+  {
+    authenticationAuthenticationForgotPasswordRoute:
+      authenticationAuthenticationForgotPasswordRoute,
+    authenticationAuthenticationLoginRoute:
+      authenticationAuthenticationLoginRoute,
+    authenticationAuthenticationResetPasswordRoute:
+      authenticationAuthenticationResetPasswordRoute,
+    authenticationAuthenticationSignupRoute:
+      authenticationAuthenticationSignupRoute,
+    authenticationAuthenticationVerifyRoute:
+      authenticationAuthenticationVerifyRoute,
+  }
 
-const authenticationLayoutRouteWithChildren =
-  authenticationLayoutRoute._addFileChildren(authenticationLayoutRouteChildren)
+const authenticationAuthenticationRouteWithChildren =
+  authenticationAuthenticationRoute._addFileChildren(
+    authenticationAuthenticationRouteChildren,
+  )
 
 interface authenticationRouteChildren {
-  authenticationLayoutRoute: typeof authenticationLayoutRouteWithChildren
+  authenticationAuthenticationRoute: typeof authenticationAuthenticationRouteWithChildren
 }
 
 const authenticationRouteChildren: authenticationRouteChildren = {
-  authenticationLayoutRoute: authenticationLayoutRouteWithChildren,
+  authenticationAuthenticationRoute:
+    authenticationAuthenticationRouteWithChildren,
 }
 
 const authenticationRouteWithChildren = authenticationRoute._addFileChildren(
@@ -106,34 +185,62 @@ const authenticationRouteWithChildren = authenticationRoute._addFileChildren(
 )
 
 export interface FileRoutesByFullPath {
-  '/': typeof authenticationLayoutRouteWithChildren
-  '/login': typeof authenticationLayoutLoginRoute
+  '/': typeof authenticationAuthenticationRouteWithChildren
+  '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
+  '/login': typeof authenticationAuthenticationLoginRoute
+  '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
+  '/signup': typeof authenticationAuthenticationSignupRoute
+  '/verify': typeof authenticationAuthenticationVerifyRoute
 }
 
 export interface FileRoutesByTo {
-  '/': typeof authenticationLayoutRouteWithChildren
-  '/login': typeof authenticationLayoutLoginRoute
+  '/': typeof authenticationAuthenticationRouteWithChildren
+  '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
+  '/login': typeof authenticationAuthenticationLoginRoute
+  '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
+  '/signup': typeof authenticationAuthenticationSignupRoute
+  '/verify': typeof authenticationAuthenticationVerifyRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
   '/(authentication)': typeof authenticationRouteWithChildren
-  '/(authentication)/_layout': typeof authenticationLayoutRouteWithChildren
-  '/(authentication)/_layout/login': typeof authenticationLayoutLoginRoute
+  '/(authentication)/_authentication': typeof authenticationAuthenticationRouteWithChildren
+  '/(authentication)/_authentication/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
+  '/(authentication)/_authentication/login': typeof authenticationAuthenticationLoginRoute
+  '/(authentication)/_authentication/reset-password': typeof authenticationAuthenticationResetPasswordRoute
+  '/(authentication)/_authentication/signup': typeof authenticationAuthenticationSignupRoute
+  '/(authentication)/_authentication/verify': typeof authenticationAuthenticationVerifyRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/signup'
+    | '/verify'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
+  to:
+    | '/'
+    | '/forgot-password'
+    | '/login'
+    | '/reset-password'
+    | '/signup'
+    | '/verify'
   id:
     | '__root__'
     | '/'
     | '/(authentication)'
-    | '/(authentication)/_layout'
-    | '/(authentication)/_layout/login'
+    | '/(authentication)/_authentication'
+    | '/(authentication)/_authentication/forgot-password'
+    | '/(authentication)/_authentication/login'
+    | '/(authentication)/_authentication/reset-password'
+    | '/(authentication)/_authentication/signup'
+    | '/(authentication)/_authentication/verify'
   fileRoutesById: FileRoutesById
 }
 
@@ -167,19 +274,39 @@ export const routeTree = rootRoute
     "/(authentication)": {
       "filePath": "(authentication)",
       "children": [
-        "/(authentication)/_layout"
+        "/(authentication)/_authentication"
       ]
     },
-    "/(authentication)/_layout": {
-      "filePath": "(authentication)/_layout.tsx",
+    "/(authentication)/_authentication": {
+      "filePath": "(authentication)/_authentication.tsx",
       "parent": "/(authentication)",
       "children": [
-        "/(authentication)/_layout/login"
+        "/(authentication)/_authentication/forgot-password",
+        "/(authentication)/_authentication/login",
+        "/(authentication)/_authentication/reset-password",
+        "/(authentication)/_authentication/signup",
+        "/(authentication)/_authentication/verify"
       ]
     },
-    "/(authentication)/_layout/login": {
-      "filePath": "(authentication)/_layout.login.tsx",
-      "parent": "/(authentication)/_layout"
+    "/(authentication)/_authentication/forgot-password": {
+      "filePath": "(authentication)/_authentication.forgot-password.tsx",
+      "parent": "/(authentication)/_authentication"
+    },
+    "/(authentication)/_authentication/login": {
+      "filePath": "(authentication)/_authentication.login.tsx",
+      "parent": "/(authentication)/_authentication"
+    },
+    "/(authentication)/_authentication/reset-password": {
+      "filePath": "(authentication)/_authentication.reset-password.tsx",
+      "parent": "/(authentication)/_authentication"
+    },
+    "/(authentication)/_authentication/signup": {
+      "filePath": "(authentication)/_authentication.signup.tsx",
+      "parent": "/(authentication)/_authentication"
+    },
+    "/(authentication)/_authentication/verify": {
+      "filePath": "(authentication)/_authentication.verify.tsx",
+      "parent": "/(authentication)/_authentication"
     }
   }
 }

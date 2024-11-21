@@ -1,7 +1,7 @@
 import "./index.scss";
 
+import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 import { PasswordResetCheck } from "@/assets/icons";
 

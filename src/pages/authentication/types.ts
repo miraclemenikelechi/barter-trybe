@@ -57,7 +57,7 @@ export type SignupResponse = {
     message: string;
 };
 
-export type BusniessOption = {
+export type businessOption = {
     label: string;
     value: string;
 };

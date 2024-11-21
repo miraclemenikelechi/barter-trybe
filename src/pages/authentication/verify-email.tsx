@@ -1,5 +1,5 @@
+import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { truncateEmail } from "@/utils/truncate-email";
 
@@ -7,15 +7,19 @@ import FormButton from "./components/button";
 import { useForgotPasswordMutation } from "./hooks/forgot-password-mutation";
 
 export default function Page() {
-    const location = useLocation();
     const navigate = useNavigate();
     const { mutate, isPending } = useForgotPasswordMutation();
+    const state = useRouterState({
+        select(state) {
+            return state.location.state;
+        },
+    });
 
-    const email = location.state?.email;
+    const email = state.verifyEmail?.email;
 
     useEffect(
         function () {
-            if (!email) navigate("../forgot-password", { replace: true });
+            if (!email) navigate({ to: "/forgot-password", replace: true });
         },
         [email, navigate]
     );
@@ -46,7 +50,7 @@ export default function Page() {
 
                     <div>
                         <span>Wrong Email?</span>
-                        <Link to={"../forgot-password"}>Change Email</Link>
+                        <Link to={"/forgot-password"}>Change Email</Link>
                     </div>
                 </footer>
             </div>

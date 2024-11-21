@@ -5,8 +5,8 @@ import { ForgotPasswordRequest, ForgotPasswordResponse } from "../types";
 
 export async function forgotPasswordAction(request: ForgotPasswordRequest) {
     return await makeRequest<ForgotPasswordResponse>({
-        url: APP_CONSTANTS.ENDPOINTS.FORGOT_PASSWORD.URL,
-        method: APP_CONSTANTS.ENDPOINTS.FORGOT_PASSWORD.METHOD as HttpMethod,
+        url: APP_CONSTANTS.ENDPOINTS.RETRIEVE_PASSWORD_TOKEN.URL,
+        method: APP_CONSTANTS.ENDPOINTS.RETRIEVE_PASSWORD_TOKEN.METHOD as HttpMethod,
         data: request,
     });
 }

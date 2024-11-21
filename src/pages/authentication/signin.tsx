@@ -1,6 +1,6 @@
 import "./index.scss";
 
-import { Link } from "react-router-dom";
+import { Link } from "@tanstack/react-router";
 
 import FormButton from "./components/button";
 import FormInput from "./components/input";
@@ -54,7 +54,7 @@ export default function Page() {
                             value={formData.password}
                         />
 
-                        <Link to={"../forgot-password"}>Forgot Password?</Link>
+                        <Link to={"/forgot-password"}>Forgot Password?</Link>
 
                         <FormButton
                             type="submit"
@@ -67,7 +67,7 @@ export default function Page() {
 
                     <div>
                         <span>Don't have an account?</span>
-                        <Link to={"../signup"}>Sign Up</Link>
+                        <Link to={"/signup"}>Sign Up</Link>
                     </div>
                 </footer>
             </div>
