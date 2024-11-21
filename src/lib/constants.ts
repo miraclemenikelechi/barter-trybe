@@ -16,5 +16,13 @@ export const APP_CONSTANTS = {
             METHOD: "POST",
             URL: "/auth/sendPasswordResetToken",
         },
+        RESEND_VERIFICATION_EMAIL: {
+            METHOD: "POST",
+            URL: "/auth/resendVerificationCode",
+        },
+        VERIFY_TOKEN: {
+            METHOD: "POST",
+            URL: "/auth/verifyAccount",
+        },
     },
 };

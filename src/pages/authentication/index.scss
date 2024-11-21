@@ -31,13 +31,18 @@
 
     &__input {
         border-radius: 0.75rem;
-        border: 0.0625rem solid var(--black--400);
+        border: 0.0625rem solid var(--black--300);
         text-align: center;
 
         @include equal(4rem);
+        @include font($f: ubuntu, $s: xl, $w: semibold);
 
         &:focus {
             border: 0.0625rem solid var(--blue--100);
+        }
+
+        &:disabled {
+            background-color: var(--blue--200);
         }
 
         &::-webkit-outer-spin-button,

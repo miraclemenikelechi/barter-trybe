@@ -1,59 +1,35 @@
 import "./index.scss";
 
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import {
-    ChangeEvent,
-    Fragment,
-    KeyboardEvent,
-    useEffect,
-    useRef,
-    useState,
-} from "react";
+import { FormEvent, Fragment, useEffect } from "react";
+import { toast } from "sonner";
 
 import { truncateEmail } from "@/utils/truncate-email";
 
 import FormButton from "./components/button";
-import { useForgotPasswordMutation } from "./hooks/forgot-password-mutation";
-
-let currentInputIndex = 0;
+import { useOtpHandler } from "./hooks/otp";
+import { API } from "./utils/endpoints";
 
 export default function Page() {
-    const { mutate, isPending } = useForgotPasswordMutation();
+    const {
+        mutate: resendVerification,
+        isPending: resendVerificationIsPending,
+    } = API.RESEND_VERIFICATION_EMAIL();
 
-    const [otp, setOtp] = useState<string[]>(new Array(4).fill(""));
-    const [activeInputIndex, setActiveInputIndex] = useState<number>(0);
+    const { mutate: verifyToken, isPending: verifyTokenIsPending } =
+        API.VERIFY_TOKEN();
 
     const navigate = useNavigate();
-    const inputRef = useRef<HTMLInputElement | null>(null);
 
-    function handleOTP(event: ChangeEvent<HTMLInputElement>) {
-        const value = event.target.value;
-        const OTP: string[] = [...otp];
-
-        OTP[currentInputIndex] = value.substring(value.length - 1);
-
-        if (!value) setActiveInputIndex(currentInputIndex - 1);
-        else setActiveInputIndex(currentInputIndex + 1);
-
-        setOtp(OTP);
-    }
-
-    function handleKeyDown(
-        event: KeyboardEvent<HTMLInputElement>,
-        index: number
-    ) {
-        currentInputIndex = index;
-
-        if (event.key === "Backspace")
-            setActiveInputIndex(currentInputIndex - 1);
-    }
-
-    useEffect(
-        function () {
-            inputRef.current?.focus();
-        },
-        [activeInputIndex]
-    );
+    const {
+        handleChange,
+        handleKeyDown,
+        handlePaste,
+        isFieldDisabled,
+        inputRefs,
+        isOtpComplete,
+        otp,
+    } = useOtpHandler(4);
 
     const state = useRouterState({
         select(state) {
@@ -70,6 +46,18 @@ export default function Page() {
         [email, navigate]
     );
 
+    function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+        event.preventDefault();
+
+        if (!isOtpComplete) {
+            toast.error("Please enter the correct OTP");
+            return;
+        }
+
+        const token = otp.join("");
+        verifyToken({ email: email!, token });
+    }
+
     if (!email) return null;
 
     return (
@@ -85,24 +73,27 @@ export default function Page() {
                     </span>
                 </header>
                 <footer>
-                    <form action="">
+                    <form onSubmit={handleSubmit}>
                         <div>
-                            {otp.map(function (_, index) {
+                            {otp.map(function (value, index) {
                                 return (
                                     <Fragment key={index}>
                                         <input
                                             className="verify-email__input"
-                                            onChange={handleOTP}
+                                            disabled={isFieldDisabled(index)}
+                                            onChange={(event) =>
+                                                handleChange(event, index)
+                                            }
                                             onKeyDown={(event) =>
                                                 handleKeyDown(event, index)
                                             }
-                                            ref={
-                                                index === activeInputIndex
-                                                    ? inputRef
-                                                    : null
+                                            onPaste={handlePaste}
+                                            ref={(input) =>
+                                                (inputRefs.current[index] =
+                                                    input as HTMLInputElement)
                                             }
                                             type="number"
-                                            value={otp[index]}
+                                            value={value}
                                         />
 
                                         {index === otp.length - 1 ? null : (
@@ -116,19 +107,25 @@ export default function Page() {
                         <FormButton
                             className="verify-email__button"
                             filled={true}
-                            label="Verify"
+                            label={
+                                verifyTokenIsPending ? "Verifying..." : "Verify"
+                            }
                             type="submit"
-                            disabled={isPending}
+                            disabled={verifyTokenIsPending}
                         />
                     </form>
 
                     <FormButton
                         className="verify-email__button"
                         filled={false}
-                        label="Resend Email"
+                        label={
+                            resendVerificationIsPending
+                                ? "Resending..."
+                                : "Resend Email"
+                        }
                         type="button"
-                        onClick={() => mutate({ email })}
-                        disabled={isPending}
+                        onClick={() => resendVerification({ email })}
+                        disabled={resendVerificationIsPending}
                     />
 
                     <div>
