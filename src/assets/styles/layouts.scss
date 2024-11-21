@@ -55,7 +55,7 @@
         background-color: var(--white--500);
         display: grid;
         grid-template-columns: 7rem 1fr;
-        grid-template-rows: 6rem 1fr;
+        grid-template-rows: 5rem 1fr;
 
         @include equal;
     }
@@ -102,7 +102,7 @@
         grid-row: 1/2;
         padding-inline: 3.5rem;
 
-        @include debug(dark);
+        // @include debug(dark);
         @include flex($j: space-between);
 
         h1 {

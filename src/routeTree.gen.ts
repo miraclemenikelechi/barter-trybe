@@ -15,20 +15,30 @@ import { createFileRoute } from '@tanstack/react-router'
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as authenticationAuthenticationImport } from './routes/(authentication)/_authentication'
+import { Route as appAppImport } from './routes/(app)/_app'
 import { Route as authenticationAuthenticationVerifyImport } from './routes/(authentication)/_authentication.verify'
 import { Route as authenticationAuthenticationSignupImport } from './routes/(authentication)/_authentication.signup'
 import { Route as authenticationAuthenticationResetPasswordImport } from './routes/(authentication)/_authentication.reset-password'
 import { Route as authenticationAuthenticationLoginImport } from './routes/(authentication)/_authentication.login'
 import { Route as authenticationAuthenticationForgotPasswordImport } from './routes/(authentication)/_authentication.forgot-password'
+import { Route as appAppDashboardImport } from './routes/(app)/_app.dashboard'
+import { Route as appAppDashboardChartsImport./routes/(app)/_app..dashboard.chartspp..dashboard.charts'
 
 // Create Virtual Routes
 
 const authenticationImport = createFileRoute('/(authentication)')()
+const appImport = createFileRoute('/(app)')()
 
 // Create/Update Routes
 
 const authenticationRoute = authenticationImport.update({
   id: '/(authentication)',
+  path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const appRoute = appImport.update({
+  id: '/(app)',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -43,6 +53,11 @@ const authenticationAuthenticationRoute =
     id: '/_authentication',
     getParentRoute: () => authenticationRoute,
   } as any)
+
+const appAppRoute = appAppImport.update({
+  id: '/_app',
+  getParentRoute: () => appRoute,
+} as any)
 
 const authenticationAuthenticationVerifyRoute =
   authenticationAuthenticationVerifyImport.update({
@@ -79,6 +94,18 @@ const authenticationAuthenticationForgotPasswordRoute =
     getParentRoute: () => authenticationAuthenticationRoute,
   } as any)
 
+const appAppDashboardRoute = appAppDashboardImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppDashboardChartsRoute = appAppDashboardChartsImport.update({
+  id: '/charts',
+  path: '/charts',
+  getParentRoute: () => appAppDashboardRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -89,6 +116,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
+    }
+    '/(app)': {
+      id: '/(app)'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof appImport
+      parentRoute: typeof rootRoute
+    }
+    '/(app)/_app': {
+      id: '/(app)/_app'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof appAppImport
+      parentRoute: typeof appRoute
     }
     '/(authentication)': {
       id: '/(authentication)'
@@ -103,6 +144,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof authenticationAuthenticationImport
       parentRoute: typeof authenticationRoute
+    }
+    '/(app)/_app/dashboard': {
+      id: '/(app)/_app/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof appAppDashboardImport
+      parentRoute: typeof appAppImport
     }
     '/(authentication)/_authentication/forgot-password': {
       id: '/(authentication)/_authentication/forgot-password'
@@ -139,10 +187,50 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authenticationAuthenticationVerifyImport
       parentRoute: typeof authenticationAuthenticationImport
     }
+    '/(app)/_app/dashboard/charts': {
+      id: '/(app)/_app/dashboard/charts'
+      path: '/charts'
+      fullPath: '/dashboard/charts'
+      preLoaderRoute: typeof appAppDashboardChartsImport
+      parentRoute: typeof appAppDashboardImport
+    }
   }
 }
 
 // Create and export the route tree
+
+interface appAppDashboardRouteChildren {
+  appAppDashboardChartsRoute: typeof appAppDashboardChartsRoute
+}
+
+const appAppDashboardRouteChildren: appAppDashboardRouteChildren = {
+  appAppDashboardChartsRoute: appAppDashboardChartsRoute,
+}
+
+const appAppDashboardRouteWithChildren = appAppDashboardRoute._addFileChildren(
+  appAppDashboardRouteChildren,
+)
+
+interface appAppRouteChildren {
+  appAppDashboardRoute: typeof appAppDashboardRouteWithChildren
+}
+
+const appAppRouteChildren: appAppRouteChildren = {
+  appAppDashboardRoute: appAppDashboardRouteWithChildren,
+}
+
+const appAppRouteWithChildren =
+  appAppRoute._addFileChildren(appAppRouteChildren)
+
+interface appRouteChildren {
+  appAppRoute: typeof appAppRouteWithChildren
+}
+
+const appRouteChildren: appRouteChildren = {
+  appAppRoute: appAppRouteWithChildren,
+}
+
+const appRouteWithChildren = appRoute._addFileChildren(appRouteChildren)
 
 interface authenticationAuthenticationRouteChildren {
   authenticationAuthenticationForgotPasswordRoute: typeof authenticationAuthenticationForgotPasswordRoute
@@ -186,71 +274,89 @@ const authenticationRouteWithChildren = authenticationRoute._addFileChildren(
 
 export interface FileRoutesByFullPath {
   '/': typeof authenticationAuthenticationRouteWithChildren
+  '/dashboard': typeof appAppDashboardRouteWithChildren
   '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/login': typeof authenticationAuthenticationLoginRoute
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
+  '/dashboard/charts': typeof appAppDashboardChartsRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof authenticationAuthenticationRouteWithChildren
+  '/dashboard': typeof appAppDashboardRouteWithChildren
   '/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/login': typeof authenticationAuthenticationLoginRoute
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
+  '/dashboard/charts': typeof appAppDashboardChartsRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/(app)': typeof appRouteWithChildren
+  '/(app)/_app': typeof appAppRouteWithChildren
   '/(authentication)': typeof authenticationRouteWithChildren
   '/(authentication)/_authentication': typeof authenticationAuthenticationRouteWithChildren
+  '/(app)/_app/dashboard': typeof appAppDashboardRouteWithChildren
   '/(authentication)/_authentication/forgot-password': typeof authenticationAuthenticationForgotPasswordRoute
   '/(authentication)/_authentication/login': typeof authenticationAuthenticationLoginRoute
   '/(authentication)/_authentication/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/(authentication)/_authentication/signup': typeof authenticationAuthenticationSignupRoute
   '/(authentication)/_authentication/verify': typeof authenticationAuthenticationVerifyRoute
+  '/(app)/_app/dashboard/charts': typeof appAppDashboardChartsRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/dashboard'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/dashboard/charts'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/dashboard'
     | '/forgot-password'
     | '/login'
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/dashboard/charts'
   id:
     | '__root__'
     | '/'
+    | '/(app)'
+    | '/(app)/_app'
     | '/(authentication)'
     | '/(authentication)/_authentication'
+    | '/(app)/_app/dashboard'
     | '/(authentication)/_authentication/forgot-password'
     | '/(authentication)/_authentication/login'
     | '/(authentication)/_authentication/reset-password'
     | '/(authentication)/_authentication/signup'
     | '/(authentication)/_authentication/verify'
+    | '/(app)/_app/dashboard/charts'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  appRoute: typeof appRouteWithChildren
   authenticationRoute: typeof authenticationRouteWithChildren
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  appRoute: appRouteWithChildren,
   authenticationRoute: authenticationRouteWithChildren,
 }
 
@@ -265,11 +371,25 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/(app)",
         "/(authentication)"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/(app)": {
+      "filePath": "(app)",
+      "children": [
+        "/(app)/_app"
+      ]
+    },
+    "/(app)/_app": {
+      "filePath": "(app)/_app.tsx",
+      "parent": "/(app)",
+      "children": [
+        "/(app)/_app/dashboard"
+      ]
     },
     "/(authentication)": {
       "filePath": "(authentication)",
@@ -286,6 +406,13 @@ export const routeTree = rootRoute
         "/(authentication)/_authentication/reset-password",
         "/(authentication)/_authentication/signup",
         "/(authentication)/_authentication/verify"
+      ]
+    },
+    "/(app)/_app/dashboard": {
+      "filePath": "(app)/_app.dashboard.tsx",
+      "parent": "/(app)/_app",
+      "children": [
+        "/(app)/_app/dashboard/charts"
       ]
     },
     "/(authentication)/_authentication/forgot-password": {
@@ -307,6 +434,10 @@ export const routeTree = rootRoute
     "/(authentication)/_authentication/verify": {
       "filePath": "(authentication)/_authentication.verify.tsx",
       "parent": "/(authentication)/_authentication"
+    },
+    "/(app)/_app/dashboard/charts": {
+      "filePath": "(app)/_app..dashboard.charts.tsx",
+      "parent": "/(app)/_app/dashboard"
     }
   }
 }

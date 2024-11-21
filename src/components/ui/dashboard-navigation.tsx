@@ -54,7 +54,11 @@ export default function Component() {
 
 function NavigationItem({ icon: Icon, label, path }: DashboardNavigationItem) {
     const matchRoute = useMatchRoute();
-    const isActive: boolean = !!matchRoute({ to: path, pending: false });
+    const isActive: boolean = !!matchRoute({
+        to: path,
+        pending: false,
+        fuzzy: true,
+    });
 
     return (
         <Link
