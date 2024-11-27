@@ -111,6 +111,16 @@ $colors: (
         rgba(
             $color: #ffcc99,
             $alpha: 100%
+        ),
+    "green--100":
+        rgba(
+            $color: #039900,
+            $alpha: 100%
+        ),
+    "red--100":
+        rgba(
+            $color: #990000,
+            $alpha: 100%
         )
 );
 
@@ -164,4 +174,7 @@ $ff: (
 :root {
     @include generate-css-variables($map: $colors);
     @include generate-css-variables($map: $desktop, $prefix: desktop);
+    @include generate-css-variables($map: $fw, $prefix: fw);
+    @include generate-css-variables($map: $fz, $prefix: fz);
+    @include generate-css-variables($map: $ff, $prefix: ff);
 }

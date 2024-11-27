@@ -1,3 +1,4 @@
+@use "sass:map";
 @use "@styles" as *;
 
 .dashboard {
@@ -48,6 +49,7 @@
             height: 9.5rem;
             border-radius: 1rem;
             background-color: var(--white--100);
+            padding: 0.75rem;
 
             @include r-w($type: min, $w: 24.5rem);
         }
@@ -62,9 +64,74 @@
 
         @include space($type: v, $size: 1.25rem);
 
-        h3{
+        h3 {
             @include font($f: inter, $s: sm, $w: bold);
             color: var(--black--100);
         }
     }
+
+    &__card {
+        display: grid;
+        grid-template-columns: 3.75rem 1fr;
+
+        > section {
+            &:first-of-type {
+                @include flex;
+            }
+
+            &:last-of-type {
+                gap: 0.5rem;
+                padding: 0 0.25rem 0 0.5rem;
+
+                @include flex($d: column, $a: flex-start);
+            }
+        }
+
+        h3 {
+            color: var(--black--500);
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        h4 {
+            color: rgba($color: map.get($map: $colors, $key: "black--500"), $alpha: 70%);
+            @include font($f: inter, $s: xs, $w: semibold);
+        }
+
+        aside {
+            > span {
+                color: rgba($color: map.get($map: $colors, $key: "blue--400"), $alpha: 90%);
+                @include font($f: inter, $s: sm, $w: semibold);
+            }
+
+            div {
+                @include flex($j: space-between);
+
+                span {
+                    @include font($f: inter, $s: sm, $w: semibold);
+
+                    &:first-of-type {
+                        white-space: nowrap;
+                    }
+
+                    &:last-of-type {
+                        color: var(--white--100);
+                        border-radius: 0.25rem;
+                        height: 1.5rem;
+                        padding-inline: 0.25rem;
+
+                        @include flex;
+                        @include font($f: inter, $s: xs, $w: semibold);
+                    }
+                }
+            }
+        }
+
+        section > div:last-of-type {
+            @include font($f: inter, $s: xs, $w: semibold);
+            @include flex;
+        }
+    }
+}
+
+.dashboard-charts {
 }
