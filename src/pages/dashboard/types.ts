@@ -1,5 +1,7 @@
+import { FC } from "react";
+
 export type DASHBOARD_SUMMARY_TYPE = {
-    icon: string;
+    icon: FC;
     isMoney: boolean;
     isProfit: boolean;
     isRating: boolean;
@@ -8,4 +10,10 @@ export type DASHBOARD_SUMMARY_TYPE = {
     profit: number;
     thisWeek: number;
     title: string;
+};
+
+export type DASHBOARD_TOP_PRODUCTS_TYPE = {
+    icon: FC;
+    title: string;
+    products: string[];
 };

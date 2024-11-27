@@ -1,8 +1,10 @@
-import { DASHBOARD_SUMMARY_TYPE } from "./types";
+import { Dashboard_Revenue } from "@/assets/icons";
+
+import { DASHBOARD_SUMMARY_TYPE, DASHBOARD_TOP_PRODUCTS_TYPE } from "./types";
 
 export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: true,
         isProfit: true,
         isRating: false,
@@ -13,7 +15,7 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         title: "Total Revenue",
     },
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: false,
         isProfit: false,
         isRating: false,
@@ -24,7 +26,7 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         title: "Total Customers",
     },
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: false,
         isProfit: true,
         isRating: false,
@@ -35,7 +37,7 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         title: "Total Sales",
     },
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: true,
         isProfit: true,
         isRating: false,
@@ -46,7 +48,7 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         title: "Average Order Value",
     },
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: false,
         isProfit: false,
         isRating: false,
@@ -57,7 +59,7 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         title: "New Customers",
     },
     {
-        icon: "",
+        icon: Dashboard_Revenue,
         isMoney: false,
         isProfit: true,
         isRating: true,
@@ -66,5 +68,40 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
         profit: 20,
         thisWeek: 4.8,
         title: "New Customers",
+    },
+];
+
+export const DASHBOARD_TOP_PRODUCTS: DASHBOARD_TOP_PRODUCTS_TYPE[] = [
+    {
+        icon: Dashboard_Revenue,
+        products: [
+            "Product 1",
+            "Product 2",
+            "Product 3",
+            "Product 4",
+            "Product 5",
+            "Product 6",
+            "Product 7",
+            "Product 8",
+            "Product 9",
+            "Product 10",
+        ],
+        title: "Top Products",
+    },
+    {
+        icon: Dashboard_Revenue,
+        products: [
+            "Product 1",
+            "Product 2",
+            "Product 3",
+            "Product 4",
+            "Product 5",
+            "Product 6",
+            "Product 7",
+            "Product 8",
+            "Product 9",
+            "Product 10",
+        ],
+        title: "Top Products",
     },
 ];
