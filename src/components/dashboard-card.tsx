@@ -1,5 +1,6 @@
-import { FC, PropsWithChildren, ReactNode } from "react";
+import { Fragment, PropsWithChildren, ReactNode } from "react";
 
+import { Dashboard_Star } from "@/assets/icons";
 import { cn } from "@/lib/utils";
 
 type CardProps = PropsWithChildren & { className?: string };
@@ -32,22 +33,26 @@ function CardTitle({ title, className }: CardTitleProps) {
     return <h3 className={cn(className, ``)}>{title}</h3>;
 }
 
-function CardLeftContent({
-    className,
-    isMoney,
-    isRating,
-    value,
-}: CardContentProps) {
+function CardLeftContent({ className, isRating, value }: CardContentProps) {
     return (
         <aside
             className={cn(
                 className,
-                `bg-[var(--white--300)] h-[4rem] min-w-[7.25rem] rounded-lg py-2 px-3`
+                `bg-[var(--white--300)] h-[4rem] rounded-lg py-2 px-3`
             )}
         >
             <h4>Last Week</h4>
             <span>
-                {isMoney ? String.fromCharCode(8358) : null} {value}
+                {isRating ? (
+                    <Fragment>
+                        <b>{value}</b>
+                        <i className="inline-flex">
+                            <Dashboard_Star />
+                        </i>
+                    </Fragment>
+                ) : (
+                    value
+                )}
             </span>
         </aside>
     );
@@ -55,8 +60,8 @@ function CardLeftContent({
 
 function CardRightContent({
     className,
-    isMoney,
     isProfit,
+    isRating,
     profit,
     value,
 }: CardRightContentProps) {
@@ -64,20 +69,29 @@ function CardRightContent({
         <aside
             className={cn(
                 className,
-                `bg-[var(--white--300)] h-[4rem] min-w-[7.25rem] rounded-lg py-2 px-3 flex-1`
+                `bg-[var(--white--300)] h-[4rem] rounded-lg py-2 px-3`
             )}
         >
             <h4>This Week</h4>
 
             <div>
                 <span
-                    className={cn(
-                        isProfit
-                            ? "text-[var(--green--100)]"
-                            : "text-[var(--red--100)]"
-                    )}
+                    className={cn({
+                        "text-inherit": isRating,
+                        "text-[var(--green--100)]": isProfit && !isRating,
+                        "text-[var(--red--100)]": !isRating && !isProfit,
+                    })}
                 >
-                    {isMoney ? String.fromCharCode(8358) : null} {value}
+                    {isRating ? (
+                        <Fragment>
+                            <b>{value}</b>
+                            <i className="inline-flex">
+                                <Dashboard_Star />
+                            </i>
+                        </Fragment>
+                    ) : (
+                        value
+                    )}
                 </span>
 
                 <span

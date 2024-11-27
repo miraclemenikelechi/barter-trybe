@@ -3,12 +3,27 @@ import { Fragment } from "react";
 import { Dashboard_Revenue } from "@/assets/icons";
 import DashboardCard from "@/components/dashboard-card";
 
+import { DASHBOARD_SUMMARY } from "./config";
+
 export default function Component() {
     return (
         <Fragment>
             <main className="dashboard-summary__top">
                 <ul>
-                    {[...Array(6)].map(function (value, index) {
+                    {DASHBOARD_SUMMARY.map(function (value, index) {
+                        function formatValue(cardValue: number) {
+                            switch (true) {
+                                case value.isMoney:
+                                    return (
+                                        String.fromCharCode(8358) +
+                                        cardValue.toLocaleString("en-NG")
+                                    );
+
+                                default:
+                                    return cardValue.toLocaleString();
+                            }
+                        }
+
                         return (
                             <li
                                 key={index}
@@ -21,18 +36,26 @@ export default function Component() {
                                         </DashboardCard.Icon>
                                     </section>
                                     <section>
-                                        <DashboardCard.Title title="Total Revenue" />
+                                        <DashboardCard.Title
+                                            title={value.title}
+                                        />
 
                                         <div className="flex items-start justify-start w-full gap-4">
                                             <DashboardCard.LeftContent
-                                                isMoney={true}
-                                                value="56,665,665"
+                                                className="dashboard-summary__card__left"
+                                                isRating={value.isRating}
+                                                value={formatValue(
+                                                    value.lastWeek
+                                                )}
                                             />
                                             <DashboardCard.RightContent
-                                                isMoney={true}
-                                                isProfit={true}
-                                                profit="20%"
-                                                value="56,665,665"
+                                                className="dashboard-summary__card__right"
+                                                isProfit={value.isProfit}
+                                                profit={`${value.profit}%`}
+                                                value={formatValue(
+                                                    value.thisWeek
+                                                )}
+                                                isRating={value.isRating}
                                             />
                                         </div>
 

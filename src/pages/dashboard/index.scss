@@ -43,6 +43,14 @@
             gap: 1.5rem;
             grid-template-columns: repeat(3, 1fr);
             place-items: center;
+
+            @include r-bp($type: max, $bp: 90rem) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include r-bp($type: max, $bp: 65rem) {
+                grid-template-columns: repeat(1, 1fr);
+            }
         }
 
         li {
@@ -51,7 +59,7 @@
             background-color: var(--white--100);
             padding: 0.75rem;
 
-            @include r-w($type: min, $w: 24.5rem);
+            @include r-w($type: max, $w: 24.5rem);
         }
     }
 
@@ -98,12 +106,22 @@
         }
 
         aside {
+            $text-color: rgba(
+                $color:
+                    map.get(
+                        $map: $colors,
+                        $key: "blue--400"
+                    ),
+                $alpha: 80%
+            );
+
             > span {
-                color: rgba($color: map.get($map: $colors, $key: "blue--400"), $alpha: 90%);
+                color: $text-color;
                 @include font($f: inter, $s: sm, $w: semibold);
             }
 
             div {
+                color: $text-color;
                 @include flex($j: space-between);
 
                 span {
@@ -129,6 +147,29 @@
         section > div:last-of-type {
             @include font($f: inter, $s: xs, $w: semibold);
             @include flex;
+        }
+
+        &__left {
+            @include r-w($type: max, $w: 7.25rem, $p: 40%);
+        }
+
+        &__right {
+            flex: 1;
+        }
+
+        &__left > span,
+        &__right > div > span:first-of-type {
+            gap: 0.5rem;
+            @include flex($j: flex-start);
+
+            b {
+                @include font($f: inter, $s: lg, $w: semibold);
+            }
+
+            i {
+                @include equal(1.25rem);
+                padding-bottom: 0.125rem;
+            }
         }
     }
 }

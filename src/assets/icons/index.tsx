@@ -476,3 +476,22 @@ export const Dashboard_Revenue: FC = () => {
         </svg>
     );
 };
+
+export const Dashboard_Star: FC = () => {
+    return (
+        <svg
+            width={21}
+            height={20}
+            viewBox="0 0 21 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path
+                fillRule="evenodd"
+                clipRule="evenodd"
+                d="M10.924.417a.52.52 0 00-.992 0L7.71 7.255H.521a.52.52 0 00-.306.942l5.816 4.226L3.81 19.26a.522.522 0 00.801.584l5.817-4.226 5.816 4.226a.522.522 0 00.801-.584l-2.222-6.837 5.817-4.226a.52.52 0 00-.305-.942h-7.19L10.923.417z"
+                fill="#FFCE54"
+            />
+        </svg>
+    );
+};
