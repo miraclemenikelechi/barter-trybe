@@ -44,7 +44,7 @@
             grid-template-columns: repeat(3, 1fr);
             place-items: center;
 
-            @include r-bp($type: max, $bp: 90rem) {
+            @include r-bp($type: max, $bp: map.get($map: $desktop, $key: screen-width)) {
                 grid-template-columns: repeat(2, 1fr);
             }
 
@@ -79,6 +79,15 @@
     }
 
     &__card {
+        $text-color: rgba(
+            $color:
+                map.get(
+                    $map: $colors,
+                    $key: "blue--400"
+                ),
+            $alpha: 80%
+        );
+
         display: grid;
         grid-template-columns: 3.75rem 1fr;
 
@@ -92,6 +101,11 @@
                 padding: 0 0.25rem 0 0.5rem;
 
                 @include flex($d: column, $a: flex-start);
+
+                > div article {
+                    color: $text-color;
+                    @include font($f: inter, $s: xs, $w: semibold);
+                }
             }
         }
 
@@ -106,15 +120,6 @@
         }
 
         aside {
-            $text-color: rgba(
-                $color:
-                    map.get(
-                        $map: $colors,
-                        $key: "blue--400"
-                    ),
-                $alpha: 80%
-            );
-
             > span {
                 color: $text-color;
                 @include font($f: inter, $s: sm, $w: semibold);
@@ -145,8 +150,8 @@
         }
 
         section > div:last-of-type {
-            @include font($f: inter, $s: xs, $w: semibold);
             @include flex;
+            @include font($f: inter, $s: xs, $w: semibold);
         }
 
         &__left {
@@ -167,12 +172,93 @@
             }
 
             i {
-                @include equal(1.25rem);
                 padding-bottom: 0.125rem;
+                @include equal(1.25rem);
             }
         }
     }
 }
 
 .dashboard-charts {
+    margin-block: 2rem;
+
+    &__top {
+        gap: 1rem;
+        height: 8rem;
+
+        @include flex;
+        // @include r-bp($type: max, $bp: map.get($map: $desktop, $key: screen-width)) {
+        //     @include debug(dark);
+        // }
+
+        > div {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+    }
+
+    &__summary {
+        background-color: var(--white--100);
+        gap: 0.75rem;
+        height: 100%;
+        padding-block: 0.75rem;
+
+        @include flex($d: column, $j: space-between);
+        @include r-w($type: min, $w: 54.5rem, $p: 70%);
+
+        > * {
+            width: 100%;
+            @include flex($j: space-between);
+        }
+
+        aside {
+            padding: 0 0 0 1.75rem;
+
+            div {
+                height: 2rem;
+            }
+        }
+
+        h3 {
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        ul {
+            padding-inline: 4.5rem;
+        }
+
+        li {
+            gap: 0.75rem;
+            @include flex($d: column, $a: flex-start);
+
+            span {
+                color: var(--blue--700);
+                @include font($f: inter, $s: base, $w: semibold);
+            }
+        }
+
+        h4 {
+            color: var(--black--500);
+            @include font($f: inter, $s: sm, $w: semibold);
+        }
+    }
+
+    &__satisfaction {
+        @include r-w($type: min, $w: 20.5rem, $p: 30%);
+
+        > section {
+            @include space($type: v, $size: 0.5rem);
+        }
+
+        &__title {
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        &__list {
+            span {
+                color: var(--blue--700);
+                @include font($f: poppins, $s: xs, $w: semibold);
+            }
+        }
+    }
 }

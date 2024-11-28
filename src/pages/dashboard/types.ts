@@ -14,6 +14,17 @@ export type DASHBOARD_SUMMARY_TYPE = {
 
 export type DASHBOARD_TOP_PRODUCTS_TYPE = {
     icon: FC;
-    title: string;
     products: string[];
+    title: string;
+};
+
+export type GENERAL_SUMMARY_TYPE = {
+    isMoney: boolean;
+    title: string;
+    value: number;
+};
+
+export type SATISFACTION_TYPE = {
+    rating: number;
+    percentage: number;
 };

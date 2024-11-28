@@ -1,6 +1,11 @@
 import { Dashboard_Revenue } from "@/assets/icons";
 
-import { DASHBOARD_SUMMARY_TYPE, DASHBOARD_TOP_PRODUCTS_TYPE } from "./types";
+import {
+    DASHBOARD_SUMMARY_TYPE,
+    DASHBOARD_TOP_PRODUCTS_TYPE,
+    GENERAL_SUMMARY_TYPE,
+    SATISFACTION_TYPE,
+} from "./types";
 
 export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
     {
@@ -103,5 +108,51 @@ export const DASHBOARD_TOP_PRODUCTS: DASHBOARD_TOP_PRODUCTS_TYPE[] = [
             "Product 10",
         ],
         title: "Top Products",
+    },
+];
+
+export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE[] = [
+    {
+        isMoney: true,
+        title: "Total Sales",
+        value: 56665665,
+    },
+    {
+        isMoney: true,
+        title: "Average Order Value",
+        value: 566665,
+    },
+    {
+        isMoney: false,
+        title: "Customers",
+        value: 655,
+    },
+    {
+        isMoney: false,
+        title: "New Customers",
+        value: 87,
+    },
+];
+
+export const SATISFACTION: SATISFACTION_TYPE[] = [
+    {
+        percentage: 78,
+        rating: 5,
+    },
+    {
+        percentage: 92,
+        rating: 4,
+    },
+    {
+        percentage: 45,
+        rating: 3,
+    },
+    {
+        percentage: 61,
+        rating: 2,
+    },
+    {
+        percentage: 20,
+        rating: 1,
     },
 ];
