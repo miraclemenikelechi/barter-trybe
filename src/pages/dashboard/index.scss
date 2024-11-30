@@ -2,8 +2,7 @@
 @use "@styles" as *;
 
 .dashboard {
-    margin-inline: auto;
-    @include r-w($type: min, $w: 76.5rem);
+    @extend %inner-layout;
 
     &__header {
         background-color: var(--white--500);
@@ -181,15 +180,13 @@
 
 .dashboard-charts {
     margin-block: 2rem;
+    @include space($type: v, $size: 1rem);
 
     &__top {
         gap: 1rem;
         height: 8rem;
 
-        @include flex;
-        // @include r-bp($type: max, $bp: map.get($map: $desktop, $key: screen-width)) {
-        //     @include debug(dark);
-        // }
+        @include flex($j: space-between);
 
         > div {
             border-radius: 0.5rem;
@@ -204,7 +201,7 @@
         padding-block: 0.75rem;
 
         @include flex($d: column, $j: space-between);
-        @include r-w($type: min, $w: 54.5rem, $p: 70%);
+        @include r-w($type: min, $w: 54.5rem, $p: 80%);
 
         > * {
             width: 100%;
@@ -244,7 +241,7 @@
     }
 
     &__satisfaction {
-        @include r-w($type: min, $w: 20.5rem, $p: 30%);
+        @include r-w($type: min, $w: 20.5rem, $p: 40%);
 
         > section {
             @include space($type: v, $size: 0.5rem);
@@ -259,6 +256,19 @@
                 color: var(--blue--700);
                 @include font($f: poppins, $s: xs, $w: semibold);
             }
+        }
+    }
+
+    &__center {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+
+        > div {
+            background-color: var(--white--100);
+            border-radius: 0.5rem;
+            height: 18.75rem;
+            overflow: hidden;
         }
     }
 }

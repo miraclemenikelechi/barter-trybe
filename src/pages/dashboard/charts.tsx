@@ -1,35 +1,28 @@
 import SatisfactionCard from "@/components/satisfaction";
 
+import { renderSatisfactionRatingItem } from "./components/customer-satisfaction-rating-item";
+import { renderGenralSummaryItem } from "./components/general-summary-item";
+import { MyResponsivePie } from "./components/return-rates-chart";
+import { MyResponsiveLine } from "./components/revenue-report-chart";
+import SalesTrendChart from "./components/sales-trend-chart";
 import { GENERAL_SUMMARY, SATISFACTION } from "./config";
-import { formatValue } from "./utils/format-value";
 
 export default function Component() {
     return (
         <main className="dashboard-charts">
+            {/* TOP SECTION */}
             <section className="dashboard-charts__top">
+                {/* GENERAL SUMMARY */}
                 <div className="dashboard-charts__summary">
                     <aside>
                         <h3>General Summary</h3>
                         <div>dropdown component</div>
                     </aside>
 
-                    <ul>
-                        {GENERAL_SUMMARY.map(function (value, index) {
-                            return (
-                                <li key={index}>
-                                    <h4>{value.title}</h4>
-                                    <span>
-                                        {formatValue(
-                                            value.isMoney,
-                                            value.value
-                                        )}
-                                    </span>
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <ul>{GENERAL_SUMMARY.map(renderGenralSummaryItem)}</ul>
                 </div>
 
+                {/* CUSTOMER SATISFACTION */}
                 <div className="dashboard-charts__satisfaction">
                     <SatisfactionCard>
                         <SatisfactionCard.Title
@@ -38,22 +31,20 @@ export default function Component() {
                         />
 
                         <ul className="dashboard-charts__satisfaction__list">
-                            {SATISFACTION.map(function (value, index) {
-                                return (
-                                    <li key={index}>
-                                        <SatisfactionCard.Rating
-                                            percentage={value.percentage}
-                                            rating={value.rating}
-                                        />
-                                    </li>
-                                );
-                            })}
+                            {SATISFACTION.map(renderSatisfactionRatingItem)}
                         </ul>
                     </SatisfactionCard>
                 </div>
             </section>
 
-            <section className="dashboard-charts__center"></section>
+            <section className="dashboard-charts__center">
+                <div>
+                    <SalesTrendChart />
+                </div>
+                <div>
+                    <SalesTrendChart />
+                </div>
+            </section>
 
             <section className="dashboard-charts__bottom"></section>
         </main>

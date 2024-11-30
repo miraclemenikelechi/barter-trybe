@@ -102,7 +102,6 @@
         grid-row: 1/2;
         padding-inline: 3.5rem;
 
-        // @include debug(dark);
         @include flex($j: space-between);
 
         h1 {

@@ -48,3 +48,8 @@
         border-radius: 0.5rem;
     }
 }
+
+%inner-layout {
+    margin-inline: auto;
+    @include r-w($type: min, $w: 76rem);
+}
