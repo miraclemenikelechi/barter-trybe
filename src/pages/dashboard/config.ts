@@ -1,11 +1,18 @@
+import { fakerEN_NG as faker } from "@faker-js/faker";
+
 import { Dashboard_Revenue } from "@/assets/icons";
 
 import {
     DASHBOARD_SUMMARY_TYPE,
     DASHBOARD_TOP_PRODUCTS_TYPE,
     GENERAL_SUMMARY_TYPE,
-    SATISFACTION_TYPE,
+    SALES_TREND_TYPE,
 } from "./types";
+import {
+    generateMonthData,
+    generateWeekData,
+    generateYearData,
+} from "./utils/generate-random-charts-data";
 
 export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
     {
@@ -79,34 +86,12 @@ export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
 export const DASHBOARD_TOP_PRODUCTS: DASHBOARD_TOP_PRODUCTS_TYPE[] = [
     {
         icon: Dashboard_Revenue,
-        products: [
-            "Product 1",
-            "Product 2",
-            "Product 3",
-            "Product 4",
-            "Product 5",
-            "Product 6",
-            "Product 7",
-            "Product 8",
-            "Product 9",
-            "Product 10",
-        ],
+        products: Array.from({ length: 10 }, () => faker.commerce.product()),
         title: "Top Products",
     },
     {
         icon: Dashboard_Revenue,
-        products: [
-            "Product 1",
-            "Product 2",
-            "Product 3",
-            "Product 4",
-            "Product 5",
-            "Product 6",
-            "Product 7",
-            "Product 8",
-            "Product 9",
-            "Product 10",
-        ],
+        products: Array.from({ length: 10 }, () => faker.commerce.product()),
         title: "Top Products",
     },
 ];
@@ -115,44 +100,27 @@ export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE[] = [
     {
         isMoney: true,
         title: "Total Sales",
-        value: 56665665,
+        value: faker.number.int({ max: 1000000 }),
     },
     {
         isMoney: true,
         title: "Average Order Value",
-        value: 566665,
+        value: faker.number.int({ max: 1000000 }),
     },
     {
         isMoney: false,
         title: "Customers",
-        value: 655,
+        value: faker.number.int({ max: 10000 }),
     },
     {
         isMoney: false,
         title: "New Customers",
-        value: 87,
+        value: faker.number.int({ max: 200 }),
     },
 ];
 
-export const SATISFACTION: SATISFACTION_TYPE[] = [
-    {
-        percentage: 78,
-        rating: 5,
-    },
-    {
-        percentage: 92,
-        rating: 4,
-    },
-    {
-        percentage: 45,
-        rating: 3,
-    },
-    {
-        percentage: 61,
-        rating: 2,
-    },
-    {
-        percentage: 20,
-        rating: 1,
-    },
-];
+export const SALES_TRENDS: SALES_TREND_TYPE = {
+    week: generateWeekData(),
+    month: generateMonthData(),
+    year: generateYearData(),
+};

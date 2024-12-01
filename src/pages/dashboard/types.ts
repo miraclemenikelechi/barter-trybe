@@ -28,3 +28,15 @@ export type SATISFACTION_TYPE = {
     rating: number;
     percentage: number;
 };
+
+export type SALES_TREND_TYPE = {
+    week: SALES_TREND_ITEM_TYPE[];
+    month: SALES_TREND_ITEM_TYPE[];
+    year: SALES_TREND_ITEM_TYPE[];
+};
+
+export type SALES_TREND_ITEM_TYPE = {
+    duration: string;
+    sales: number;
+    color?: string;
+};

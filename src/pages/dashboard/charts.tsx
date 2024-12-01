@@ -2,10 +2,9 @@ import SatisfactionCard from "@/components/satisfaction";
 
 import { renderSatisfactionRatingItem } from "./components/customer-satisfaction-rating-item";
 import { renderGenralSummaryItem } from "./components/general-summary-item";
-import { MyResponsivePie } from "./components/return-rates-chart";
-import { MyResponsiveLine } from "./components/revenue-report-chart";
 import SalesTrendChart from "./components/sales-trend-chart";
-import { GENERAL_SUMMARY, SATISFACTION } from "./config";
+import { GENERAL_SUMMARY } from "./config";
+import { generateRandomSatisfactionData } from "./utils/generate-random-charts-data";
 
 export default function Component() {
     return (
@@ -31,7 +30,9 @@ export default function Component() {
                         />
 
                         <ul className="dashboard-charts__satisfaction__list">
-                            {SATISFACTION.map(renderSatisfactionRatingItem)}
+                            {generateRandomSatisfactionData().map(
+                                renderSatisfactionRatingItem
+                            )}
                         </ul>
                     </SatisfactionCard>
                 </div>

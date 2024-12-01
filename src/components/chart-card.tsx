@@ -5,7 +5,16 @@ import { cn } from "@/lib/utils";
 type ComponentProps = PropsWithChildren & { className?: string };
 
 export default function Component({ children, className }: ComponentProps) {
-    return <section className={cn(className, "size-full")}>{children}</section>;
+    return (
+        <section
+            className={cn(
+                className,
+                "size-full bg-[var(--white--100)] rounded-lg"
+            )}
+        >
+            {children}
+        </section>
+    );
 }
 
 type HeaderProps = {

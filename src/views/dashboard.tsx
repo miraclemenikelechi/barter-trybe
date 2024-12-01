@@ -1,6 +1,6 @@
 import { Outlet } from "@tanstack/react-router";
 
-import DashboardNavigation from "@/components/ui/dashboard-navigation";
+import DashboardNavigation from "@/components/dashboard-navigation";
 import { useDashboardPagesTitle } from "@/hooks/dashboard-pages-title";
 
 export default function Component() {
