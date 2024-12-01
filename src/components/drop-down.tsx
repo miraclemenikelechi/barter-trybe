@@ -1,53 +1,47 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
-
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { DropdownOption } from "@/types/drop-down";
 
 type DropdownProps = {
-    onChange: Dispatch<SetStateAction<DropdownOption>>;
+    onChange: (value: string) => void;
     options: DropdownOption[];
     value: DropdownOption;
-    className?: string;
     placeholder?: string;
-    showPlaceholder?: boolean;
+    styles?: { [key: string]: string };
 };
 
 export default function Component({
-    className,
     onChange,
     options,
     placeholder = "Select",
-    showPlaceholder = true,
     value,
+    styles,
 }: DropdownProps) {
-    function handleChange(event: ChangeEvent<HTMLSelectElement>) {
-        const selected = event.target.value;
-        const selectedOption = options.find(
-            (option) => option.value.toString() === selected
-        );
-
-        if (selectedOption) onChange(selectedOption);
-    }
-
     return (
-        <select
-            className={cn(className, "size-full")}
-            value={value.value}
-            onChange={handleChange}
-        >
-            {showPlaceholder && !value ? (
-                <option value="">{placeholder}</option>
-            ) : null}
-
-            {options.map(renderOptions)}
-        </select>
+        <Select value={value.value} onValueChange={onChange}>
+            <SelectTrigger className={cn(styles?.trigger, "dropdown-trigger")}>
+                <SelectValue
+                    placeholder={
+                        options.find((item) => item.value === value.value)
+                            ?.label || placeholder
+                    }
+                />
+            </SelectTrigger>
+            <SelectContent>{options.map(renderOptions)}</SelectContent>
+        </Select>
     );
 }
 
 function renderOptions(value: DropdownOption, index: number) {
     return (
-        <option key={index} value={value.value}>
-            {value.label}
-        </option>
+        <SelectItem key={index} value={value.value}>
+            <span className={cn("font-poppins text-xs")}>{value.label}</span>
+        </SelectItem>
     );
 }

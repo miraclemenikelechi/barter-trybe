@@ -53,3 +53,12 @@
     margin-inline: auto;
     @include r-w($type: min, $w: 76rem);
 }
+
+%dropdown {
+    .dropdown-trigger {
+        border-radius: 0.5rem;
+        border: 0.0625rem solid var(--blue--800);
+        gap: 0.75rem;
+        height: 2rem;
+    }
+}

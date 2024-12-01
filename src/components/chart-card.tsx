@@ -31,13 +31,17 @@ Component.Header = function Component({
     title,
 }: HeaderProps) {
     return (
-        <header className={cn(className, "py-3 px-6")}>
+        <header className={cn(className, "py-3 px-6 flex justify-between")}>
             <div>
                 <h3>{title}</h3>
                 <p>{description}</p>
             </div>
 
-            {dropdown ? <div>{dropdown}</div> : null}
+            {dropdown ? (
+                <div className="flex items-center justify-center">
+                    {dropdown}
+                </div>
+            ) : null}
         </header>
     );
 };

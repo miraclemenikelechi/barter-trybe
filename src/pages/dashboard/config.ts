@@ -120,7 +120,7 @@ export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE[] = [
 ];
 
 export const SALES_TRENDS: SALES_TREND_TYPE = {
-    week: generateWeekData(),
-    month: generateMonthData(),
-    year: generateYearData(),
+    thisWeek: generateWeekData(),
+    thisMonth: generateMonthData(),
+    thisYear: generateYearData(),
 };

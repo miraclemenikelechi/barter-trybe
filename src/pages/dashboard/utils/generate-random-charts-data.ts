@@ -23,6 +23,22 @@ export function generateWeekData(): SALES_TREND_ITEM_TYPE[] {
 }
 
 export function generateMonthData(): SALES_TREND_ITEM_TYPE[] {
+    const weeks: string[] = Array.from(
+        { length: faker.datatype.boolean() ? 5 : 4 },
+        function (_, index) {
+            return `Week ${index + 1}`;
+        }
+    );
+
+    return weeks.map(function (week) {
+        return {
+            duration: week,
+            sales: faker.number.int({ min: 100, max: 850 }),
+        };
+    });
+}
+
+export function generateYearData(): SALES_TREND_ITEM_TYPE[] {
     return [
         "Jan",
         "Feb",
@@ -40,15 +56,6 @@ export function generateMonthData(): SALES_TREND_ITEM_TYPE[] {
         return {
             duration: month,
             sales: faker.number.int({ min: 100, max: 850 }),
-        };
-    });
-}
-
-export function generateYearData(): SALES_TREND_ITEM_TYPE[] {
-    return Array.from({ length: 5 }, function (_, index) {
-        return {
-            duration: (2020 + index).toString(),
-            sales: faker.number.int({ min: 100, max: 900 }),
         };
     });
 }

@@ -264,6 +264,8 @@
         gap: 1rem;
         grid-template-columns: 1fr 1fr;
 
+        @extend %dropdown;
+
         > div {
             height: 18.75rem;
         }

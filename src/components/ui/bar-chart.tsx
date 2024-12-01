@@ -48,7 +48,6 @@ export default function Component({ data }: { data: BarDatum[] }) {
                 tickValues: chartTickValues({
                     data,
                     key: "sales",
-                    maxTicks: 10,
                 }),
                 legendPosition: "middle",
                 legendOffset: -40,

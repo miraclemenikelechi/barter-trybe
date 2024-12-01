@@ -1,42 +1,24 @@
-// type ChartTickValuesProps<T> = {
-//     data: T[];
-//     key: keyof T;
-//     maxTicks?: number;
-// };
-
-// export function chartTickValues<T>({
-//     data,
-//     key,
-//     maxTicks = 10,
-// }: ChartTickValuesProps<T>): number[] {
-//     const maxValue = Math.max(...data.map((item) => item[key] as number));
-
-//     const rawStep = maxValue / maxTicks;
-
-//     const magnitude = Math.pow(10, Math.floor(Math.log10(rawStep)));
-//     const step = Math.ceil(rawStep / magnitude) * magnitude;
-
-//     const ticks: number[] = [];
-
-//     let finalTick = Math.ceil(maxValue / step) * step;
-
-//     if (finalTick > maxValue * 1.25)
-//         finalTick = Math.ceil(maxValue / step) * step - step;
-
-//     for (let index = 0; index <= finalTick; index += step) {
-//         ticks.push(index);
-//     }
-
-//     return ticks;
-// }
-
-
 type ChartTickValuesProps<T> = {
     data: T[];
     key: keyof T;
     maxTicks?: number;
 };
 
+/**
+ * Generate an array of tick values for charts based on the provided data.
+ *
+ * This function takes an array of data objects and a specified key to extract numeric values,
+ * then calculates and returns an array of tick values suitable for use on a chart axis.
+ * The tick values are evenly spaced within the range defined by the data.
+ *
+ * @param props - The properties required to generate the tick values.
+ * @param props.data - An array of data objects containing the values to analyze.
+ * @param props.key - The key in the data objects to extract numeric values for tick generation.
+ * @param props.maxTicks - The maximum number of ticks to generate. Defaults to 10 if not provided.
+ *
+ * @returns An array of tick values, which are evenly spaced numeric values
+ * that can be used for chart axis labeling.
+ */
 export function chartTickValues<T>({
     data,
     key,
