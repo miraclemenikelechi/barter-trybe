@@ -25,4 +25,36 @@ export const APP_CONSTANTS = {
             URL: "/auth/verifyAccount",
         },
     },
+
+    CHART_DROPDOWN_OPTIONS: [
+        { label: "This Week", value: "thisWeek" },
+        { label: "This Month", value: "thisMonth" },
+        { label: "This Year", value: "thisYear" },
+    ],
+
+    TIME_FRAMES: {
+        MONTHS: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+        ],
+        DAYS: [
+            "Monday",
+            "Tuesday",
+            "Wednessday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+        ],
+    },
 };

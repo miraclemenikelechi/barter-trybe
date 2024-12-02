@@ -40,3 +40,18 @@ export type SALES_TREND_ITEM_TYPE = {
     sales: number;
     color?: string;
 };
+
+export type REPORT_REVENUE_TYPE = {
+    thisWeek: REPORT_REVENUE_ITEM_TYPE[];
+    thisMonth: REPORT_REVENUE_ITEM_TYPE[];
+    thisYear: REPORT_REVENUE_ITEM_TYPE[];
+};
+
+export type REPORT_REVENUE_ITEM_TYPE = {
+    id: string;
+    color?: string;
+    data: {
+        x: string;
+        y: number;
+    }[];
+};

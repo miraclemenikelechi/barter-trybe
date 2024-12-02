@@ -33,8 +33,12 @@ Component.Header = function Component({
     return (
         <header className={cn(className, "py-3 px-6 flex justify-between")}>
             <div>
-                <h3>{title}</h3>
-                <p>{description}</p>
+                <h3 className="text-base font-semibold text-inter text-[var(--black--500)]">
+                    {title}
+                </h3>
+                <p className="text-xs font-inter text-[var(--black--300)]">
+                    {description}
+                </p>
             </div>
 
             {dropdown ? (
@@ -50,7 +54,7 @@ type FooterProps = { chart: ReactNode; className?: string };
 
 Component.Footer = function Component({ className, chart }: FooterProps) {
     return (
-        <footer className={cn(className, "py-3 px-6")}>
+        <footer className={cn(className, "py-3 px-6 h-[14rem]")}>
             <div className="size-full">{chart}</div>
         </footer>
     );

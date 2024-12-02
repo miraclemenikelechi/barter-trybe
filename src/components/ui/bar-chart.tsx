@@ -1,6 +1,6 @@
 import { BarDatum, ResponsiveBar } from "@nivo/bar";
 
-import { chartTickValues } from "@/utils/chart-tick-values";
+import { chartTickValues, formatTickValue } from "@/utils/chart-tick-values";
 
 export default function Component({ data }: { data: BarDatum[] }) {
     return (
@@ -8,7 +8,7 @@ export default function Component({ data }: { data: BarDatum[] }) {
             data={data}
             keys={["sales"]}
             indexBy="duration"
-            margin={{ top: 20, right: 0, bottom: 25, left: 35 }}
+            margin={{ top: 20, right: 0, bottom: 25, left: 45 }}
             padding={0.3}
             valueScale={{ type: "linear" }}
             indexScale={{ type: "band", round: true }}
@@ -49,6 +49,7 @@ export default function Component({ data }: { data: BarDatum[] }) {
                     data,
                     key: "sales",
                 }),
+                format: (value: number) => formatTickValue(value),
                 legendPosition: "middle",
                 legendOffset: -40,
                 truncateTickAt: 0,

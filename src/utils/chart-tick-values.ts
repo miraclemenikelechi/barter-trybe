@@ -53,3 +53,16 @@ export function chartTickValues<T>({
 
     return ticks;
 }
+
+/**
+ * Format tick values into human-readable format (e.g., K for thousands, M for millions).
+ *
+ * @param value - The numeric value to format.
+ * @returns A formatted string with appropriate suffix.
+ */
+export function formatTickValue(value: number): string {
+    if (value >= 1_000_000_000) return `${(value / 1_000_000_000).toFixed(1)}B`;
+    if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
+    if (value >= 1_000) return `${(value / 1_000).toFixed(1)}K`;
+    return value.toString(); // For smaller numbers, return the raw value
+}

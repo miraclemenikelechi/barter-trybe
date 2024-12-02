@@ -2,6 +2,7 @@ import SatisfactionCard from "@/components/satisfaction";
 
 import { renderSatisfactionRatingItem } from "./components/customer-satisfaction-rating-item";
 import { renderGenralSummaryItem } from "./components/general-summary-item";
+import RevenueReportChart from "./components/revenue-report-chart";
 import SalesTrendChart from "./components/sales-trend-chart";
 import { GENERAL_SUMMARY } from "./config";
 import { generateRandomSatisfactionData } from "./utils/generate-random-charts-data";
@@ -19,7 +20,7 @@ export default function Component() {
                     <SalesTrendChart />
                 </div>
                 <div>
-                    <SalesTrendChart />
+                    <RevenueReportChart />
                 </div>
             </section>
 

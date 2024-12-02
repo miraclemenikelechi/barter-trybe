@@ -41,7 +41,11 @@ export default function Component({
 function renderOptions(value: DropdownOption, index: number) {
     return (
         <SelectItem key={index} value={value.value}>
-            <span className={cn("font-poppins text-xs")}>{value.label}</span>
+            <span
+                className={cn("font-poppins text-xs text-[var(--black--500)]")}
+            >
+                {value.label}
+            </span>
         </SelectItem>
     );
 }
