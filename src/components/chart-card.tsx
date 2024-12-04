@@ -8,8 +8,8 @@ export default function Component({ children, className }: ComponentProps) {
     return (
         <section
             className={cn(
-                className,
-                "size-full bg-[var(--white--100)] rounded-lg"
+                "size-full bg-[var(--white--100)] rounded-lg flex flex-col",
+                className
             )}
         >
             {children}
@@ -31,7 +31,7 @@ Component.Header = function Component({
     title,
 }: HeaderProps) {
     return (
-        <header className={cn(className, "py-3 px-6 flex justify-between")}>
+        <header className={cn("py-3 px-6 flex justify-between", className)}>
             <div>
                 <h3 className="text-base font-semibold text-inter text-[var(--black--500)]">
                     {title}
@@ -54,7 +54,7 @@ type FooterProps = { chart: ReactNode; className?: string };
 
 Component.Footer = function Component({ className, chart }: FooterProps) {
     return (
-        <footer className={cn(className, "py-3 px-6 h-[14rem]")}>
+        <footer className={cn("py-3 px-6 h-[14rem]", className)}>
             <div className="size-full">{chart}</div>
         </footer>
     );

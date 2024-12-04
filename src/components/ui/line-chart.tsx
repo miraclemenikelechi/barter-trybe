@@ -48,6 +48,8 @@ export default function Component({ data }: { data: Serie[] }) {
             pointLabelYOffset={-12}
             enableTouchCrosshair={true}
             useMesh={true}
+            crosshairType="cross"
+            enablePointLabel={false}
         />
     );
 }

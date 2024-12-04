@@ -7,16 +7,22 @@ import { APP_CONSTANTS } from "@/lib/constants";
 import { DropdownOption } from "@/types/drop-down";
 
 import { SALES_TRENDS } from "../config";
+import { SALES_TREND_ITEM_TYPE } from "../types";
 
 export default function Component() {
     const [selected, setSelected] = useState<DropdownOption>(
         APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
     );
 
-    const chartData = SALES_TRENDS[selected.value as keyof typeof SALES_TRENDS];
+    function transformDataForApexChart(data: SALES_TREND_ITEM_TYPE[]) {
+        return {
+            series: [{ name: "Sales", data: data.map((item) => item.sales) }],
+            categories: data.map((item) => item.duration),
+        };
+    }
 
     return (
-        <ChartCard className="flex flex-col">
+        <ChartCard>
             <ChartCard.Header
                 title="Sales Trend"
                 description="Number Of Sales Made Over Time"
@@ -38,7 +44,17 @@ export default function Component() {
 
             <hr />
 
-            <ChartCard.Footer chart={<BarChart data={chartData} />} />
+            <ChartCard.Footer className="px-1 py-0"
+                chart={
+                    <BarChart
+                        data={transformDataForApexChart(
+                            SALES_TRENDS[
+                                selected.value as keyof typeof SALES_TRENDS
+                            ]
+                        )}
+                    />
+                }
+            />
         </ChartCard>
     );
 }

@@ -3,6 +3,7 @@
 
 .dashboard {
     @extend %inner-layout;
+    @extend %scroll-bar;
 
     &__header {
         background-color: var(--white--500);
@@ -267,7 +268,13 @@
         @extend %dropdown;
 
         > div {
-            height: 18.75rem;
+            // height: 18.75rem;
         }
+    }
+
+    &__bottom {
+        @include debug(dark);
+        display: grid;
+        grid-template-columns: 308px 1fr 1fr;
     }
 }

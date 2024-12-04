@@ -1,69 +1,64 @@
-import { BarDatum, ResponsiveBar } from "@nivo/bar";
+import { ApexOptions } from "apexcharts";
+import ReactApexChart from "react-apexcharts";
 
-import { chartTickValues, formatTickValue } from "@/utils/chart-tick-values";
+type ChartData = {
+    series: ApexOptions["series"];
+    categories: string[];
+};
 
-export default function Component({ data }: { data: BarDatum[] }) {
+export default function Component({ data }: { data: ChartData }) {
+    const { series, categories } = data;
+
+    const options: ApexOptions = {
+        chart: {
+            toolbar: {
+                show: false,
+            },
+            fontFamily: "Inter, sans-serif",
+            parentHeightOffset: 0,
+        },
+        colors: ["#F94144"],
+        dataLabels: {
+            enabled: false,
+        },
+        grid: {
+            show: true,
+            strokeDashArray: 2,
+            xaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+        },
+        plotOptions: {
+            bar: {
+                borderRadius: 0,
+                borderRadiusApplication: "end",
+                horizontal: false,
+            },
+        },
+        xaxis: {
+            categories,
+            labels: {
+                rotate: 0,
+                style: {
+                    fontSize: "0.75rem",
+                },
+                trim: true,
+            },
+        },
+        yaxis: {
+            // stepSize: 100,
+        },
+    };
+
     return (
-        <ResponsiveBar
-            data={data}
-            keys={["sales"]}
-            indexBy="duration"
-            margin={{ top: 20, right: 0, bottom: 25, left: 45 }}
-            padding={0.3}
-            valueScale={{ type: "linear" }}
-            indexScale={{ type: "band", round: true }}
-            colors={({ data }) => String(data.color || "#F94144")}
-            fill={[
-                {
-                    match: {
-                        id: "fries",
-                    },
-                    id: "dots",
-                },
-                {
-                    match: {
-                        id: "sandwich",
-                    },
-                    id: "lines",
-                },
-            ]}
-            borderColor={{
-                from: "color",
-                modifiers: [["darker", 1.6]],
-            }}
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legendPosition: "middle",
-                legendOffset: 32,
-                truncateTickAt: 0,
-            }}
-            axisLeft={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                tickValues: chartTickValues({
-                    data,
-                    key: "sales",
-                }),
-                format: (value: number) => formatTickValue(value),
-                legendPosition: "middle",
-                legendOffset: -40,
-                truncateTickAt: 0,
-            }}
-            enableGridX={true}
-            enableLabel={false}
-            labelSkipWidth={12}
-            labelSkipHeight={12}
-            labelTextColor={{
-                from: "color",
-                modifiers: [["darker", 1.6]],
-            }}
-            legends={[]}
-            role="application"
+        <ReactApexChart
+            options={options}
+            series={series}
+            type="bar"
+            height={"100%"}
+            width={"100%"}
         />
     );
 }

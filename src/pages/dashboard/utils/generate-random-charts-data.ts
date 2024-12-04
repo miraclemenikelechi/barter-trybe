@@ -30,4 +30,11 @@ export function generateChartData({
     });
 }
 
-export function generateLineChartData() {}
+export function generateWeeks() {
+    return Array.from(
+        { length: faker.datatype.boolean() ? 5 : 4 },
+        function (_, index) {
+            return `Week ${index + 1}`;
+        }
+    );
+}

@@ -2,6 +2,7 @@ import SatisfactionCard from "@/components/satisfaction";
 
 import { renderSatisfactionRatingItem } from "./components/customer-satisfaction-rating-item";
 import { renderGenralSummaryItem } from "./components/general-summary-item";
+import ReturnRateChart from "./components/return-rates-chart";
 import RevenueReportChart from "./components/revenue-report-chart";
 import SalesTrendChart from "./components/sales-trend-chart";
 import { GENERAL_SUMMARY } from "./config";
@@ -24,7 +25,13 @@ export default function Component() {
                 </div>
             </section>
 
-            <section className="dashboard-charts__bottom"></section>
+            <section className="dashboard-charts__bottom">
+                <div>
+                    <ReturnRateChart />
+                </div>
+                <div>top products</div>
+                <div>low stock</div>
+            </section>
         </main>
     );
 }

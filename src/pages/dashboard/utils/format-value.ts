@@ -6,7 +6,18 @@
  * @returns {string} The formatted value.
  */
 export function formatValue(isMoney: boolean, value: number): string {
+    // return isMoney
+    //     ? String.fromCharCode(8358) +
+    //           value.toLocaleString("en-NG", {
+    //               currency: "NGN",
+    //               style: "currency",
+    //           })
+    //     : value.toLocaleString();
+
     return isMoney
-        ? String.fromCharCode(8358) + value.toLocaleString("en-NG")
+        ? value.toLocaleString("en-NG", {
+            style: "currency",
+            currency: "NGN",
+        })
         : value.toLocaleString();
 }

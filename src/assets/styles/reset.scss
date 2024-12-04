@@ -1,5 +1,6 @@
 @use "mixins" as *;
 @use "variables" as *;
+@use "extensions" as *;
 
 * {
     margin: 0;
@@ -15,9 +16,7 @@ html {
 }
 
 body {
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    @extend %scroll-bar;
 }
 
 button,

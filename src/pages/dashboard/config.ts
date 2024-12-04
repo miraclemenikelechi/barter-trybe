@@ -10,7 +10,10 @@ import {
     REPORT_REVENUE_TYPE,
     SALES_TREND_TYPE,
 } from "./types";
-import { generateChartData } from "./utils/generate-random-charts-data";
+import {
+    generateChartData,
+    generateWeeks,
+} from "./utils/generate-random-charts-data";
 
 export const DASHBOARD_SUMMARY: DASHBOARD_SUMMARY_TYPE[] = [
     {
@@ -125,14 +128,7 @@ export const SALES_TRENDS: SALES_TREND_TYPE = {
     }),
 
     thisMonth: generateChartData({
-        labels: function () {
-            return Array.from(
-                { length: faker.datatype.boolean() ? 5 : 4 },
-                function (_, index) {
-                    return `Week ${index + 1}`;
-                }
-            );
-        },
+        labels: generateWeeks(),
         minSales: 100,
         maxSales: 9000,
     }),
@@ -167,14 +163,7 @@ export const REPORT_REVENUE: REPORT_REVENUE_TYPE = {
 
     thisMonth: (function () {
         const data = generateChartData({
-            labels: function () {
-                return Array.from(
-                    { length: faker.datatype.boolean() ? 5 : 4 },
-                    function (_, index) {
-                        return `Week ${index + 1}`;
-                    }
-                );
-            },
+            labels: generateWeeks(),
             minSales: 100,
             maxSales: 9000,
         });
