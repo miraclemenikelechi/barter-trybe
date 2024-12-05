@@ -25,9 +25,13 @@ export default function Component({ data }: { data: ChartDataProps }) {
             },
         },
         markers: {
-            size: 4,
+            size: 2,
             colors: undefined,
             strokeColors: "#F94144",
+        },
+        stroke: {
+            curve: "smooth",
+            width: 3,
         },
         xaxis: {
             categories,

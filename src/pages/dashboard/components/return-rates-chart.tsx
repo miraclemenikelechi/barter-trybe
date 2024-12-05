@@ -1,33 +1,54 @@
-import ChartCard from "@/components/chart-card";
-import PieChart from "@/components/ui/full-pie-chart";
+import { useState } from "react";
 
-const data = [
-    {
-        id: "scala",
-        label: "scala",
-        value: 54,
-        color: "hsl(219, 70%, 50%)",
-    },
-    {
-        id: "hack",
-        label: "hack",
-        value: 46,
-        color: "hsl(152, 70%, 50%)",
-    },
-];
+import ChartCard from "@/components/chart-card";
+import Dropdown from "@/components/drop-down";
+import PieChart from "@/components/ui/full-pie-chart";
+import { APP_CONSTANTS } from "@/lib/constants";
+import { DropdownOption } from "@/types/drop-down";
+import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
+
+import { RETURN_RATE } from "../config";
 
 export default function Component() {
+    const [selected, setSelected] = useState<DropdownOption>(
+        APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
+    );
+
+    const chartData = transformDataForApexChart({
+        categoryKey: "duration",
+        data: RETURN_RATE[selected.value as keyof typeof RETURN_RATE],
+        seriesName: "Return Rate",
+        valueKey: "sales",
+    });
+
     return (
-        <ChartCard className="border border-red-500">
+        <ChartCard>
             <ChartCard.Header
                 title="Return Rate"
                 description="New VS Returning Customers"
-                dropdown={<></>}
+                className="px-3"
+                dropdown={
+                    <Dropdown
+                        onChange={(option) =>
+                            setSelected(
+                                APP_CONSTANTS.CHART_DROPDOWN_OPTIONS.find(
+                                    (item) => item.value === option
+                                )!
+                            )
+                        }
+                        options={APP_CONSTANTS.CHART_DROPDOWN_OPTIONS}
+                        value={selected}
+                        placeholder="Filter By..."
+                    />
+                }
             />
 
             <hr />
 
-            <ChartCard.Footer chart={<PieChart data={data} />} />
+            <ChartCard.Footer
+                chart={<PieChart data={chartData} />}
+                className="size-full"
+            />
         </ChartCard>
     );
 }

@@ -158,3 +158,23 @@ export const REPORT_REVENUE: CHART_FILTER_TYPE = {
         maxSales: 90000,
     }),
 };
+
+export const RETURN_RATE: CHART_FILTER_TYPE = {
+    thisWeek: generateChartData({
+        labels: ["Returning Customers", "New Customers"],
+        minSales: 100,
+        maxSales: 900,
+    }),
+
+    thisMonth: generateChartData({
+        labels: ["Returning Customers", "New Customers"],
+        minSales: 100,
+        maxSales: 9000,
+    }),
+
+    thisYear: generateChartData({
+        labels: ["Returning Customers", "New Customers"],
+        minSales: 100,
+        maxSales: 90000,
+    }),
+};

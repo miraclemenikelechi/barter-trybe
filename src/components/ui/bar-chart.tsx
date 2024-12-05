@@ -29,7 +29,7 @@ export default function Component({ data }: { data: ChartDataProps }) {
         },
         plotOptions: {
             bar: {
-                borderRadius: 2,
+                borderRadius: 0,
                 borderRadiusApplication: "end",
                 horizontal: false,
             },

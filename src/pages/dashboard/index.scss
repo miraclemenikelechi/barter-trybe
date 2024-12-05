@@ -266,15 +266,18 @@
         grid-template-columns: 1fr 1fr;
 
         @extend %dropdown;
-
-        > div {
-            // height: 18.75rem;
-        }
     }
 
     &__bottom {
-        @include debug(dark);
         display: grid;
-        grid-template-columns: 308px 1fr 1fr;
+        gap: 1rem;
+        grid-template-columns: repeat(3, 1fr);
+        min-height: 19.25rem;
+
+        @extend %dropdown;
+
+        .apexcharts-legend {
+            flex-direction: column;
+        }
     }
 }
