@@ -5,21 +5,21 @@ import Dropdown from "@/components/drop-down";
 import BarChart from "@/components/ui/bar-chart";
 import { APP_CONSTANTS } from "@/lib/constants";
 import { DropdownOption } from "@/types/drop-down";
+import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
 
 import { SALES_TRENDS } from "../config";
-import { SALES_TREND_ITEM_TYPE } from "../types";
 
 export default function Component() {
     const [selected, setSelected] = useState<DropdownOption>(
         APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
     );
 
-    function transformDataForApexChart(data: SALES_TREND_ITEM_TYPE[]) {
-        return {
-            series: [{ name: "Sales", data: data.map((item) => item.sales) }],
-            categories: data.map((item) => item.duration),
-        };
-    }
+    const chartData = transformDataForApexChart({
+        categoryKey: "duration",
+        data: SALES_TRENDS[selected.value as keyof typeof SALES_TRENDS],
+        seriesName: "Sales",
+        valueKey: "sales",
+    });
 
     return (
         <ChartCard>
@@ -44,16 +44,9 @@ export default function Component() {
 
             <hr />
 
-            <ChartCard.Footer className="px-1 py-0"
-                chart={
-                    <BarChart
-                        data={transformDataForApexChart(
-                            SALES_TRENDS[
-                                selected.value as keyof typeof SALES_TRENDS
-                            ]
-                        )}
-                    />
-                }
+            <ChartCard.Footer
+                className="px-1 py-0"
+                chart={<BarChart data={chartData} />}
             />
         </ChartCard>
     );

@@ -1,55 +1,46 @@
-import { ResponsiveLine, Serie } from "@nivo/line";
+import { ApexOptions } from "apexcharts";
+import ReactApexChart from "react-apexcharts";
 
-import { chartTickValues, formatTickValue } from "@/utils/chart-tick-values";
+import { APP_CONSTANTS } from "@/lib/constants";
+import { ChartDataProps } from "@/types/charts";
 
-export default function Component({ data }: { data: Serie[] }) {
+export default function Component({ data }: { data: ChartDataProps }) {
+    const { categories, series } = data;
+
+    const options: ApexOptions = {
+        ...APP_CONSTANTS.APEX_CHART_CONFIG,
+
+        grid: {
+            show: true,
+            strokeDashArray: 2,
+            xaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+            yaxis: {
+                lines: {
+                    show: true,
+                },
+            },
+        },
+        markers: {
+            size: 4,
+            colors: undefined,
+            strokeColors: "#F94144",
+        },
+        xaxis: {
+            categories,
+        },
+    };
+
     return (
-        <ResponsiveLine
-            data={data}
-            colors={({ data }) => String(data.color || "#F94144")}
-            margin={{ top: 20, right: 20, bottom: 25, left: 40 }}
-            xScale={{ type: "point" }}
-            yScale={{
-                type: "linear",
-                min: 0,
-                max: "auto",
-                stacked: true,
-                reverse: false,
-            }}
-            yFormat=" >-.2f"
-            axisTop={null}
-            axisRight={null}
-            axisBottom={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legendOffset: 36,
-                legendPosition: "middle",
-                truncateTickAt: 0,
-            }}
-            axisLeft={{
-                tickSize: 5,
-                tickPadding: 5,
-                tickRotation: 0,
-                legendOffset: -40,
-                legendPosition: "middle",
-                truncateTickAt: 0,
-                tickValues: chartTickValues({
-                    data: data.flatMap((item) => item.data),
-                    key: "y",
-                }),
-                format: (value: number) => formatTickValue(value),
-            }}
-            pointSize={10}
-            pointColor={{ theme: "background" }}
-            pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabel="data.yFormatted"
-            pointLabelYOffset={-12}
-            enableTouchCrosshair={true}
-            useMesh={true}
-            crosshairType="cross"
-            enablePointLabel={false}
+        <ReactApexChart
+            options={options}
+            series={series}
+            type="line"
+            height={"100%"}
+            width={"100%"}
         />
     );
 }

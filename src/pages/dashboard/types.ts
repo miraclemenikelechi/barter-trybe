@@ -29,29 +29,13 @@ export type SATISFACTION_TYPE = {
     percentage: number;
 };
 
-export type SALES_TREND_TYPE = {
-    thisWeek: SALES_TREND_ITEM_TYPE[];
-    thisMonth: SALES_TREND_ITEM_TYPE[];
-    thisYear: SALES_TREND_ITEM_TYPE[];
+export type CHART_FILTER_TYPE = {
+    thisWeek: CHART_DATA[];
+    thisMonth: CHART_DATA[];
+    thisYear: CHART_DATA[];
 };
 
-export type SALES_TREND_ITEM_TYPE = {
+type CHART_DATA = {
     duration: string;
     sales: number;
-    color?: string;
-};
-
-export type REPORT_REVENUE_TYPE = {
-    thisWeek: REPORT_REVENUE_ITEM_TYPE[];
-    thisMonth: REPORT_REVENUE_ITEM_TYPE[];
-    thisYear: REPORT_REVENUE_ITEM_TYPE[];
-};
-
-export type REPORT_REVENUE_ITEM_TYPE = {
-    id: string;
-    color?: string;
-    data: {
-        x: string;
-        y: number;
-    }[];
 };

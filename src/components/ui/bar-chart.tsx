@@ -1,23 +1,15 @@
 import { ApexOptions } from "apexcharts";
 import ReactApexChart from "react-apexcharts";
 
-type ChartData = {
-    series: ApexOptions["series"];
-    categories: string[];
-};
+import { APP_CONSTANTS } from "@/lib/constants";
+import { ChartDataProps } from "@/types/charts";
 
-export default function Component({ data }: { data: ChartData }) {
-    const { series, categories } = data;
+export default function Component({ data }: { data: ChartDataProps }) {
+    const { categories, series } = data;
 
     const options: ApexOptions = {
-        chart: {
-            toolbar: {
-                show: false,
-            },
-            fontFamily: "Inter, sans-serif",
-            parentHeightOffset: 0,
-        },
-        colors: ["#F94144"],
+        ...APP_CONSTANTS.APEX_CHART_CONFIG,
+
         dataLabels: {
             enabled: false,
         },
@@ -29,26 +21,21 @@ export default function Component({ data }: { data: ChartData }) {
                     show: true,
                 },
             },
+            yaxis: {
+                lines: {
+                    show: true,
+                },
+            },
         },
         plotOptions: {
             bar: {
-                borderRadius: 0,
+                borderRadius: 2,
                 borderRadiusApplication: "end",
                 horizontal: false,
             },
         },
         xaxis: {
             categories,
-            labels: {
-                rotate: 0,
-                style: {
-                    fontSize: "0.75rem",
-                },
-                trim: true,
-            },
-        },
-        yaxis: {
-            // stepSize: 100,
         },
     };
 

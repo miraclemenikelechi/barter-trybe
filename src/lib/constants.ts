@@ -47,14 +47,26 @@ export const APP_CONSTANTS = {
             "Nov",
             "Dec",
         ],
-        DAYS: [
-            "Mon",
-            "Tue",
-            "Wed",
-            "Thu",
-            "Fri",
-            "Sat",
-            "Sun",
-        ],
+        DAYS: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+    },
+
+    APEX_CHART_CONFIG: {
+        chart: {
+            toolbar: {
+                show: false,
+            },
+            fontFamily: "Inter, sans-serif",
+            parentHeightOffset: 0,
+        },
+        colors: ["#F94144"],
+        xaxis: {
+            labels: {
+                rotate: 0,
+                style: {
+                    fontSize: "0.75rem",
+                },
+                trim: true,
+            },
+        },
     },
 };

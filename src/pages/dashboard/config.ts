@@ -4,11 +4,10 @@ import { Dashboard_Revenue } from "@/assets/icons";
 import { APP_CONSTANTS } from "@/lib/constants";
 
 import {
+    CHART_FILTER_TYPE,
     DASHBOARD_SUMMARY_TYPE,
     DASHBOARD_TOP_PRODUCTS_TYPE,
     GENERAL_SUMMARY_TYPE,
-    REPORT_REVENUE_TYPE,
-    SALES_TREND_TYPE,
 } from "./types";
 import {
     generateChartData,
@@ -120,7 +119,7 @@ export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE[] = [
     },
 ];
 
-export const SALES_TRENDS: SALES_TREND_TYPE = {
+export const SALES_TRENDS: CHART_FILTER_TYPE = {
     thisWeek: generateChartData({
         labels: APP_CONSTANTS.TIME_FRAMES.DAYS,
         minSales: 100,
@@ -140,64 +139,22 @@ export const SALES_TRENDS: SALES_TREND_TYPE = {
     }),
 };
 
-export const REPORT_REVENUE: REPORT_REVENUE_TYPE = {
-    thisWeek: (function () {
-        const data = generateChartData({
-            labels: APP_CONSTANTS.TIME_FRAMES.DAYS,
-            minSales: 100,
-            maxSales: 900,
-        });
+export const REPORT_REVENUE: CHART_FILTER_TYPE = {
+    thisWeek: generateChartData({
+        labels: APP_CONSTANTS.TIME_FRAMES.DAYS,
+        minSales: 100,
+        maxSales: 900,
+    }),
 
-        return [
-            {
-                id: "revenue",
-                data: data.map(function (item) {
-                    return {
-                        x: item.duration,
-                        y: item.sales,
-                    };
-                }),
-            },
-        ];
-    })(),
+    thisMonth: generateChartData({
+        labels: generateWeeks(),
+        minSales: 100,
+        maxSales: 9000,
+    }),
 
-    thisMonth: (function () {
-        const data = generateChartData({
-            labels: generateWeeks(),
-            minSales: 100,
-            maxSales: 9000,
-        });
-
-        return [
-            {
-                id: "revenue",
-                data: data.map(function (item) {
-                    return {
-                        x: item.duration,
-                        y: item.sales,
-                    };
-                }),
-            },
-        ];
-    })(),
-
-    thisYear: (function () {
-        const data = generateChartData({
-            labels: APP_CONSTANTS.TIME_FRAMES.MONTHS,
-            minSales: 100,
-            maxSales: 90000,
-        });
-
-        return [
-            {
-                id: "revenue",
-                data: data.map(function (item) {
-                    return {
-                        x: item.duration,
-                        y: item.sales,
-                    };
-                }),
-            },
-        ];
-    })(),
+    thisYear: generateChartData({
+        labels: APP_CONSTANTS.TIME_FRAMES.MONTHS,
+        minSales: 100,
+        maxSales: 90000,
+    }),
 };

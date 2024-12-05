@@ -5,6 +5,7 @@ import Dropdown from "@/components/drop-down";
 import LineChart from "@/components/ui/line-chart";
 import { APP_CONSTANTS } from "@/lib/constants";
 import { DropdownOption } from "@/types/drop-down";
+import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
 
 import { REPORT_REVENUE } from "../config";
 
@@ -13,8 +14,12 @@ export default function Component() {
         APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
     );
 
-    const chartData =
-        REPORT_REVENUE[selected.value as keyof typeof REPORT_REVENUE];
+    const chartData = transformDataForApexChart({
+        categoryKey: "duration",
+        data: REPORT_REVENUE[selected.value as keyof typeof REPORT_REVENUE],
+        seriesName: "Revenue",
+        valueKey: "sales",
+    });
 
     return (
         <ChartCard>
@@ -39,7 +44,10 @@ export default function Component() {
 
             <hr />
 
-            <ChartCard.Footer chart={<LineChart data={chartData} />} />
+            <ChartCard.Footer
+                className="px-1 py-0"
+                chart={<LineChart data={chartData} />}
+            />
         </ChartCard>
     );
 }
