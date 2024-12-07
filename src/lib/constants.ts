@@ -69,4 +69,24 @@ export const APP_CONSTANTS = {
             },
         },
     },
+    TABLE_COLUMNS: {
+        DASHBOARD: [
+            {
+                label: "Name",
+                value: "name",
+            },
+            {
+                label: "Items Sold",
+                value: "sold",
+            },
+            {
+                label: "Remaining Stock",
+                value: "remaining",
+            },
+            {
+                label: "Price",
+                value: "price",
+            },
+        ],
+    },
 };

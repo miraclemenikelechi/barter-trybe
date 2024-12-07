@@ -38,3 +38,14 @@ export function generateWeeks() {
         }
     );
 }
+
+export function generateTableData(length: number) {
+    return Array.from({ length }, function () {
+        return {
+            name: faker.commerce.product(),
+            sold: faker.number.int({ min: 50, max: 300 }),
+            remaining: faker.number.int({ min: 10, max: 200 }),
+            price: faker.commerce.price({ min: 100, max: 200 }),
+        };
+    });
+}

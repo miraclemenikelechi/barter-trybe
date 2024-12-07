@@ -272,12 +272,20 @@
         display: grid;
         gap: 1rem;
         grid-template-columns: repeat(3, 1fr);
-        min-height: 19.25rem;
 
         @extend %dropdown;
 
+        > div {
+            height: 19.25rem;
+            overflow: hidden;
+        }
+
         .apexcharts-legend {
             flex-direction: column;
+        }
+
+        footer > div {
+            @extend %no-scroll-bar;
         }
     }
 }

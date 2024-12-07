@@ -1,4 +1,7 @@
+import DashboardTable from "@/components/dashboard-table";
 import SatisfactionCard from "@/components/satisfaction";
+import { APP_CONSTANTS } from "@/lib/constants";
+import { CHARTS_PAGE_TABLE } from "@/types/tables";
 
 import { renderSatisfactionRatingItem } from "./components/customer-satisfaction-rating-item";
 import { renderGenralSummaryItem } from "./components/general-summary-item";
@@ -6,7 +9,10 @@ import ReturnRateChart from "./components/return-rates-chart";
 import RevenueReportChart from "./components/revenue-report-chart";
 import SalesTrendChart from "./components/sales-trend-chart";
 import { GENERAL_SUMMARY } from "./config";
-import { generateRandomSatisfactionData } from "./utils/generate-random-charts-data";
+import {
+    generateRandomSatisfactionData,
+    generateTableData,
+} from "./utils/generate-random-charts-data";
 
 export default function Component() {
     return (
@@ -29,8 +35,12 @@ export default function Component() {
                 <div>
                     <ReturnRateChart />
                 </div>
-                <div>top products</div>
-                <div>low stock</div>
+                <div>
+                    <TopProductsTable />
+                </div>
+                <div>
+                    <LowStockTable />
+                </div>
             </section>
         </main>
     );
@@ -65,5 +75,46 @@ function SatisfactionSummary() {
                 </ul>
             </SatisfactionCard>
         </div>
+    );
+}
+
+function TopProductsTable() {
+    return (
+        <DashboardTable className="flex flex-col">
+            <DashboardTable.Header href="" title="Top Products" />
+            <DashboardTable.Footer
+                columns={
+                    APP_CONSTANTS.TABLE_COLUMNS.DASHBOARD as {
+                        value: keyof CHARTS_PAGE_TABLE;
+                        label: string;
+                    }[]
+                }
+                data={generateTableData(10)}
+                sticky="name"
+                styles={{ footer: "flex-1 overflow-hidden" }}
+            />
+        </DashboardTable>
+    );
+}
+
+function LowStockTable() {
+    return (
+        <DashboardTable className="flex flex-col">
+            <DashboardTable.Header href="" title="Low Stock" />
+            <DashboardTable.Footer
+                columns={
+                    APP_CONSTANTS.TABLE_COLUMNS.DASHBOARD as {
+                        value: keyof CHARTS_PAGE_TABLE;
+                        label: string;
+                    }[]
+                }
+                data={generateTableData(20)}
+                sticky="name"
+                styles={{
+                    name: "text-red-400",
+                    footer: "flex-1 overflow-hidden",
+                }}
+            />
+        </DashboardTable>
     );
 }
