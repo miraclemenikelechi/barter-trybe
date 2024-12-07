@@ -19,6 +19,12 @@ export type DASHBOARD_TOP_PRODUCTS_TYPE = {
 };
 
 export type GENERAL_SUMMARY_TYPE = {
+    thisWeek: GENERAL_SUMMARY_ITEM_TYPE[];
+    thisMonth: GENERAL_SUMMARY_ITEM_TYPE[];
+    thisYear: GENERAL_SUMMARY_ITEM_TYPE[];
+};
+
+export type GENERAL_SUMMARY_ITEM_TYPE = {
     isMoney: boolean;
     title: string;
     value: number;

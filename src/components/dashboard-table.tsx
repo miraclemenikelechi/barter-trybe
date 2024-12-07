@@ -42,7 +42,7 @@ Component.Header = function ComponentHeader({
             <h3 className={styles?.title}>{title}</h3>
 
             <Link
-                className={cn("text-[var(--blue--100)]", styles?.link)}
+                className={cn("text-[var(--blue--100)] font-inter", styles?.link)}
                 to={href}
             >
                 {linkText}
@@ -94,14 +94,15 @@ Component.Footer = function ComponentFooter<T>({
 
 type TableHeadProps<T> = Omit<FooterProps<T>, "data">;
 
-function TableHead<T>({ columns, sticky, styles }: TableHeadProps<T>) {
+function TableHead<T>({ columns, sticky }: TableHeadProps<T>) {
     return columns.map(function (column, index) {
         return (
             <th
                 key={index}
                 className={cn(
-                    styles?.tableHeaderCell,
-                    column.value === sticky ? "sticky left-0 bg-white text-left !px-2" : "",
+                    column.value === sticky
+                        ? "sticky left-0 bg-white text-left !px-2"
+                        : "",
                     "text-nowrap px-3 text-xs font-inter text-[var(--blue--700)] font-medium h-[2.75rem]"
                 )}
             >
@@ -118,7 +119,6 @@ function TableBody<T>({ columns, data, sticky, styles }: FooterProps<T>) {
                 <td
                     key={colIndex}
                     className={cn(
-                        styles?.tableCell,
                         column.value === sticky
                             ? "sticky left-0 bg-white border-b"
                             : "",

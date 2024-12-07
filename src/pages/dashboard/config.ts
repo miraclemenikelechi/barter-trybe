@@ -96,28 +96,74 @@ export const DASHBOARD_TOP_PRODUCTS: DASHBOARD_TOP_PRODUCTS_TYPE[] = [
     },
 ];
 
-export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE[] = [
-    {
-        isMoney: true,
-        title: "Total Sales",
-        value: faker.number.int({ max: 1000000 }),
-    },
-    {
-        isMoney: true,
-        title: "Average Order Value",
-        value: faker.number.int({ max: 1000000 }),
-    },
-    {
-        isMoney: false,
-        title: "Customers",
-        value: faker.number.int({ max: 10000 }),
-    },
-    {
-        isMoney: false,
-        title: "New Customers",
-        value: faker.number.int({ max: 200 }),
-    },
-];
+export const GENERAL_SUMMARY: GENERAL_SUMMARY_TYPE = {
+    thisWeek: [
+        {
+            isMoney: true,
+            title: "Total Sales",
+            value: faker.number.int({ max: 100000 }),
+        },
+        {
+            isMoney: true,
+            title: "Average Order Value",
+            value: faker.number.int({ max: 10000 }),
+        },
+        {
+            isMoney: false,
+            title: "Customers",
+            value: faker.number.int({ max: 500 }),
+        },
+        {
+            isMoney: false,
+            title: "New Customers",
+            value: faker.number.int({ max: 50 }),
+        },
+    ],
+    thisMonth: [
+        {
+            isMoney: true,
+            title: "Total Sales",
+            value: faker.number.int({ max: 500000 }),
+        },
+        {
+            isMoney: true,
+            title: "Average Order Value",
+            value: faker.number.int({ max: 20000 }),
+        },
+        {
+            isMoney: false,
+            title: "Customers",
+            value: faker.number.int({ max: 2000 }),
+        },
+        {
+            isMoney: false,
+            title: "New Customers",
+            value: faker.number.int({ max: 300 }),
+        },
+    ],
+    thisYear: [
+        {
+            isMoney: true,
+            title: "Total Sales",
+            value: faker.number.int({ max: 1000000 }),
+        },
+        {
+            isMoney: true,
+            title: "Average Order Value",
+            value: faker.number.int({ max: 50000 }),
+        },
+        {
+            isMoney: false,
+            title: "Customers",
+            value: faker.number.int({ max: 10000 }),
+        },
+        {
+            isMoney: false,
+            title: "New Customers",
+            value: faker.number.int({ max: 2000 }),
+        },
+    ],
+};
 
 export const SALES_TRENDS: CHART_FILTER_TYPE = {
     thisWeek: generateChartData({

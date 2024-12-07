@@ -18,8 +18,8 @@ export default function Component({ children, className }: ComponentProps) {
 }
 
 type HeaderProps = {
-    description: string;
     title: string;
+    description?: string;
     className?: string;
     dropdown?: ReactNode;
 };
