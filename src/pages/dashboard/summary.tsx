@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 import { DASHBOARD_SUMMARY, DASHBOARD_TOP_PRODUCTS } from "./config";
 import { DASHBOARD_SUMMARY_TYPE, DASHBOARD_TOP_PRODUCTS_TYPE } from "./types";
-import { formatValue } from "./utils/format-value";
+import { formatValue } from "../../utils/format-value";
 
 export default function Component() {
     return (

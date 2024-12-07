@@ -1,5 +1,5 @@
 import { GENERAL_SUMMARY_TYPE } from "../types";
-import { formatValue } from "../utils/format-value";
+import { formatValue } from "../../../utils/format-value";
 
 export function renderGenralSummaryItem(
     value: GENERAL_SUMMARY_TYPE,

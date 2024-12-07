@@ -91,7 +91,11 @@ function TopProductsTable() {
                 }
                 data={generateTableData(10)}
                 sticky="name"
-                styles={{ footer: "flex-1 overflow-hidden" }}
+                styles={{
+                    footer: "flex-1 overflow-hidden",
+                    name: "font-medium !text-[var(--blue--900)] !text-left",
+                    price: "!font-semibold",
+                }}
             />
         </DashboardTable>
     );
@@ -111,8 +115,9 @@ function LowStockTable() {
                 data={generateTableData(20)}
                 sticky="name"
                 styles={{
-                    name: "text-red-400",
+                    name: "!text-red-600 font-medium !text-left",
                     footer: "flex-1 overflow-hidden",
+                    price: "!font-semibold",
                 }}
             />
         </DashboardTable>

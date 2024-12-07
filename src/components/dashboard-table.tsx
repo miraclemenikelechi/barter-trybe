@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { PropsWithChildren, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
+import { formatValue } from "@/utils/format-value";
 
 type ComponentProps = PropsWithChildren & { className?: string };
 
@@ -65,9 +66,9 @@ Component.Footer = function ComponentFooter<T>({
 }: FooterProps<T>) {
     return (
         <footer className={cn("size-full", styles?.footer)}>
-            <div className="h-full overflow-auto border border-green-700">
-                <table>
-                    <thead className="sticky top-0 z-10 bg-white">
+            <div className="h-full overflow-auto">
+                <table className="w-full">
+                    <thead className="sticky top-0 z-10 bg-white border-b">
                         <tr>
                             <TableHead
                                 columns={columns}
@@ -100,8 +101,8 @@ function TableHead<T>({ columns, sticky, styles }: TableHeadProps<T>) {
                 key={index}
                 className={cn(
                     styles?.tableHeaderCell,
-                    column.value === sticky ? "sticky left-0 bg-white" : "",
-                    "text-nowrap px-3"
+                    column.value === sticky ? "sticky left-0 bg-white text-left !px-2" : "",
+                    "text-nowrap px-3 text-xs font-inter text-[var(--blue--700)] font-medium h-[2.75rem]"
                 )}
             >
                 {column.label}
@@ -112,17 +113,22 @@ function TableHead<T>({ columns, sticky, styles }: TableHeadProps<T>) {
 
 function TableBody<T>({ columns, data, sticky, styles }: FooterProps<T>) {
     return data.map((row, rowIndex) => (
-        <tr key={rowIndex} className={styles?.tableRow}>
+        <tr key={rowIndex} className={cn(styles?.tableRow, "border-b")}>
             {columns.map((column, colIndex) => (
                 <td
                     key={colIndex}
                     className={cn(
                         styles?.tableCell,
-                        column.value === sticky ? "sticky left-0 bg-white" : "",
-                        styles?.[column.value as string]
+                        column.value === sticky
+                            ? "sticky left-0 bg-white border-b"
+                            : "",
+                        styles?.[column.value as string],
+                        "text-center h-[2.75rem] font-inter text-sm text-[#667085] px-2"
                     )}
                 >
-                    {row[column.value] as ReactNode}
+                    {column.value === "price"
+                        ? formatValue(true, row[column.value] as number)
+                        : (row[column.value] as ReactNode)}
                 </td>
             ))}
         </tr>
