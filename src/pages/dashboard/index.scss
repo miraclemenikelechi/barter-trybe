@@ -271,7 +271,7 @@
     &__bottom {
         display: grid;
         gap: 1rem;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: minmax(20.25rem, 25%) 1fr 1fr;
 
         @extend %dropdown;
 
