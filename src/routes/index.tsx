@@ -5,5 +5,3 @@ import LandingPage from "@/pages/home";
 export const Route = createFileRoute("/")({
     component: LandingPage,
 });
-
-

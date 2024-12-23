@@ -1,14 +1,16 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
-import { Fragment } from "react";
 import { Toaster } from "sonner";
 
 import ContextWrapper from "@/contexts";
 import { useAuthenticationContext } from "@/hooks/authentication";
 import { routeTree } from "@/routeTree.gen";
 
+const queryClient = new QueryClient();
+
 const router = createRouter({
     routeTree,
-    context: { authentication: undefined! },
+    context: { authentication: undefined!, queryClient },
 });
 
 declare module "@tanstack/react-router" {
@@ -20,18 +22,18 @@ declare module "@tanstack/react-router" {
     }
 }
 
+function ContextProvider() {
+    const authentication = useAuthenticationContext();
+    return <RouterProvider router={router} context={{ authentication }} />;
+}
+
 export default function App() {
     return (
-        <Fragment>
+        <QueryClientProvider client={queryClient}>
             <ContextWrapper>
                 <ContextProvider />
             </ContextWrapper>
             <Toaster richColors />
-        </Fragment>
+        </QueryClientProvider>
     );
-}
-
-function ContextProvider() {
-    const authentication = useAuthenticationContext();
-    return <RouterProvider router={router} context={{ authentication }} />;
 }

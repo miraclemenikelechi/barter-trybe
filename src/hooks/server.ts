@@ -9,13 +9,10 @@ import { HttpMethod, makeRequest } from "@/utils/make-requests";
  *
  * @param endpoint - API endpoint configuration.
  * @param options - Optional React Query mutation options.
- * @param transformRequestData - Optional function to transform request data.
+ * @param transformRequestData - Optional function to transform client data to server data.
  * @returns React Query mutation hook.
  */
-export function useApiMutation<
-    TRequest extends Record<string, unknown>,
-    TResponse,
->(
+export function useServer<TRequest extends Record<string, unknown>, TResponse>(
     endpoint: {
         URL: string;
         METHOD: HttpMethod;

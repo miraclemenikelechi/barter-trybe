@@ -14,7 +14,7 @@ export default function Component() {
                     <NavigationButtons />
 
                     <div className="home__header__cta">
-                        <Link to={"."}>get started</Link>
+                        <Link to={"/login"}>get started</Link>
                     </div>
                 </nav>
 

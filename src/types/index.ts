@@ -34,3 +34,34 @@ export type ChartDataProps = {
     series: ApexOptions["series"];
     categories: string[];
 };
+
+export interface IUser {
+    address: string;
+    authType: string;
+    bio: string;
+    businessname: string;
+    businesstype: string;
+    country: string;
+    countryCode: string;
+    dob: string;
+    email: string;
+    gender: string;
+    imageUrl: string;
+    lga: string;
+    location: string;
+    password: string;
+    phone: string;
+    phoneNumber: string;
+    profileVerified: boolean;
+    referralCode: string;
+    resetPasswordCode: string;
+    state: string;
+    uid: string;
+    username: string;
+    verificationCode: string;
+    verificationCodeTimeStamp: number;
+    verified: boolean;
+    zipcode: string;
+}
+
+export type AuthUser = Partial<IUser>;

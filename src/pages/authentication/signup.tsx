@@ -20,6 +20,9 @@ export default function Page() {
     const [image, setImage] = useState<File | null>(null);
     const [imagePreview, setImagePreview] = useState<string | null>(null);
 
+    /**
+     * Form handling using custom hook
+     */
     const { errors, formData, handleChange, handleSubmit, setFormData } =
         useForm<SignupRequest>({
             initialData: {
@@ -144,7 +147,7 @@ export default function Page() {
                             name="businessName"
                             onChange={handleChange}
                             placeholder="Enter your business name"
-                            type="email"
+                            type="text"
                             value={formData.businessName}
                         />
 

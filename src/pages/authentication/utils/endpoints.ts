@@ -53,6 +53,8 @@ export const API = {
     },
 
     VERIFY_TOKEN: function () {
+        const navigate = useNavigate();
+
         return useApiMutation(
             {
                 URL: APP_CONSTANTS.ENDPOINTS.VERIFY_TOKEN.URL,
@@ -62,6 +64,8 @@ export const API = {
             {
                 onSuccess: async function (data: VerifyTokenResponse) {
                     toast.success(data.message);
+                    await sleep(1500);
+                    navigate({ to: "/login" });
                 },
             },
             function (variables: VerifyTokenRequest) {
