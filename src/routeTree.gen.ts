@@ -22,14 +22,18 @@ import { Route as authenticationAuthenticationResetPasswordImport } from './rout
 import { Route as authenticationAuthenticationLoginImport } from './routes/(authentication)/_authentication.login'
 import { Route as authenticationAuthenticationForgotPasswordImport } from './routes/(authentication)/_authentication.forgot-password'
 import { Route as appAppDashboardLayoutImport } from './routes/(app)/_app.dashboard/_layout'
+import { Route as appAppAnalyticsLayoutImport } from './routes/(app)/_app.analytics/_layout'
 import { Route as appAppDashboardLayoutIndexImport } from './routes/(app)/_app.dashboard/_layout.index'
+import { Route as appAppAnalyticsLayoutIndexImport } from './routes/(app)/_app.analytics/_layout.index'
 import { Route as appAppDashboardLayoutChartsImport } from './routes/(app)/_app.dashboard/_layout.charts'
+import { Route as appAppAnalyticsLayoutCategoriesImport } from './routes/(app)/_app.analytics/_layout.categories'
 
 // Create Virtual Routes
 
 const authenticationImport = createFileRoute('/(authentication)')()
 const appImport = createFileRoute('/(app)')()
 const appAppDashboardImport = createFileRoute('/(app)/_app/dashboard')()
+const appAppAnalyticsImport = createFileRoute('/(app)/_app/analytics')()
 
 // Create/Update Routes
 
@@ -64,6 +68,12 @@ const appAppRoute = appAppImport.update({
 const appAppDashboardRoute = appAppDashboardImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => appAppRoute,
+} as any)
+
+const appAppAnalyticsRoute = appAppAnalyticsImport.update({
+  id: '/analytics',
+  path: '/analytics',
   getParentRoute: () => appAppRoute,
 } as any)
 
@@ -107,6 +117,11 @@ const appAppDashboardLayoutRoute = appAppDashboardLayoutImport.update({
   getParentRoute: () => appAppDashboardRoute,
 } as any)
 
+const appAppAnalyticsLayoutRoute = appAppAnalyticsLayoutImport.update({
+  id: '/_layout',
+  getParentRoute: () => appAppAnalyticsRoute,
+} as any)
+
 const appAppDashboardLayoutIndexRoute = appAppDashboardLayoutIndexImport.update(
   {
     id: '/',
@@ -115,11 +130,26 @@ const appAppDashboardLayoutIndexRoute = appAppDashboardLayoutIndexImport.update(
   } as any,
 )
 
+const appAppAnalyticsLayoutIndexRoute = appAppAnalyticsLayoutIndexImport.update(
+  {
+    id: '/',
+    path: '/',
+    getParentRoute: () => appAppAnalyticsLayoutRoute,
+  } as any,
+)
+
 const appAppDashboardLayoutChartsRoute =
   appAppDashboardLayoutChartsImport.update({
     id: '/charts',
     path: '/charts',
     getParentRoute: () => appAppDashboardLayoutRoute,
+  } as any)
+
+const appAppAnalyticsLayoutCategoriesRoute =
+  appAppAnalyticsLayoutCategoriesImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => appAppAnalyticsLayoutRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -196,6 +226,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authenticationAuthenticationVerifyImport
       parentRoute: typeof authenticationAuthenticationImport
     }
+    '/(app)/_app/analytics': {
+      id: '/(app)/_app/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof appAppAnalyticsImport
+      parentRoute: typeof appAppImport
+    }
+    '/(app)/_app/analytics/_layout': {
+      id: '/(app)/_app/analytics/_layout'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof appAppAnalyticsLayoutImport
+      parentRoute: typeof appAppAnalyticsRoute
+    }
     '/(app)/_app/dashboard': {
       id: '/(app)/_app/dashboard'
       path: '/dashboard'
@@ -210,12 +254,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAppDashboardLayoutImport
       parentRoute: typeof appAppDashboardRoute
     }
+    '/(app)/_app/analytics/_layout/categories': {
+      id: '/(app)/_app/analytics/_layout/categories'
+      path: '/categories'
+      fullPath: '/analytics/categories'
+      preLoaderRoute: typeof appAppAnalyticsLayoutCategoriesImport
+      parentRoute: typeof appAppAnalyticsLayoutImport
+    }
     '/(app)/_app/dashboard/_layout/charts': {
       id: '/(app)/_app/dashboard/_layout/charts'
       path: '/charts'
       fullPath: '/dashboard/charts'
       preLoaderRoute: typeof appAppDashboardLayoutChartsImport
       parentRoute: typeof appAppDashboardLayoutImport
+    }
+    '/(app)/_app/analytics/_layout/': {
+      id: '/(app)/_app/analytics/_layout/'
+      path: '/'
+      fullPath: '/analytics/'
+      preLoaderRoute: typeof appAppAnalyticsLayoutIndexImport
+      parentRoute: typeof appAppAnalyticsLayoutImport
     }
     '/(app)/_app/dashboard/_layout/': {
       id: '/(app)/_app/dashboard/_layout/'
@@ -228,6 +286,33 @@ declare module '@tanstack/react-router' {
 }
 
 // Create and export the route tree
+
+interface appAppAnalyticsLayoutRouteChildren {
+  appAppAnalyticsLayoutCategoriesRoute: typeof appAppAnalyticsLayoutCategoriesRoute
+  appAppAnalyticsLayoutIndexRoute: typeof appAppAnalyticsLayoutIndexRoute
+}
+
+const appAppAnalyticsLayoutRouteChildren: appAppAnalyticsLayoutRouteChildren = {
+  appAppAnalyticsLayoutCategoriesRoute: appAppAnalyticsLayoutCategoriesRoute,
+  appAppAnalyticsLayoutIndexRoute: appAppAnalyticsLayoutIndexRoute,
+}
+
+const appAppAnalyticsLayoutRouteWithChildren =
+  appAppAnalyticsLayoutRoute._addFileChildren(
+    appAppAnalyticsLayoutRouteChildren,
+  )
+
+interface appAppAnalyticsRouteChildren {
+  appAppAnalyticsLayoutRoute: typeof appAppAnalyticsLayoutRouteWithChildren
+}
+
+const appAppAnalyticsRouteChildren: appAppAnalyticsRouteChildren = {
+  appAppAnalyticsLayoutRoute: appAppAnalyticsLayoutRouteWithChildren,
+}
+
+const appAppAnalyticsRouteWithChildren = appAppAnalyticsRoute._addFileChildren(
+  appAppAnalyticsRouteChildren,
+)
 
 interface appAppDashboardLayoutRouteChildren {
   appAppDashboardLayoutChartsRoute: typeof appAppDashboardLayoutChartsRoute
@@ -257,10 +342,12 @@ const appAppDashboardRouteWithChildren = appAppDashboardRoute._addFileChildren(
 )
 
 interface appAppRouteChildren {
+  appAppAnalyticsRoute: typeof appAppAnalyticsRouteWithChildren
   appAppDashboardRoute: typeof appAppDashboardRouteWithChildren
 }
 
 const appAppRouteChildren: appAppRouteChildren = {
+  appAppAnalyticsRoute: appAppAnalyticsRouteWithChildren,
   appAppDashboardRoute: appAppDashboardRouteWithChildren,
 }
 
@@ -324,8 +411,11 @@ export interface FileRoutesByFullPath {
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
+  '/analytics': typeof appAppAnalyticsLayoutRouteWithChildren
   '/dashboard': typeof appAppDashboardLayoutRouteWithChildren
+  '/analytics/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
+  '/analytics/': typeof appAppAnalyticsLayoutIndexRoute
   '/dashboard/': typeof appAppDashboardLayoutIndexRoute
 }
 
@@ -336,7 +426,9 @@ export interface FileRoutesByTo {
   '/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/signup': typeof authenticationAuthenticationSignupRoute
   '/verify': typeof authenticationAuthenticationVerifyRoute
+  '/analytics': typeof appAppAnalyticsLayoutIndexRoute
   '/dashboard': typeof appAppDashboardLayoutIndexRoute
+  '/analytics/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
 }
 
@@ -352,9 +444,13 @@ export interface FileRoutesById {
   '/(authentication)/_authentication/reset-password': typeof authenticationAuthenticationResetPasswordRoute
   '/(authentication)/_authentication/signup': typeof authenticationAuthenticationSignupRoute
   '/(authentication)/_authentication/verify': typeof authenticationAuthenticationVerifyRoute
+  '/(app)/_app/analytics': typeof appAppAnalyticsRouteWithChildren
+  '/(app)/_app/analytics/_layout': typeof appAppAnalyticsLayoutRouteWithChildren
   '/(app)/_app/dashboard': typeof appAppDashboardRouteWithChildren
   '/(app)/_app/dashboard/_layout': typeof appAppDashboardLayoutRouteWithChildren
+  '/(app)/_app/analytics/_layout/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/(app)/_app/dashboard/_layout/charts': typeof appAppDashboardLayoutChartsRoute
+  '/(app)/_app/analytics/_layout/': typeof appAppAnalyticsLayoutIndexRoute
   '/(app)/_app/dashboard/_layout/': typeof appAppDashboardLayoutIndexRoute
 }
 
@@ -367,8 +463,11 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/analytics'
     | '/dashboard'
+    | '/analytics/categories'
     | '/dashboard/charts'
+    | '/analytics/'
     | '/dashboard/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -378,7 +477,9 @@ export interface FileRouteTypes {
     | '/reset-password'
     | '/signup'
     | '/verify'
+    | '/analytics'
     | '/dashboard'
+    | '/analytics/categories'
     | '/dashboard/charts'
   id:
     | '__root__'
@@ -392,9 +493,13 @@ export interface FileRouteTypes {
     | '/(authentication)/_authentication/reset-password'
     | '/(authentication)/_authentication/signup'
     | '/(authentication)/_authentication/verify'
+    | '/(app)/_app/analytics'
+    | '/(app)/_app/analytics/_layout'
     | '/(app)/_app/dashboard'
     | '/(app)/_app/dashboard/_layout'
+    | '/(app)/_app/analytics/_layout/categories'
     | '/(app)/_app/dashboard/_layout/charts'
+    | '/(app)/_app/analytics/_layout/'
     | '/(app)/_app/dashboard/_layout/'
   fileRoutesById: FileRoutesById
 }
@@ -439,6 +544,7 @@ export const routeTree = rootRoute
       "filePath": "(app)/_app.tsx",
       "parent": "/(app)",
       "children": [
+        "/(app)/_app/analytics",
         "/(app)/_app/dashboard"
       ]
     },
@@ -479,6 +585,21 @@ export const routeTree = rootRoute
       "filePath": "(authentication)/_authentication.verify.tsx",
       "parent": "/(authentication)/_authentication"
     },
+    "/(app)/_app/analytics": {
+      "filePath": "(app)/_app.analytics",
+      "parent": "/(app)/_app",
+      "children": [
+        "/(app)/_app/analytics/_layout"
+      ]
+    },
+    "/(app)/_app/analytics/_layout": {
+      "filePath": "(app)/_app.analytics/_layout.tsx",
+      "parent": "/(app)/_app/analytics",
+      "children": [
+        "/(app)/_app/analytics/_layout/categories",
+        "/(app)/_app/analytics/_layout/"
+      ]
+    },
     "/(app)/_app/dashboard": {
       "filePath": "(app)/_app.dashboard",
       "parent": "/(app)/_app",
@@ -494,9 +615,17 @@ export const routeTree = rootRoute
         "/(app)/_app/dashboard/_layout/"
       ]
     },
+    "/(app)/_app/analytics/_layout/categories": {
+      "filePath": "(app)/_app.analytics/_layout.categories.tsx",
+      "parent": "/(app)/_app/analytics/_layout"
+    },
     "/(app)/_app/dashboard/_layout/charts": {
       "filePath": "(app)/_app.dashboard/_layout.charts.tsx",
       "parent": "/(app)/_app/dashboard/_layout"
+    },
+    "/(app)/_app/analytics/_layout/": {
+      "filePath": "(app)/_app.analytics/_layout.index.tsx",
+      "parent": "/(app)/_app/analytics/_layout"
     },
     "/(app)/_app/dashboard/_layout/": {
       "filePath": "(app)/_app.dashboard/_layout.index.tsx",

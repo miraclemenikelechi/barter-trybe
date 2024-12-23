@@ -1,12 +1,22 @@
 import "./index.scss";
 
-import { Link, Outlet, useMatchRoute } from "@tanstack/react-router";
+import { Outlet, useMatchRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
+import DashboardPageNavigation from "@/components/dashboard-page-navigation-link";
 import { useDashboardPagesTitle } from "@/hooks/dashboard-pages-title";
-import { cn } from "@/lib/utils";
+import { DASHBOARD_PAGE_NAVIGATION } from "@/types";
 
-import { isActiveLink } from "./utils/active-link";
+const pageNavigation: DASHBOARD_PAGE_NAVIGATION[] = [
+    {
+        href: "/dashboard",
+        title: "Summary",
+    },
+    {
+        href: "/dashboard/charts",
+        title: "Charts",
+    },
+];
 
 export default function Page() {
     const { setTitle } = useDashboardPagesTitle();
@@ -16,30 +26,16 @@ export default function Page() {
         setTitle("Dashboard");
     }, [setTitle]);
 
-    const activeLink = {
-        summary: !!matchRoute({ to: "/dashboard" }),
-        charts: !!matchRoute({ to: "/dashboard/charts" }),
-    };
-
     return (
         <section className="dashboard">
             <header className="dashboard__header">
                 <nav className="dashboard__navigation">
-                    <Link
-                        to={"/dashboard"}
-                        className={cn(isActiveLink(activeLink.summary))}
-                    >
-                        <span>Summary</span>
-                    </Link>
-                    <Link
-                        to={"/dashboard/charts"}
-                        className={cn(isActiveLink(activeLink.charts))}
-                    >
-                        <span>Charts</span>
-                    </Link>
+                    <DashboardPageNavigation links={pageNavigation} />
                 </nav>
 
-                {activeLink.summary ? <span>stuff here temp</span> : null}
+                {matchRoute({ to: "/dashboard" }) ? (
+                    <span>stuff here temp</span>
+                ) : null}
             </header>
 
             <Outlet />

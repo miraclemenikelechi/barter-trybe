@@ -1,0 +1,15 @@
+@use "@styles" as *;
+
+.analytics {
+    @extend %inner-layout;
+    @extend %scroll-bar;
+
+    &__header {
+        @extend %dashboard-page-navigation-header;
+    }
+
+    &__navigation {
+        @extend %dashboard-page-navigation;
+        @include flex($j: flex-start);
+    }
+}

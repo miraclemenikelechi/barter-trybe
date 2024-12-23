@@ -6,31 +6,11 @@
     @extend %scroll-bar;
 
     &__header {
-        background-color: var(--white--500);
-        padding-block: 0.5rem;
-        position: sticky;
-        top: 0;
-
-        @include flex($j: space-between);
+        @extend %dashboard-page-navigation-header;
     }
 
     &__navigation {
-        gap: 0.75rem;
-        @include flex();
-
-        a {
-            border-radius: 2.5rem;
-            border: 0.0625rem solid var(--black--100);
-            height: 2.25rem;
-            padding-inline: 0.75rem;
-            transition: all 150ms ease-in-out;
-
-            @include font($f: inter, $s: sm, $w: regular);
-
-            &:hover:not(.active) {
-                background-color: var(--white--500);
-            }
-        }
+        @extend %dashboard-page-navigation;
     }
 }
 
