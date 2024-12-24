@@ -69,7 +69,7 @@ export function Page() {
                     <FormButton
                         className="reset-password__button"
                         label="Back to Login"
-                        onClick={() => navigate("../login")}
+                        onClick={() => navigate({ to: "/login" })}
                         type="button"
                     />
                 </footer>
@@ -97,7 +97,7 @@ export default function PasswordResetConfirmation() {
                         className="reset-password__button"
                         filled={true}
                         label="Login"
-                        onClick={() => navigate("../login")}
+                        onClick={() => navigate({ to: "/login" })}
                         type="button"
                     />
                 </footer>
