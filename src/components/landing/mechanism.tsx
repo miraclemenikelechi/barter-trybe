@@ -1,7 +1,6 @@
 import { MechanismLine } from "@/assets/icons";
+import { MECHANISM_STEPS } from "@/lib/landing.config";
 import { purifyMarkup } from "@/utils/purify-markup";
-
-import { MECHANISM_STEPS } from "../config";
 
 export default function Component() {
     return (

@@ -26,7 +26,7 @@ export type DASHBOARD_PAGE_NAVIGATION = Link;
  * === DROPDOWN AND SELECTION TYPES ===
  * Types related to dropdowns and selection options
  */
-export interface DROPDOWN_OPTION {
+export interface IDropdownOption {
     label: string;
     value: string;
 }
@@ -55,6 +55,51 @@ export interface DASHBOARD_PAGE_CHARTS_TABLE {
     remaining: number;
     sold: number;
 }
+
+/**
+ * === LANDING PAGE TYPES ===
+ * Interfaces and types related to the landing page
+ */
+export type Feature = {
+    description: string;
+    icon: FC;
+    title: string;
+};
+
+export type Step = {
+    after: string;
+    before: string;
+    content: string;
+};
+
+export type Testimonial = {
+    content: string;
+    image: string;
+    job: string;
+    name: string;
+};
+
+export type PricingPlan = {
+    description: string;
+    features: string[];
+    href: string;
+    price: number;
+    title: string;
+};
+
+export type Social = {
+    href: string;
+    icon: FC;
+};
+
+/**
+ * === ANALYTICS PAGE TYPES ===
+ * Interfaces and types related to the analytics page
+ */
+export type ProductsFilter = {
+    title: string;
+    options: IDropdownOption[];
+};
 
 /**
  * === USER DATA TYPES ===

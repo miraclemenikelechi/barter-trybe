@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import axios from "axios";
-import { useTransition } from "react";
+import { useEffect, useTransition } from "react";
 import { toast } from "sonner";
 
 import { useAuthentication } from "@/hooks/authentication";
@@ -17,7 +17,16 @@ export const Route = createFileRoute("/(authentication)/_authentication/login")(
             const [isPending, startTransition] = useTransition();
 
             // Authentication context to manage user login
-            const { login } = useAuthentication();
+            const { login, isAuthenticated } = useAuthentication();
+
+            // Redirect user to dashboard if already authenticated
+            useEffect(
+                function () {
+                    if (isAuthenticated)
+                        navigate({ to: "/dashboard", replace: true });
+                },
+                [isAuthenticated, navigate]
+            );
 
             // Form handling with validation schema
             const { errors, formData, handleChange, handleSubmit } =
@@ -34,7 +43,7 @@ export const Route = createFileRoute("/(authentication)/_authentication/login")(
                 startTransition(() => {
                     login(data.email, data.password)
                         .then(function () {
-                            toast.success("You have successfully logged in!");
+                            toast.success("You are logged in!");
                             navigate({ to: "/dashboard" });
                         })
 

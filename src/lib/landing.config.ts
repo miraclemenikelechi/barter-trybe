@@ -8,21 +8,13 @@ import {
     X,
     Youtube,
 } from "@/assets/icons";
+import { Feature, Link, PricingPlan, Social, Step, Testimonial } from "@/types";
 
-import {
-    Feature,
-    NavigationLink,
-    PricingPlan,
-    Social,
-    Step,
-    Testimonial,
-} from "./types";
-
-export const NAVIGATION_LINKS: NavigationLink[] = [
-    { href: "home", label: "home" },
-    { href: "features", label: "features" },
-    { href: "pricing", label: "pricing" },
-    { href: "testimonials", label: "testimonials" },
+export const NAVIGATION_LINKS: Link[] = [
+    { href: "home", title: "home" },
+    { href: "features", title: "features" },
+    { href: "pricing", title: "pricing" },
+    { href: "testimonials", title: "testimonials" },
 ];
 
 export const FEATURES: Feature[] = [
@@ -152,18 +144,18 @@ export const PRICING_PLANS: PricingPlan[] = [
     },
 ];
 
-export const FOOTER_LINKS: NavigationLink[] = [
+export const FOOTER_LINKS: Link[] = [
     {
         href: "",
-        label: "Privacy Policy",
+        title: "Privacy Policy",
     },
     {
         href: "",
-        label: "Terms of Service",
+        title: "Terms of Service",
     },
     {
         href: "",
-        label: "Cookies Settings",
+        title: "Cookies Settings",
     },
 ];
 

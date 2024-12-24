@@ -2,8 +2,7 @@ import { useRef } from "react";
 import Slider, { Settings } from "react-slick";
 
 import { ArrowLeft, ArrowRight } from "@/assets/icons";
-
-import { TESTIMONIES } from "../config";
+import { TESTIMONIES } from "@/lib/landing.config";
 
 export default function Component() {
     const settings: Settings = {

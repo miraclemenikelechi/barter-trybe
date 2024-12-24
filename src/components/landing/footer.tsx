@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { FOOTER_LINKS, FOOTER_SOCIALS } from "../config";
+import { FOOTER_LINKS, FOOTER_SOCIALS } from "@/lib/landing.config";
 
 export default function Component() {
     return (
@@ -38,7 +38,7 @@ export default function Component() {
                         {FOOTER_LINKS.map(function (value, index) {
                             return (
                                 <li key={index}>
-                                    <Link to={value.href}>{value.label}</Link>
+                                    <Link to={value.href}>{value.title}</Link>
                                 </li>
                             );
                         })}

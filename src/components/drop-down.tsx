@@ -6,12 +6,12 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { DropdownOption } from "@/types/drop-down";
+import type { IDropdownOption } from "@/types";
 
 type DropdownProps = {
     onChange: (value: string) => void;
-    options: DropdownOption[];
-    value: DropdownOption;
+    options: IDropdownOption[];
+    value: IDropdownOption;
     placeholder?: string;
     styles?: { [key: string]: string };
 };
@@ -33,19 +33,25 @@ export default function Component({
                     }
                 />
             </SelectTrigger>
-            <SelectContent>{options.map(renderOptions)}</SelectContent>
-        </Select>
-    );
-}
 
-function renderOptions(value: DropdownOption, index: number) {
-    return (
-        <SelectItem key={index} value={value.value}>
-            <span
-                className={cn("font-poppins text-xs text-[var(--black--500)]")}
-            >
-                {value.label}
-            </span>
-        </SelectItem>
+            <SelectContent>
+                {options.map(function (value: IDropdownOption, index: number) {
+                    console.log(styles);
+
+                    return (
+                        <SelectItem key={index} value={value.value}>
+                            <span
+                                className={cn(
+                                    "font-inter text-xs text-[var(--black--500)]",
+                                    styles?.placeholder
+                                )}
+                            >
+                                {value.label}
+                            </span>
+                        </SelectItem>
+                    );
+                })}
+            </SelectContent>
+        </Select>
     );
 }

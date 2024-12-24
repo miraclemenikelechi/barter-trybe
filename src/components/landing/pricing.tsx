@@ -2,8 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Fragment } from "react";
 
 import { Check } from "@/assets/icons";
-
-import { PRICING_PLANS } from "../config";
+import { PRICING_PLANS } from "@/lib/landing.config";
 
 export default function Component() {
     return (

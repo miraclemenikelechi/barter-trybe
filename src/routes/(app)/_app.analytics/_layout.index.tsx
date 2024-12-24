@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Fragment } from "react";
 
+import ProductsFilter from "@/components/analytics/products-filter";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/(app)/_app/analytics/_layout/")({
@@ -8,7 +9,7 @@ export const Route = createFileRoute("/(app)/_app/analytics/_layout/")({
         return (
             <Fragment>
                 <main className={cn("analytics__filter")}>
-                    <></>
+                    <ProductsFilter />
                 </main>
 
                 <footer>table</footer>

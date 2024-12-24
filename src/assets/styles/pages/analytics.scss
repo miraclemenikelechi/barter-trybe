@@ -13,3 +13,20 @@
         @include flex($j: flex-start);
     }
 }
+
+.analytics__filter {
+    background-color: var(--white--100);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    padding: 1rem 1.25rem;
+
+    @extend %dropdown;
+
+    .dropdown-trigger {
+        height: 3.5rem;
+    }
+
+    &-clear {
+        border: 0.0625rem solid var(--red--100);
+    }
+}

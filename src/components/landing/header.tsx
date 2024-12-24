@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { NAVIGATION_LINKS } from "../config";
+import { NAVIGATION_LINKS } from "@/lib/landing.config";
 
 export default function Component() {
     return (
@@ -39,7 +39,7 @@ function NavigationButtons() {
             {NAVIGATION_LINKS.map(function (value, index) {
                 return (
                     <li key={index}>
-                        <Link hash={value.href}>{value.label}</Link>
+                        <Link hash={value.href}>{value.title}</Link>
                     </li>
                 );
             })}

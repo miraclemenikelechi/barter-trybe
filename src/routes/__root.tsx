@@ -9,7 +9,5 @@ type RouterContext = {
 };
 
 export const Route = createRootRouteWithContext<RouterContext>()({
-    component: function () {
-        return <Outlet />;
-    },
+    component: () => <Outlet />,
 });

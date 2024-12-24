@@ -1,4 +1,4 @@
-import { FEATURES } from "../config";
+import { FEATURES } from "@/lib/landing.config";
 
 export default function Component() {
     return (

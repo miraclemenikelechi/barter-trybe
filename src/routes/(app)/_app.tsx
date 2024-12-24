@@ -1,4 +1,6 @@
 import { createFileRoute, Outlet, useNavigate } from "@tanstack/react-router";
+import axios from "axios";
+import { toast } from "sonner";
 
 import DashboardNavigation from "@/components/dashboard-navigation";
 import { useAuthentication } from "@/hooks/authentication";
@@ -13,8 +15,18 @@ export const Route = createFileRoute("/(app)/_app")({
         const { logout } = useAuthentication();
 
         function handleLogout() {
-            navigate({ to: "/login", replace: true });
-            logout();
+            logout()
+                .then(function () {
+                    navigate({ to: "/login", replace: true });
+                })
+
+                .catch(function (error) {
+                    if (axios.isAxiosError(error))
+                        toast.error(
+                            error.response?.data.message ||
+                                "An error occurred. Please try again later."
+                        );
+                });
         }
 
         return (
