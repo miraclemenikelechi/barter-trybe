@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 
 import { AuthenticationContext } from "@/hooks/authentication";
 import { APP_CONSTANTS } from "@/lib/constants";
-import {
+import type {
     SigninRequest,
     SigninResponse,
     SignoutResponse,
@@ -18,7 +18,7 @@ const authenticatedUserKey = "bartertrybe_user";
  *
  * @returns {Omit<AuthUser, "token"> | null} The user object without the token or null if not found.
  */
-function getUserFromStorage() {
+function getUserFromStorage(): Omit<AuthUser, "token"> | null {
     const user = localStorage.getItem(authenticatedUserKey);
     if (user) return JSON.parse(user) as Omit<AuthUser, "token">;
     return null;
@@ -50,7 +50,7 @@ export function AuthenticationContextProvider({
     children,
 }: {
     children: ReactNode;
-}) {
+}): JSX.Element {
     const [user, setUser] = useState<AuthUser | null>(getUserFromStorage());
     const isAuthenticated = !!user;
     const [cookies, setCookies, removeCookies] = useCookies([

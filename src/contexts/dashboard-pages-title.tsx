@@ -1,14 +1,8 @@
-import { createContext, ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 
-export type DashboardPagesTitleContextType = {
-    title: string | null;
-    setTitle: (title: string | null) => void;
-};
+import { DashboardPagesTitleContext } from "@/hooks/dashboard-pages-title";
 
-const DashboardPagesTitleContext =
-    createContext<DashboardPagesTitleContextType | null>(null);
-
-function DashboardPagesTitleContextProvider({
+export function DashboardPagesTitleContextProvider({
     children,
 }: {
     children: ReactNode;
@@ -21,5 +15,3 @@ function DashboardPagesTitleContextProvider({
         </DashboardPagesTitleContext.Provider>
     );
 }
-
-export { DashboardPagesTitleContext, DashboardPagesTitleContextProvider };

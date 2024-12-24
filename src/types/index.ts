@@ -1,14 +1,13 @@
 import { ApexOptions } from "apexcharts";
 import { FC } from "react";
 
+/**
+ * === LINK TYPES ===
+ * Types and interfaces related to navigation and links
+ */
 export interface Link {
     href: string;
     title: string;
-}
-
-export interface DROPDOWN_OPTION {
-    label: string;
-    value: string;
 }
 
 export type DASHBOARD_NAVIGATION = Link & {
@@ -23,6 +22,33 @@ export type DASHBOARD_NAVIGATION_ITEM = {
 
 export type DASHBOARD_PAGE_NAVIGATION = Link;
 
+/**
+ * === DROPDOWN AND SELECTION TYPES ===
+ * Types related to dropdowns and selection options
+ */
+export interface DROPDOWN_OPTION {
+    label: string;
+    value: string;
+}
+
+/**
+ * === DASHBOARD CONTEXT TYPES ===
+ * Types related to the dashboard's state and context
+ */
+export type DashboardPagesTitleContextType = {
+    title: string | null;
+    setTitle: (title: string | null) => void;
+};
+
+/**
+ * === CHARTS AND TABLE DATA TYPES ===
+ * Types for managing chart and table data in the dashboard
+ */
+export type ChartDataProps = {
+    series: ApexOptions["series"];
+    categories: string[];
+};
+
 export interface DASHBOARD_PAGE_CHARTS_TABLE {
     name: string;
     price: number;
@@ -30,11 +56,10 @@ export interface DASHBOARD_PAGE_CHARTS_TABLE {
     sold: number;
 }
 
-export type ChartDataProps = {
-    series: ApexOptions["series"];
-    categories: string[];
-};
-
+/**
+ * === USER DATA TYPES ===
+ * Interfaces and types related to user data and authentication
+ */
 export interface IUser {
     address: string;
     authType: string;
@@ -66,6 +91,10 @@ export interface IUser {
 
 export type AuthUser = Partial<IUser>;
 
+/**
+ * === AUTHENTICATION CONTEXT TYPES ===
+ * Types related to the Authentication context provider
+ */
 export interface AuthenticationContextType {
     user: AuthUser | null;
     isAuthenticated: boolean;

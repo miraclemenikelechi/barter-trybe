@@ -1,0 +1,27 @@
+{
+  "ignoreUnresolved": [
+    [
+      "@styles/components/i-spinner.scss",
+      [
+        "src\\components\\spinner.tsx"
+      ]
+    ]
+  ],
+  "ignoreUnused": [
+    "@radix-ui/react-dropdown-menu",
+    "@radix-ui/react-slot",
+    "@tanstack/query-sync-storage-persister",
+    "@tanstack/react-query-persist-client",
+    "class-variance-authority",
+    "next-themes",
+    "tailwindcss-animate"
+  ],
+  "ignoreUnimported": [
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\components\\lazy.tsx",
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\components\\ui\\sonner.tsx",
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\components\\ui\\table.tsx",
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\hooks\\top-loader.ts",
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\pages\\analytics\\components\\products-filter.tsx",
+    "C:\\Users\\mirac\\Documents\\GitHub\\barter-trybe\\src\\pages\\authentication\\hooks\\sign-up-mutation.tsx"
+  ]
+}
