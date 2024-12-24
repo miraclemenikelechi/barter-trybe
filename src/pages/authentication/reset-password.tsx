@@ -10,7 +10,7 @@ import FormInput from "./components/input";
 import { useForm } from "./hooks/useForm";
 import { ResetPasswordSchema } from "./utils/validation";
 
-export default function Page() {
+export function Page() {
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
     const { errors, formData, handleChange, handleSubmit } = useForm({
@@ -78,7 +78,7 @@ export default function Page() {
     );
 }
 
-function PasswordResetConfirmation() {
+export default function PasswordResetConfirmation() {
     const navigate = useNavigate();
 
     return (

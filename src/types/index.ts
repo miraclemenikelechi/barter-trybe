@@ -65,3 +65,11 @@ export interface IUser {
 }
 
 export type AuthUser = Partial<IUser>;
+
+export interface AuthenticationContextType {
+    user: AuthUser | null;
+    isAuthenticated: boolean;
+    login: (email: string, password: string) => Promise<void>;
+    logout: () => Promise<void>;
+    cookies: Record<string, string>;
+}

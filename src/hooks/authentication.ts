@@ -1,12 +1,15 @@
-import { useContext } from "react";
+import { createContext, useContext } from "react";
 
-import { AuthenticationContext } from "@/contexts/authentication";
+import { AuthenticationContextType } from "@/types";
 
-export function useAuthenticationContext() {
+export const AuthenticationContext =
+    createContext<AuthenticationContextType | null>(null);
+
+export function useAuthentication() {
     const context = useContext(AuthenticationContext);
     if (context === undefined || context === null || !context) {
         throw new Error(
-            "useAuthenticationContext must be used within a AuthenticationContextProvider"
+            "useAuthentication must be used within a AuthenticationContextProvider"
         );
     }
 

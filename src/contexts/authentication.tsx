@@ -1,20 +1,11 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useState } from "react";
+import { useCookies } from "react-cookie";
 
+import { AuthenticationContext } from "@/hooks/authentication";
 import { APP_CONSTANTS } from "@/lib/constants";
 import { SigninRequest, SigninResponse } from "@/pages/authentication/types";
 import type { AuthUser } from "@/types";
 import { HttpMethod, makeRequest } from "@/utils/make-requests";
-
-export type AuthenticationContextType = {
-    user: AuthUser | null;
-    isAuthenticated: boolean;
-    login: (email: string, password: string) => Promise<void>;
-    logout: () => Promise<void>;
-};
-
-const AuthenticationContext = createContext<AuthenticationContextType | null>(
-    null
-);
 
 const authenticatedUserKey = "bartertrybe_user";
 
@@ -29,9 +20,16 @@ function setUserToStorage(user: AuthUser | null) {
     else localStorage.removeItem(authenticatedUserKey);
 }
 
-function AuthenticationContextProvider({ children }: { children: ReactNode }) {
+export function AuthenticationContextProvider({
+    children,
+}: {
+    children: ReactNode;
+}) {
     const [user, setUser] = useState<AuthUser | null>(getUserFromStorage());
     const isAuthenticated = !!user;
+    const [cookies, setCookies, removeCookies] = useCookies([
+        authenticatedUserKey,
+    ]);
 
     useEffect(() => setUserToStorage(getUserFromStorage()), []);
 
@@ -42,22 +40,36 @@ function AuthenticationContextProvider({ children }: { children: ReactNode }) {
             data: { email, password } as SigninRequest,
         });
 
+        setCookies("bartertrybe_user", response.data.token);
+
         setUser(response.data);
         setUserToStorage(response.data);
     }
 
     async function logout(): Promise<void> {
+        console.log("logout");
+        ["bartertrybe_user"].forEach((cookie) =>
+            removeCookies(cookie as "bartertrybe_user")
+        );
         setUser(null);
         setUserToStorage(null);
     }
 
+    const value = useMemo(
+        () => ({
+            cookies,
+            login,
+            logout,
+            user,
+            isAuthenticated,
+        }),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [cookies]
+    );
+
     return (
-        <AuthenticationContext.Provider
-            value={{ isAuthenticated, logout, login, user }}
-        >
+        <AuthenticationContext.Provider value={value}>
             {children}
         </AuthenticationContext.Provider>
     );
 }
-
-export { AuthenticationContext, AuthenticationContextProvider };

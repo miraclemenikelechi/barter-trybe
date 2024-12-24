@@ -1,10 +1,19 @@
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useNavigate } from "@tanstack/react-router";
 
 import DashboardNavigation from "@/components/dashboard-navigation";
+import { useAuthentication } from "@/hooks/authentication";
 import { useDashboardPagesTitle } from "@/hooks/dashboard-pages-title";
 
 export default function Component() {
+    const navigate = useNavigate();
+
     const { title } = useDashboardPagesTitle();
+    const { logout } = useAuthentication();
+
+    function handleLogout() {
+        navigate({ to: "/signup" });
+        logout();
+    }
 
     return (
         <section className="business-owner">
@@ -20,6 +29,7 @@ export default function Component() {
                 <header className="business-owner__header">
                     <h1>{title}</h1>
                     <h2>Owner</h2>
+                    <button onClick={handleLogout}>logout</button>
                 </header>
 
                 <footer className="business-owner__footer">

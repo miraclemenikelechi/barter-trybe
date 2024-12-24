@@ -1,9 +1,9 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import axios from "axios";
-import { useState } from "react";
+import { useTransition } from "react";
 import { toast } from "sonner";
 
-import { useAuthenticationContext } from "@/hooks/authentication";
+import { useAuthentication } from "@/hooks/authentication";
 import FormButton from "@/pages/authentication/components/button";
 import FormInput from "@/pages/authentication/components/input";
 import { useForm } from "@/pages/authentication/hooks/useForm";
@@ -13,10 +13,13 @@ import { SigninSchema } from "@/pages/authentication/utils/validation";
 export const Route = createFileRoute("/(authentication)/_authentication/login")(
     {
         component: function Page() {
-            const [isPending, setIsPending] = useState<boolean>(false);
             const navigate = useNavigate();
-            const { login } = useAuthenticationContext();
+            const [isPending, startTransition] = useTransition();
 
+            // Authentication context to manage user login
+            const { login } = useAuthentication();
+
+            // Form handling with validation schema
             const { errors, formData, handleChange, handleSubmit } =
                 useForm<SigninRequest>({
                     initialData: {
@@ -24,37 +27,26 @@ export const Route = createFileRoute("/(authentication)/_authentication/login")(
                         password: "",
                     },
                     schema: SigninSchema,
-                    onSubmit: async (data) => {
-                        setIsPending(true);
-                        // login(data.email, data.password)
-                        //     .then(function () {
-                        //         toast.success(
-                        //             "You have successfully logged in!"
-                        //         );
-                        //         navigate({ to: "/dashboard" });
-                        //     })
-                        //     .catch(function (error) {
-                        //         toast.error(error.response.data.message);
-                        //     })
-                        //     .finally(function () {
-                        //         setIsPending(false);
-                        //     });
+                    onSubmit: handleLoginAuth,
+                });
 
-                        try {
-                            await login(data.email, data.password);
+            function handleLoginAuth(data: SigninRequest) {
+                startTransition(() => {
+                    login(data.email, data.password)
+                        .then(function () {
                             toast.success("You have successfully logged in!");
                             navigate({ to: "/dashboard" });
-                        } catch (error) {
+                        })
+
+                        .catch(function (error) {
                             if (axios.isAxiosError(error))
                                 toast.error(
                                     error.response?.data.message ||
                                         "An error occurred. Please try again later."
                                 );
-                        } finally {
-                            setIsPending(false);
-                        }
-                    },
+                        });
                 });
+            }
 
             return (
                 <section className="signin">

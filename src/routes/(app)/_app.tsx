@@ -1,16 +1,27 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 
+import { useAuthentication } from "@/hooks/authentication";
+import { useHydration } from "@/hooks/hydration";
 import DashboardLayout from "@/views/dashboard";
 
 export const Route = createFileRoute("/(app)/_app")({
-    beforeLoad: function ({ context, location }) {
-        if (!context.authentication.isAuthenticated) {
-            throw redirect({
-                to: "/login",
-                search: { redirect: location.href },
-            });
-        }
-    },
+    component: function Page() {
+        const navigate = useNavigate();
 
-    component: DashboardLayout,
+        const { isAuthenticated } = useAuthentication();
+        const isHydrated = useHydration();
+
+        useEffect(() => {
+            if (!isAuthenticated && isHydrated) {
+                navigate({ to: "/login", replace: true });
+            }
+        }, [isAuthenticated, navigate, isHydrated]);
+
+        if (!isAuthenticated) {
+            return null;
+        }
+
+        return <DashboardLayout />;
+    },
 });

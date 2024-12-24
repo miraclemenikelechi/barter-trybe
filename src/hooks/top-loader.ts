@@ -1,16 +1,16 @@
-import nProgress from "nprogress";
-import { useLayoutEffect } from "react";
-import { useLocation } from "react-router-dom";
+// import nProgress from "nprogress";
+// import { useLayoutEffect } from "react";
+// import { useLocation } from "react-router-dom";
 
-export function useTopLoader() {
-    nProgress.configure({ showSpinner: false });
+// export function useTopLoader() {
+//     nProgress.configure({ showSpinner: false });
 
-    const { pathname } = useLocation();
-    nProgress.start();
+//     const { pathname } = useLocation();
+//     nProgress.start();
 
-    useLayoutEffect(() => {
-        nProgress.done();
-    }, [pathname]);
+//     useLayoutEffect(() => {
+//         nProgress.done();
+//     }, [pathname]);
 
-    return null;
-}
+//     return null;
+// }

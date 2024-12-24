@@ -3,7 +3,7 @@ import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { Toaster } from "sonner";
 
 import ContextWrapper from "@/contexts";
-import { useAuthenticationContext } from "@/hooks/authentication";
+import { useAuthentication } from "@/hooks/authentication";
 import { routeTree } from "@/routeTree.gen";
 
 const queryClient = new QueryClient();
@@ -19,11 +19,12 @@ declare module "@tanstack/react-router" {
     }
     interface HistoryState {
         verifyEmail?: { email: string };
+        from?: string;
     }
 }
 
 function ContextProvider() {
-    const authentication = useAuthenticationContext();
+    const authentication = useAuthentication();
     return <RouterProvider router={router} context={{ authentication }} />;
 }
 
