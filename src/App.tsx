@@ -1,5 +1,6 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { Fragment } from "react";
 import { Toaster } from "sonner";
 
 import ContextWrapper from "@/contexts";
@@ -30,11 +31,11 @@ function ContextProvider() {
 
 export default function App() {
     return (
-        <QueryClientProvider client={queryClient}>
+        <Fragment>
             <ContextWrapper>
                 <ContextProvider />
             </ContextWrapper>
             <Toaster richColors />
-        </QueryClientProvider>
+        </Fragment>
     );
 }

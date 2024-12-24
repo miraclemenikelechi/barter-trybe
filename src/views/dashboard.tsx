@@ -11,7 +11,7 @@ export default function Component() {
     const { logout } = useAuthentication();
 
     function handleLogout() {
-        navigate({ to: "/signup" });
+        navigate({ to: "/login", replace: true });
         logout();
     }
 

@@ -8,6 +8,10 @@ export const APP_CONSTANTS = {
             METHOD: "POST",
             URL: "/auth/login",
         },
+        SIGN_OUT: {
+            METHOD: "GET",
+            URL: "/user/logout",
+        },
         SIGN_UP: {
             METHOD: "POST",
             URL: "/auth/signup",

@@ -20,6 +20,7 @@ type RequestOptions = {
 
 const axiosInstance = axios.create({
     baseURL: APP_CONSTANTS.API,
+    withCredentials: true,
 });
 
 /**

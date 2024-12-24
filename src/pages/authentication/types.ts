@@ -51,6 +51,10 @@ export type SigninResponse = {
     };
 };
 
+export type SignoutResponse = MessageResponse & {
+    loggedIn: boolean;
+};
+
 export type ForgotPasswordRequest = z.infer<typeof ForgotPasswordSchema>;
 
 export type ForgotPasswordResponse = MessageWithDataResponse;
