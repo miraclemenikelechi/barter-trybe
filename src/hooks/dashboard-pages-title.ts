@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { DashboardPagesTitleContextType } from "@/types";
+import type { DashboardPagesTitleContextType } from "@/types";
 
 export const DashboardPagesTitleContext =
     createContext<DashboardPagesTitleContextType | null>(null);

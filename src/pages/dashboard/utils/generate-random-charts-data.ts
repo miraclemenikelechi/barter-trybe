@@ -1,8 +1,6 @@
 import { fakerEN_NG as faker } from "@faker-js/faker";
 
-import { SATISFACTION_TYPE } from "../types";
-
-export function generateRandomSatisfactionData(): SATISFACTION_TYPE[] {
+export function generateRandomSatisfactionData() {
     return Array.from({ length: 5 }, function (_, index) {
         return {
             percentage: faker.number.int({ max: 100, min: 10 }),

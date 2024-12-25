@@ -5,12 +5,12 @@ import { FC } from "react";
  * === LINK TYPES ===
  * Types and interfaces related to navigation and links
  */
-export interface Link {
+export interface ILink {
     href: string;
     title: string;
 }
 
-export type DASHBOARD_NAVIGATION = Link & {
+export type DASHBOARD_NAVIGATION = ILink & {
     icon: FC<{ color: string }>;
 };
 
@@ -19,8 +19,6 @@ export type DASHBOARD_NAVIGATION_ITEM = {
     label: string;
     path: string;
 };
-
-export type DASHBOARD_PAGE_NAVIGATION = Link;
 
 /**
  * === DROPDOWN AND SELECTION TYPES ===
@@ -49,11 +47,22 @@ export type ChartDataProps = {
     categories: string[];
 };
 
-export interface DASHBOARD_PAGE_CHARTS_TABLE {
+export type ChartRenderProps = {
+    duration: string;
+    sales: number;
+};
+
+export interface IDashboardChartsPageTable {
     name: string;
     price: number;
     remaining: number;
     sold: number;
+}
+
+export interface IChartFilter {
+    thisWeek: ChartRenderProps[];
+    thisMonth: ChartRenderProps[];
+    thisYear: ChartRenderProps[];
 }
 
 /**
@@ -91,6 +100,45 @@ export type Social = {
     href: string;
     icon: FC;
 };
+
+/**
+ * === DASHBOARD PAGE TYPES ===
+ * Interfaces and types related to the dashboard page
+ */
+export interface IDashboardSummary {
+    icon: FC;
+    isMoney: boolean;
+    isProfit: boolean;
+    isRating: boolean;
+    lastWeek: number;
+    prediction: number;
+    profit: number;
+    thisWeek: number;
+    title: string;
+}
+
+export interface IDashboardSummaryTopProducts {
+    icon: FC;
+    products: string[];
+    title: string;
+}
+
+export interface IDashboardChartsGeneralSummary {
+    isMoney: boolean;
+    title: string;
+    value: number;
+}
+
+export interface IDashboardChartsGeneralSummaryFilter {
+    thisWeek: IDashboardChartsGeneralSummary[];
+    thisMonth: IDashboardChartsGeneralSummary[];
+    thisYear: IDashboardChartsGeneralSummary[];
+}
+
+export interface IDashboardChartCustomerSatisfaction {
+    rating: number;
+    percentage: number;
+}
 
 /**
  * === ANALYTICS PAGE TYPES ===

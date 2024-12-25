@@ -2,12 +2,11 @@ import { useState } from "react";
 
 import ChartCard from "@/components/chart-card";
 import Dropdown from "@/components/drop-down";
-import BarChart from "@/components/ui/bar-chart";
+import PieChart from "@/components/ui/full-pie-chart";
 import { APP_CONSTANTS } from "@/lib/constants";
+import { RETURN_RATE } from "@/lib/dashboard-page.config";
 import { DropdownOption } from "@/types/drop-down";
 import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
-
-import { SALES_TRENDS } from "../config";
 
 export default function Component() {
     const [selected, setSelected] = useState<DropdownOption>(
@@ -16,16 +15,17 @@ export default function Component() {
 
     const chartData = transformDataForApexChart({
         categoryKey: "duration",
-        data: SALES_TRENDS[selected.value as keyof typeof SALES_TRENDS],
-        seriesName: "Sales",
+        data: RETURN_RATE[selected.value as keyof typeof RETURN_RATE],
+        seriesName: "Return Rate",
         valueKey: "sales",
     });
 
     return (
         <ChartCard>
             <ChartCard.Header
-                title="Sales Trend"
-                description="Number Of Sales Made Over Time"
+                title="Return Rate"
+                description="New VS Returning Customers"
+                className="px-3"
                 dropdown={
                     <Dropdown
                         onChange={(option) =>
@@ -45,8 +45,8 @@ export default function Component() {
             <hr />
 
             <ChartCard.Footer
-                className="px-1 py-0"
-                chart={<BarChart data={chartData} />}
+                chart={<PieChart data={chartData} />}
+                className="size-full"
             />
         </ChartCard>
     );

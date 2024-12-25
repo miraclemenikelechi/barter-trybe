@@ -27,6 +27,15 @@
     }
 
     &-clear {
-        border: 0.0625rem solid var(--red--100);
+        border: 0.0625rem solid;
+    }
+
+    :is(&-clear, &-apply) {
+        transition: scale 150ms cubic-bezier(1, 0.99, 1, 0.99);
+        scale: 0.975;
+
+        &:hover {
+            scale: 1.025;
+        }
     }
 }

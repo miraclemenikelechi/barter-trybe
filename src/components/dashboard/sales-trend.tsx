@@ -2,30 +2,29 @@ import { useState } from "react";
 
 import ChartCard from "@/components/chart-card";
 import Dropdown from "@/components/drop-down";
-import LineChart from "@/components/ui/line-chart";
+import BarChart from "@/components/ui/bar-chart";
 import { APP_CONSTANTS } from "@/lib/constants";
-import { DropdownOption } from "@/types/drop-down";
+import { SALES_TRENDS } from "@/lib/dashboard-page.config";
+import type { IDropdownOption } from "@/types";
 import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
 
-import { REPORT_REVENUE } from "../config";
-
 export default function Component() {
-    const [selected, setSelected] = useState<DropdownOption>(
+    const [selected, setSelected] = useState<IDropdownOption>(
         APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
     );
 
     const chartData = transformDataForApexChart({
         categoryKey: "duration",
-        data: REPORT_REVENUE[selected.value as keyof typeof REPORT_REVENUE],
-        seriesName: "Revenue",
+        data: SALES_TRENDS[selected.value as keyof typeof SALES_TRENDS],
+        seriesName: "Sales",
         valueKey: "sales",
     });
 
     return (
         <ChartCard>
             <ChartCard.Header
-                title="Revenue Report"
-                description="Income Over Time"
+                title="Sales Trend"
+                description="Number Of Sales Made Over Time"
                 dropdown={
                     <Dropdown
                         onChange={(option) =>
@@ -46,7 +45,7 @@ export default function Component() {
 
             <ChartCard.Footer
                 className="px-1 py-0"
-                chart={<LineChart data={chartData} />}
+                chart={<BarChart data={chartData} />}
             />
         </ChartCard>
     );

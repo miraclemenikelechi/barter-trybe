@@ -1,0 +1,272 @@
+@use "sass:map";
+@use "@styles" as *;
+
+.dashboard {
+    @extend %inner-layout;
+    @extend %scroll-bar;
+
+    &__header {
+        @extend %dashboard-page-navigation-header;
+    }
+
+    &__navigation {
+        @extend %dashboard-page-navigation;
+    }
+}
+
+.dashboard-summary {
+    &__top {
+        margin-block: 2rem;
+
+        ul {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(3, 1fr);
+            place-items: center;
+
+            @include r-bp($type: max, $bp: map.get($map: $desktop, $key: screen-width)) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            @include r-bp($type: max, $bp: 65rem) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
+
+        li {
+            height: 9.5rem;
+            border-radius: 1rem;
+            background-color: var(--white--100);
+            padding: 0.75rem;
+
+            @include r-w($type: max, $w: 24.5rem);
+        }
+    }
+
+    &__bottom {
+        background-color: var(--orange--100);
+        border-radius: 1rem;
+        height: 7.5rem;
+        margin-bottom: 2rem;
+        padding: 1.5rem;
+
+        @include space($type: v, $size: 1.25rem);
+
+        h3 {
+            @include font($f: inter, $s: sm, $w: bold);
+            color: var(--black--100);
+        }
+    }
+
+    &__card {
+        $text-color: rgba(
+            $color:
+                map.get(
+                    $map: $colors,
+                    $key: "blue--400"
+                ),
+            $alpha: 80%
+        );
+
+        display: grid;
+        grid-template-columns: 3.75rem 1fr;
+
+        > section {
+            &:first-of-type {
+                @include flex;
+            }
+
+            &:last-of-type {
+                gap: 0.5rem;
+                padding: 0 0.25rem 0 0.5rem;
+
+                @include flex($d: column, $a: flex-start);
+
+                > div article {
+                    color: $text-color;
+                    @include font($f: inter, $s: xs, $w: semibold);
+                }
+            }
+        }
+
+        h3 {
+            color: var(--black--500);
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        h4 {
+            color: rgba($color: map.get($map: $colors, $key: "black--500"), $alpha: 70%);
+            @include font($f: inter, $s: xs, $w: semibold);
+        }
+
+        aside {
+            > span {
+                color: $text-color;
+                @include font($f: inter, $s: sm, $w: semibold);
+            }
+
+            div {
+                color: $text-color;
+                @include flex($j: space-between);
+
+                span {
+                    @include font($f: inter, $s: sm, $w: semibold);
+
+                    &:first-of-type {
+                        white-space: nowrap;
+                    }
+
+                    &:last-of-type {
+                        color: var(--white--100);
+                        border-radius: 0.25rem;
+                        height: 1.5rem;
+                        padding-inline: 0.25rem;
+
+                        @include flex;
+                        @include font($f: inter, $s: xs, $w: semibold);
+                    }
+                }
+            }
+        }
+
+        section > div:last-of-type {
+            @include flex;
+            @include font($f: inter, $s: xs, $w: semibold);
+        }
+
+        &__left {
+            @include r-w($type: max, $w: 7.25rem, $p: 40%);
+        }
+
+        &__right {
+            flex: 1;
+        }
+
+        &__left > span,
+        &__right > div > span:first-of-type {
+            gap: 0.5rem;
+            @include flex($j: flex-start);
+
+            b {
+                @include font($f: inter, $s: lg, $w: semibold);
+            }
+
+            i {
+                padding-bottom: 0.125rem;
+                @include equal(1.25rem);
+            }
+        }
+    }
+}
+
+.dashboard-charts {
+    margin-block: 2rem;
+    @include space($type: v, $size: 1rem);
+
+    &__top {
+        gap: 1rem;
+        height: 8rem;
+
+        @include flex($j: space-between);
+
+        > div {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+    }
+
+    &__summary {
+        background-color: var(--white--100);
+        gap: 0.75rem;
+        height: 100%;
+        padding-block: 0.75rem;
+
+        @extend %dropdown;
+        @include flex($d: column, $j: space-between);
+        @include r-w($type: min, $w: 54.5rem, $p: 80%);
+
+        > * {
+            width: 100%;
+            @include flex($j: space-between);
+        }
+
+        aside {
+            padding: 0 1.75rem;
+
+            div {
+                height: 2rem;
+            }
+        }
+
+        h3 {
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        ul {
+            padding-inline: 4.5rem;
+        }
+
+        li {
+            gap: 0.75rem;
+            @include flex($d: column, $a: flex-start);
+
+            span {
+                color: var(--blue--700);
+                @include font($f: inter, $s: base, $w: semibold);
+            }
+        }
+
+        h4 {
+            color: var(--black--500);
+            @include font($f: inter, $s: sm, $w: semibold);
+        }
+    }
+
+    &__satisfaction {
+        @include r-w($type: min, $w: 20.5rem, $p: 40%);
+
+        > section {
+            @include space($type: v, $size: 0.5rem);
+        }
+
+        &__title {
+            @include font($f: inter, $s: base, $w: semibold);
+        }
+
+        &__list {
+            span {
+                color: var(--blue--700);
+                @include font($f: poppins, $s: xs, $w: semibold);
+            }
+        }
+    }
+
+    &__center {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: 1fr 1fr;
+
+        @extend %dropdown;
+    }
+
+    &__bottom {
+        display: grid;
+        gap: 1rem;
+        grid-template-columns: minmax(20.25rem, 25%) 1fr 1fr;
+
+        @extend %dropdown;
+
+        > div {
+            height: 19.25rem;
+            overflow: hidden;
+        }
+
+        .apexcharts-legend {
+            flex-direction: column;
+        }
+
+        footer > div {
+            @extend %no-scroll-bar;
+        }
+    }
+}

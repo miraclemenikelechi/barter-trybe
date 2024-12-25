@@ -5,11 +5,21 @@ import { PRODUCTS_FILTER } from "@/lib/analytics.config";
 import { cn } from "@/lib/utils";
 import type { IDropdownOption, ProductsFilter } from "@/types";
 
+/**
+ * Actions for the filter reducer.
+ */
 type FilterActions =
     | { type: "INITIALIZE"; filters: ProductsFilter[] }
     | { type: "UPDATE"; title: string; selected: IDropdownOption }
     | { type: "RESET" };
 
+/**
+ * Reducer function to manage filter state.
+ *
+ * @param state - Current state of the filters.
+ * @param action - Action to perform on the state.
+ * @returns Updated state after applying the action.
+ */
 function reducer(
     state: Record<string, IDropdownOption | null>,
     action: FilterActions
@@ -44,7 +54,14 @@ function reducer(
     }
 }
 
-export default function Component() {
+/**
+ * Filter Component
+ *
+ * This component renders a form with dropdown filters for products and handles filter changes.
+ *
+ * @returns {JSX.Element} The rendered filter form.
+ */
+export default function Component(): JSX.Element {
     const [selectedFilters, dispatch] = useReducer(reducer, {});
 
     useEffect(function () {
@@ -54,6 +71,12 @@ export default function Component() {
         });
     }, []);
 
+    /**
+     * Handles changes in filter selection.
+     *
+     * @param title - The title of the filter being updated.
+     * @param selectedOption - The selected option for the filter.
+     */
     function handleFilterChange(
         title: string,
         selectedOption: IDropdownOption
@@ -65,6 +88,11 @@ export default function Component() {
         });
     }
 
+    /**
+     * Handles the submission of the filter form.
+     *
+     * @param event - The form submission event.
+     */
     function handleApplyFilters(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
@@ -92,6 +120,13 @@ export default function Component() {
     );
 }
 
+/**
+ * FilterActionButtons Component
+ *
+ * This component renders buttons for applying or resetting filters.
+ *
+ * @param onClear - Function to call when clearing filters.
+ */
 function FilterActionButtons({ onClear }: { onClear: () => void }) {
     return (
         <div className={cn("flex flex-col w-[9.75rem] gap-2.5")}>
@@ -100,7 +135,7 @@ function FilterActionButtons({ onClear }: { onClear: () => void }) {
                 onClick={onClear}
                 className={cn(
                     "analytics__filter-clear",
-                    "h-10 rounded-lg text-center font-inter font-medium text-sm text-red-600"
+                    "h-10 rounded-lg text-center font-inter font-medium text-sm text-red-500"
                 )}
             >
                 Reset
@@ -109,6 +144,7 @@ function FilterActionButtons({ onClear }: { onClear: () => void }) {
             <button
                 type="submit"
                 className={cn(
+                    "analytics__filter-apply",
                     "h-10 rounded-lg text-center font-inter font-medium text-sm bg-[var(--blue--100)] text-white"
                 )}
             >
@@ -118,6 +154,17 @@ function FilterActionButtons({ onClear }: { onClear: () => void }) {
     );
 }
 
+/**
+ * Filter Component
+ *
+ * This component renders a dropdown filter for selecting options.
+ *
+ * @param onChange - Function to call when an option is selected.
+ * @param options - Array of options for the dropdown.
+ * @param title - Title of the filter.
+ * @param value - Currently selected value for the filter.
+ * @param placeholder - Placeholder text for the dropdown (optional).
+ */
 interface FilterProps {
     onChange: (value: IDropdownOption) => void;
     options: IDropdownOption[];
@@ -127,13 +174,18 @@ interface FilterProps {
 }
 
 function Filter({ onChange, options, title, value, placeholder }: FilterProps) {
+    /**
+     * Handles change in dropdown selection.
+     *
+     * @param option - The value of the selected option.
+     */
     function handleChange(option: string) {
         const selectedOption = options.find((item) => item.value === option);
         if (selectedOption) onChange(selectedOption);
     }
 
     return (
-        <section className={cn("flex flex-col max-w-[14.25rem] w-full gap-2")}>
+        <section className={cn("flex flex-col max-w-[14.25rem] w-full gap-2.5")}>
             <span
                 className={cn(
                     "font-inter font-semibold text-base text-[var(--black--300)]"

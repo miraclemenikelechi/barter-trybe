@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { NAVIGATION_LINKS } from "@/lib/landing.config";
+import { NAVIGATION_LINKS } from "@/lib/landing-page.config";
 
 export default function Component() {
     return (

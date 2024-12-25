@@ -1,5 +1,5 @@
 import { MechanismLine } from "@/assets/icons";
-import { MECHANISM_STEPS } from "@/lib/landing.config";
+import { MECHANISM_STEPS } from "@/lib/landing-page.config";
 import { purifyMarkup } from "@/utils/purify-markup";
 
 export default function Component() {

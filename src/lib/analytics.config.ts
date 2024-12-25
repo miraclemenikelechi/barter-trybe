@@ -1,4 +1,4 @@
-import { ProductsFilter } from "@/types";
+import type { ProductsFilter } from "@/types";
 
 export const PRODUCTS_FILTER: ProductsFilter[] = [
     {

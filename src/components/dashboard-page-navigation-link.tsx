@@ -1,17 +1,13 @@
 import { Link, useMatchRoute } from "@tanstack/react-router";
 
 import { cn } from "@/lib/utils";
-import { DASHBOARD_PAGE_NAVIGATION } from "@/types/links";
+import type { ILink } from "@/types";
 import { isActiveLink } from "@/utils/active-link";
 
-interface Props {
-    links: DASHBOARD_PAGE_NAVIGATION[];
-}
-
-export default function Component({ links }: Props) {
+export default function Component({ links }: { links: ILink[] }) {
     const matchRoute = useMatchRoute();
 
-    return links.map((value: DASHBOARD_PAGE_NAVIGATION, index: number) => (
+    return links.map((value: ILink, index: number) => (
         <Link
             className={cn(isActiveLink(!!matchRoute({ to: value.href })))}
             key={index}

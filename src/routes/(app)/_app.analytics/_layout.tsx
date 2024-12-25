@@ -6,9 +6,9 @@ import { useEffect } from "react";
 import DashboardPageNavigation from "@/components/dashboard-page-navigation-link";
 import { useDashboardPagesTitle } from "@/hooks/dashboard-pages-title";
 import { cn } from "@/lib/utils";
-import { DASHBOARD_PAGE_NAVIGATION } from "@/types";
+import type { ILink } from "@/types";
 
-const pageNavigation: DASHBOARD_PAGE_NAVIGATION[] = [
+const pageNavigation: ILink[] = [
     {
         href: "/analytics",
         title: "Products",

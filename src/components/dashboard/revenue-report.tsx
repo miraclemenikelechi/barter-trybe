@@ -2,31 +2,29 @@ import { useState } from "react";
 
 import ChartCard from "@/components/chart-card";
 import Dropdown from "@/components/drop-down";
-import PieChart from "@/components/ui/full-pie-chart";
+import LineChart from "@/components/ui/line-chart";
 import { APP_CONSTANTS } from "@/lib/constants";
-import { DropdownOption } from "@/types/drop-down";
+import { REPORT_REVENUE } from "@/lib/dashboard-page.config";
+import type { IDropdownOption } from "@/types";
 import { transformDataForApexChart } from "@/utils/transdorm-data-to-apex-format";
 
-import { RETURN_RATE } from "../config";
-
 export default function Component() {
-    const [selected, setSelected] = useState<DropdownOption>(
+    const [selected, setSelected] = useState<IDropdownOption>(
         APP_CONSTANTS.CHART_DROPDOWN_OPTIONS[0]
     );
 
     const chartData = transformDataForApexChart({
         categoryKey: "duration",
-        data: RETURN_RATE[selected.value as keyof typeof RETURN_RATE],
-        seriesName: "Return Rate",
+        data: REPORT_REVENUE[selected.value as keyof typeof REPORT_REVENUE],
+        seriesName: "Revenue",
         valueKey: "sales",
     });
 
     return (
         <ChartCard>
             <ChartCard.Header
-                title="Return Rate"
-                description="New VS Returning Customers"
-                className="px-3"
+                title="Revenue Report"
+                description="Income Over Time"
                 dropdown={
                     <Dropdown
                         onChange={(option) =>
@@ -46,8 +44,8 @@ export default function Component() {
             <hr />
 
             <ChartCard.Footer
-                chart={<PieChart data={chartData} />}
-                className="size-full"
+                className="px-1 py-0"
+                chart={<LineChart data={chartData} />}
             />
         </ChartCard>
     );

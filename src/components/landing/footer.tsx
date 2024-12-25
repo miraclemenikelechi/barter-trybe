@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 
-import { FOOTER_LINKS, FOOTER_SOCIALS } from "@/lib/landing.config";
+import { FOOTER_LINKS, FOOTER_SOCIALS } from "@/lib/landing-page.config";
 
 export default function Component() {
     return (

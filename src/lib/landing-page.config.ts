@@ -8,9 +8,16 @@ import {
     X,
     Youtube,
 } from "@/assets/icons";
-import { Feature, Link, PricingPlan, Social, Step, Testimonial } from "@/types";
+import type {
+    Feature,
+    ILink,
+    PricingPlan,
+    Social,
+    Step,
+    Testimonial,
+} from "@/types";
 
-export const NAVIGATION_LINKS: Link[] = [
+export const NAVIGATION_LINKS: ILink[] = [
     { href: "home", title: "home" },
     { href: "features", title: "features" },
     { href: "pricing", title: "pricing" },
@@ -144,7 +151,7 @@ export const PRICING_PLANS: PricingPlan[] = [
     },
 ];
 
-export const FOOTER_LINKS: Link[] = [
+export const FOOTER_LINKS: ILink[] = [
     {
         href: "",
         title: "Privacy Policy",
