@@ -149,6 +149,24 @@ export type ProductsFilter = {
     options: IDropdownOption[];
 };
 
+export interface IProductsTable {
+    serialNumber: number;
+    name: string;
+    batchNumber: string;
+    expiresIn: string;
+    expiryThreshold: number;
+    expiredItems: number;
+    expiredLoss: number;
+    unit: number;
+    shelf: string;
+    category: string;
+}
+
+export interface IProductsTableHeaders {
+    label: string;
+    value: keyof IProductsTable;
+}
+
 /**
  * === USER DATA TYPES ===
  * Interfaces and types related to user data and authentication

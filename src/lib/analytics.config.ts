@@ -1,4 +1,5 @@
-import type { ProductsFilter } from "@/types";
+import type { IProductsTable, ProductsFilter } from "@/types";
+import { generateTableData } from "@/utils/analytics-page.utils";
 
 export const PRODUCTS_FILTER: ProductsFilter[] = [
     {
@@ -38,3 +39,5 @@ export const PRODUCTS_FILTER: ProductsFilter[] = [
         ],
     },
 ];
+
+export const PRODUCTS_TABLE: IProductsTable[] = [...generateTableData(10)];

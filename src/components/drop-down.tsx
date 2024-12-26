@@ -36,8 +36,6 @@ export default function Component({
 
             <SelectContent>
                 {options.map(function (value: IDropdownOption, index: number) {
-                    console.log(styles);
-
                     return (
                         <SelectItem key={index} value={value.value}>
                             <span

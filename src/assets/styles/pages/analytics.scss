@@ -15,12 +15,11 @@
 }
 
 .analytics__filter {
-    background-color: var(--white--100);
-    border-radius: 0.5rem;
-    margin-top: 1rem;
+    margin-block: 1rem;
     padding: 1rem 1.25rem;
 
     @extend %dropdown;
+    @extend %white-background-with-radius;
 
     .dropdown-trigger {
         height: 3.5rem;
@@ -38,4 +37,9 @@
             scale: 1.025;
         }
     }
+}
+
+.analytics__table {
+    margin-block: 1.5rem;
+    @extend %white-background-with-radius;
 }
