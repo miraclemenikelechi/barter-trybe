@@ -1,9 +1,8 @@
 import { fakerEN_NG as faker } from "@faker-js/faker";
 
 export function generateTableData(length: number) {
-    return Array.from({ length }, function (_, index) {
+    return Array.from({ length }, function () {
         return {
-            serialNumber: index + 1,
             name: faker.commerce.product(),
             batchNumber: faker.string.alphanumeric(6),
             expiresIn: generateFormattedDate(faker.date.soon({ days: 10 })),

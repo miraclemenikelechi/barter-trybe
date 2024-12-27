@@ -150,7 +150,6 @@ export type ProductsFilter = {
 };
 
 export interface IProductsTable {
-    serialNumber: number;
     name: string;
     batchNumber: string;
     expiresIn: string;

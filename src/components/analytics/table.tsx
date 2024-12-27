@@ -3,13 +3,29 @@ import {
     type ColumnDef,
     flexRender,
     getCoreRowModel,
+    getFilteredRowModel,
     getSortedRowModel,
     SortingState,
     useReactTable,
 } from "@tanstack/react-table";
 import { ArrowUpDown, MoveDown, MoveUp, Search } from "lucide-react";
-import { type FormEvent, Fragment, ReactNode, useMemo, useState } from "react";
+import {
+    ChangeEvent,
+    type FormEvent,
+    Fragment,
+    ReactNode,
+    useMemo,
+    useState,
+} from "react";
 
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 import { PRODUCTS_TABLE } from "@/lib/analytics.config";
 import { cn } from "@/lib/utils";
 import { IProductsTable } from "@/types";
@@ -217,6 +233,42 @@ const PRODUCTS_TABLE_COLUMNS: ColumnDef<IProductsTable>[] = [
 ];
 
 export default function Component() {
+    const config = useMemo(
+        () => ({
+            columns: PRODUCTS_TABLE_COLUMNS,
+            data: PRODUCTS_TABLE,
+        }),
+        []
+    );
+
+    const [sorting, setSorting] = useState<SortingState>([]);
+    const [globalFilter, setGlobalFilter] = useState<string>("");
+    const [pagination, setPagination] = useState({
+        pageIndex: 0,
+        pageSize: 8,
+    });
+
+    const table = useReactTable({
+        columns: config.columns,
+        data: config.data,
+        state: {
+            sorting,
+            globalFilter,
+            pagination,
+        },
+        getCoreRowModel: getCoreRowModel(),
+
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+
+        onGlobalFilterChange: setGlobalFilter,
+        getFilteredRowModel: getFilteredRowModel(),
+
+        pageCount: Math.ceil(config.data.length / pagination.pageSize),
+        manualPagination: false,
+        onPaginationChange: setPagination,
+    });
+
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
     }
@@ -258,6 +310,10 @@ export default function Component() {
                         type="text"
                         className={cn("w-full ml-auto")}
                         placeholder="Search..."
+                        value={globalFilter ?? ""}
+                        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                            setGlobalFilter(event?.target.value)
+                        }
                     />
                     <button
                         className={cn(
@@ -270,115 +326,173 @@ export default function Component() {
             </header>
 
             <footer>
-                <RenderTable
-                    columns={PRODUCTS_TABLE_COLUMNS}
-                    data={PRODUCTS_TABLE}
-                />
-            </footer>
-        </Fragment>
-    );
-}
+                <section>
+                    <table className={cn("size-full")}>
+                        <thead className={cn("border-y")}>
+                            {table.getHeaderGroups().map((headerGroup) => {
+                                return (
+                                    <tr key={headerGroup.id}>
+                                        {headerGroup.headers.map((header) => {
+                                            return (
+                                                <th
+                                                    key={header.id}
+                                                    className={cn(
+                                                        "px-2 py-3 text-[var(--blue--700)] text-xs font-inter"
+                                                    )}
+                                                >
+                                                    {flexRender(
+                                                        header.column.columnDef
+                                                            .header,
+                                                        header.getContext()
+                                                    )}
+                                                </th>
+                                            );
+                                        })}
+                                    </tr>
+                                );
+                            })}
+                        </thead>
 
-interface TableProps<TData, TValue> {
-    columns: ColumnDef<TData, TValue>[];
-    data: TData[];
-}
-
-function RenderTable<TData, TValue>({
-    columns,
-    data,
-}: TableProps<TData, TValue>) {
-    const config = useMemo(
-        () => ({
-            columns,
-            data,
-        }),
-        [columns, data]
-    );
-
-    const [sorting, setSorting] = useState<SortingState>([]);
-
-    const table = useReactTable({
-        columns: config.columns,
-        data: config.data,
-        state: {
-            sorting,
-        },
-        getCoreRowModel: getCoreRowModel(),
-        onSortingChange: setSorting,
-        getSortedRowModel: getSortedRowModel(),
-    });
-
-    return (
-        <section>
-            <table className={cn("size-full")}>
-                <thead className={cn("border-y")}>
-                    {table.getHeaderGroups().map((headerGroup) => {
-                        return (
-                            <tr key={headerGroup.id}>
-                                {headerGroup.headers.map((header) => {
-                                    return (
-                                        <th
-                                            key={header.id}
-                                            className={cn(
-                                                "px-2 py-3 text-[var(--blue--700)] text-xs font-inter"
-                                            )}
-                                        >
-                                            {flexRender(
-                                                header.column.columnDef.header,
-                                                header.getContext()
-                                            )}
-                                        </th>
-                                    );
-                                })}
-                            </tr>
-                        );
-                    })}
-                </thead>
-
-                <tbody>
-                    {table.getRowModel().rows.length ? (
-                        table.getRowModel().rows.map((row, index) => (
-                            <tr key={row.id} className={cn("border-b")}>
-                                {row.getVisibleCells().map((cell) => (
-                                    <td
-                                        key={cell.id}
-                                        className={cn(
-                                            "p-2 text-sm font-inter text-[var(--blue--700)]",
-                                            cell.column.id === "batchNumber" ||
-                                                cell.column.id === "category" ||
-                                                cell.column.id === "shelf" ||
-                                                cell.column.id === "unit" ||
-                                                cell.column.id === "name"
-                                                ? "text-left"
-                                                : "text-center"
-                                        )}
-                                    >
-                                        {cell.column.id === "serialNumber" ? (
-                                            <span
+                        <tbody>
+                            {table.getRowModel().rows.length ? (
+                                table.getRowModel().rows.map((row, index) => (
+                                    <tr key={row.id} className={cn("border-b")}>
+                                        {row.getVisibleCells().map((cell) => (
+                                            <td
+                                                key={cell.id}
                                                 className={cn(
-                                                    "font-semibold text-[var(--blue--900)]"
+                                                    "p-2 text-sm font-inter text-[var(--blue--700)]",
+                                                    cell.column.id ===
+                                                        "batchNumber" ||
+                                                        cell.column.id ===
+                                                            "category" ||
+                                                        cell.column.id ===
+                                                            "shelf" ||
+                                                        cell.column.id ===
+                                                            "unit" ||
+                                                        cell.column.id ===
+                                                            "name"
+                                                        ? "text-left"
+                                                        : "text-center"
                                                 )}
                                             >
-                                                {index + 1}
-                                            </span>
-                                        ) : (
-                                            flexRender(
-                                                cell.column.columnDef.cell,
-                                                cell.getContext()
-                                            )
-                                        )}
+                                                {cell.column.id ===
+                                                "serialNumber" ? (
+                                                    <span
+                                                        className={cn(
+                                                            "font-semibold text-[var(--blue--900)]"
+                                                        )}
+                                                    >
+                                                        {index + 1}
+                                                    </span>
+                                                ) : (
+                                                    flexRender(
+                                                        cell.column.columnDef
+                                                            .cell,
+                                                        cell.getContext()
+                                                    )
+                                                )}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr key={"no-data"}>
+                                    <td colSpan={config.columns.length}>
+                                        <span className="flex items-center justify-center p-5 text-base font-semibold font-inter">
+                                            No data available!
+                                        </span>
                                     </td>
-                                ))}
+                                </tr>
+                            )}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colSpan={config.columns.length}>
+                                    <div className={cn("flex justify-between px-5 py-2.5")}>
+                                        <aside className={cn("flex gap-2")}>
+                                            <span>
+                                                Number of Items displayed per
+                                                page
+                                            </span>
+
+                                            <Select
+                                                onValueChange={(event) =>
+                                                    table.setPageSize(
+                                                        Number(event)
+                                                    )
+                                                }
+                                            >
+                                                <SelectTrigger
+                                                    className={cn(
+                                                        "w-[3.75rem] h-[1.5rem] bg-[var(--blue--100)] text-xs text-white font-inter",
+                                                        "focus:ring-0 hover:ring-0 ring-0"
+                                                    )}
+                                                >
+                                                    <SelectValue
+                                                        placeholder={
+                                                            table.getState()
+                                                                .pagination
+                                                                .pageSize
+                                                        }
+                                                    />
+                                                </SelectTrigger>
+
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        {[
+                                                            10, 20, 30, 40, 50,
+                                                        ].map((pageSize) => (
+                                                            <SelectItem
+                                                                value={String(
+                                                                    pageSize
+                                                                )}
+                                                                key={pageSize}
+                                                            >
+                                                                {pageSize}
+                                                            </SelectItem>
+                                                        ))}
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+
+                                            <span>
+                                                {table.getState().pagination
+                                                    .pageIndex *
+                                                    table.getState().pagination
+                                                        .pageSize +
+                                                    1}{" "}
+                                                - {""}
+                                                {Math.min(
+                                                    (table.getState().pagination
+                                                        .pageIndex +
+                                                        1) *
+                                                        table.getState()
+                                                            .pagination
+                                                            .pageSize,
+                                                    table.getFilteredRowModel()
+                                                        .rows.length
+                                                )}{" "}
+                                                of{" "}
+                                                {
+                                                    table.getFilteredRowModel()
+                                                        .rows.length
+                                                }{" "}
+                                                items
+                                            </span>
+                                        </aside>
+
+                                        <aside>
+                                            <button>prev</button>
+                                            <button>next</button>
+                                        </aside>
+                                    </div>
+                                </td>
                             </tr>
-                        ))
-                    ) : (
-                        <tr key={"no-data"}>
-                            <td colSpan={columns.length}>No data available</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-        </section>
+                        </tfoot>
+                    </table>
+                </section>
+            </footer>
+        </Fragment>
     );
 }
