@@ -409,7 +409,11 @@ export default function Component() {
                         <tfoot>
                             <tr>
                                 <td colSpan={config.columns.length}>
-                                    <div className={cn("flex justify-between px-5 py-2.5")}>
+                                    <div
+                                        className={cn(
+                                            "flex justify-between px-5 py-2.5"
+                                        )}
+                                    >
                                         <aside className={cn("flex gap-2")}>
                                             <span>
                                                 Number of Items displayed per
@@ -483,8 +487,85 @@ export default function Component() {
                                         </aside>
 
                                         <aside>
-                                            <button>prev</button>
-                                            <button>next</button>
+                                            <button
+                                                disabled={
+                                                    !table.getCanPreviousPage()
+                                                }
+                                                onClick={() =>
+                                                    table.previousPage()
+                                                }
+                                            >
+                                                prev
+                                            </button>
+
+                                            {Array.from(
+                                                {
+                                                    length: table.getPageCount(),
+                                                },
+                                                (_, i) => i + 1
+                                            )
+                                                .filter(function (page) {
+                                                    const currentPage =
+                                                        table.getState()
+                                                            .pagination
+                                                            .pageIndex + 1;
+
+                                                    const totalPages =
+                                                        table.getPageCount();
+
+                                                    return (
+                                                        page === 1 ||
+                                                        page === totalPages ||
+                                                        (page >=
+                                                            currentPage - 1 &&
+                                                            page <=
+                                                                currentPage + 1)
+                                                    );
+                                                })
+                                                .map(
+                                                    function (
+                                                        page,
+                                                        index,
+                                                        visiblePages
+                                                    ) {
+                                                        return (
+                                                            <Fragment
+                                                                key={index}
+                                                            >
+                                                                {index > 0 ? (
+                                                                    page >
+                                                                    visiblePages[
+                                                                        index -
+                                                                            1
+                                                                    ] +
+                                                                        1 ? (
+                                                                        <>...</>
+                                                                    ) : null
+                                                                ) : null}
+
+                                                                <button
+                                                                    onClick={() =>
+                                                                        table.setPageIndex(
+                                                                            page -
+                                                                                1
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {page}
+                                                                </button>
+                                                            </Fragment>
+                                                        );
+                                                    }
+                                                )}
+
+                                            <button
+                                                onClick={() => table.nextPage()}
+                                                disabled={
+                                                    !table.getCanNextPage()
+                                                }
+                                            >
+                                                next
+                                            </button>
                                         </aside>
                                     </div>
                                 </td>

@@ -1,12 +1,14 @@
 import { Link } from "@tanstack/react-router";
-import { PropsWithChildren, ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
+import type { ParentComponentProps } from "@/types";
 import { formatValue } from "@/utils/format-value";
 
-type ComponentProps = PropsWithChildren & { className?: string };
-
-export default function Component({ children, className }: ComponentProps) {
+export default function Component({
+    children,
+    className,
+}: ParentComponentProps) {
     return (
         <section
             className={cn(
@@ -26,7 +28,7 @@ type HeaderProps = {
     styles?: { [key: string]: string };
 };
 
-Component.Header = function ComponentHeader({
+Component.Header = function ({
     href,
     linkText = "See All",
     styles,
@@ -42,7 +44,10 @@ Component.Header = function ComponentHeader({
             <h3 className={styles?.title}>{title}</h3>
 
             <Link
-                className={cn("text-[var(--blue--100)] font-inter", styles?.link)}
+                className={cn(
+                    "text-[var(--blue--100)] font-inter",
+                    styles?.link
+                )}
                 to={href}
             >
                 {linkText}
@@ -58,7 +63,7 @@ type FooterProps<T> = {
     styles?: { [key: string]: string };
 };
 
-Component.Footer = function ComponentFooter<T>({
+Component.Footer = function <T>({
     columns,
     data,
     sticky,

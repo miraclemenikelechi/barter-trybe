@@ -40,4 +40,4 @@ export const PRODUCTS_FILTER: ProductsFilter[] = [
     },
 ];
 
-export const PRODUCTS_TABLE: IProductsTable[] = [...generateTableData(50)];
+export const PRODUCTS_TABLE: IProductsTable[] = [...generateTableData(5)];

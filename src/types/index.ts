@@ -1,5 +1,6 @@
+import { ColumnDef, useReactTable } from "@tanstack/react-table";
 import { ApexOptions } from "apexcharts";
-import { FC } from "react";
+import { FC, PropsWithChildren } from "react";
 
 /**
  * === LINK TYPES ===
@@ -212,3 +213,9 @@ export interface AuthenticationContextType {
     logout: () => Promise<void>;
     cookies: Record<string, string>;
 }
+
+/**
+ * === REUSABLE COMPONSNTS TYPES ===
+ * Types related to the reusable components
+ */
+export type ParentComponentProps = PropsWithChildren & { className?: string };
