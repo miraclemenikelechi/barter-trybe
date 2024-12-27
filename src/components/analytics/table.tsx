@@ -18,6 +18,7 @@ import {
     useState,
 } from "react";
 
+import DataTable from "@/components/data-table";
 import {
     Select,
     SelectContent,
@@ -275,7 +276,7 @@ export default function Component() {
 
     return (
         <Fragment>
-            <header className={cn("px-5 py-6 flex gap-4 items-center")}>
+            {/* <header className={cn("px-5 py-6 flex gap-4 items-center")}>
                 <div className={cn("space-y-2")}>
                     <h3
                         className={cn(
@@ -574,6 +575,16 @@ export default function Component() {
                     </table>
                 </section>
             </footer>
+
+            <br />
+            <hr />
+            <br /> */}
+
+            <DataTable columns={PRODUCTS_TABLE_COLUMNS} data={PRODUCTS_TABLE}>
+                <DataTable.Search />
+                <DataTable.TableHeader />
+                <DataTable.TableBody />
+            </DataTable>
         </Fragment>
     );
 }

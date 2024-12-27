@@ -14,7 +14,7 @@ export function TableContextProvider<TData, TValue>({
     children,
     columns,
     data,
-    initialPageSize,
+    initialPageSize = 10,
 }: Props<TData, TValue>) {
     const tableState = useDataTable({ columns, data, initialPageSize });
 

@@ -1,6 +1,6 @@
-import { ColumnDef, useReactTable } from "@tanstack/react-table";
+import { SortingState, useReactTable } from "@tanstack/react-table";
 import { ApexOptions } from "apexcharts";
-import { FC, PropsWithChildren } from "react";
+import { Dispatch, FC, PropsWithChildren, SetStateAction } from "react";
 
 /**
  * === LINK TYPES ===
@@ -65,6 +65,21 @@ export interface IChartFilter {
     thisMonth: ChartRenderProps[];
     thisYear: ChartRenderProps[];
 }
+
+export interface IPagination {
+    pageIndex: number;
+    pageSize: number;
+}
+
+export type TableContextType<T> = {
+    table: ReturnType<typeof useReactTable<T>>;
+    sorting: SortingState;
+    globalFilter: string;
+    pagination: IPagination;
+    setSorting: Dispatch<SetStateAction<SortingState>>;
+    setGlobalFilter: Dispatch<SetStateAction<string>>;
+    setPagination: Dispatch<SetStateAction<IPagination>>;
+};
 
 /**
  * === LANDING PAGE TYPES ===

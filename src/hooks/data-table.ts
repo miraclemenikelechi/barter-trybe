@@ -8,16 +8,13 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 
+import type { IPagination } from "@/types";
+
 interface Props<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     initialPageSize?: number;
 }
-
-type Pagination = {
-    pageIndex: number;
-    pageSize: number;
-};
 
 export function useDataTable<TData, TValue>({
     columns,
@@ -26,7 +23,7 @@ export function useDataTable<TData, TValue>({
 }: Props<TData, TValue>) {
     const [sorting, setSorting] = useState<SortingState>([]);
     const [globalFilter, setGlobalFilter] = useState<string>("");
-    const [pagination, setPagination] = useState<Pagination>({
+    const [pagination, setPagination] = useState<IPagination>({
         pageIndex: 0,
         pageSize: initialPageSize || 10,
     });
@@ -63,5 +60,5 @@ export function useDataTable<TData, TValue>({
 
         pagination,
         setPagination,
-    };
+    } as const;
 }

@@ -28,7 +28,7 @@ type HeaderProps = {
     styles?: { [key: string]: string };
 };
 
-Component.Header = function ({
+Component.Header = function Component ({
     href,
     linkText = "See All",
     styles,
@@ -63,7 +63,7 @@ type FooterProps<T> = {
     styles?: { [key: string]: string };
 };
 
-Component.Footer = function <T>({
+Component.Footer = function Component<T>({
     columns,
     data,
     sticky,
