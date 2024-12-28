@@ -1,9 +1,10 @@
 import {
-    ColumnDef,
+    type ColumnDef,
     getCoreRowModel,
     getFilteredRowModel,
+    getPaginationRowModel,
     getSortedRowModel,
-    SortingState,
+    type SortingState,
     useReactTable,
 } from "@tanstack/react-table";
 import { useState } from "react";
@@ -29,24 +30,25 @@ export function useDataTable<TData, TValue>({
     });
 
     const table = useReactTable({
-        data,
         columns,
+        data,
         getCoreRowModel: getCoreRowModel(),
 
         getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
 
+        manualPagination: false,
+        pageCount: Math.ceil(data.length / pagination.pageSize),
         state: {
-            sorting,
             globalFilter,
             pagination,
+            sorting,
         },
-        pageCount: Math.ceil(data.length / pagination.pageSize),
-        manualPagination: false,
 
-        onSortingChange: setSorting,
         onGlobalFilterChange: setGlobalFilter,
         onPaginationChange: setPagination,
+        onSortingChange: setSorting,
     });
 
     return {
