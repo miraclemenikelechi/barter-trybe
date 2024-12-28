@@ -1,6 +1,6 @@
-import { ColumnDef, flexRender } from "@tanstack/react-table";
+import { type ColumnDef, flexRender } from "@tanstack/react-table";
 import { Search } from "lucide-react";
-import { ChangeEvent, FormEvent } from "react";
+import { type ChangeEvent, type FormEvent, type HTMLProps } from "react";
 
 import { TableContextProvider } from "@/contexts/table";
 import { useTableContext } from "@/hooks/table-context";
@@ -11,6 +11,10 @@ interface Props<TData, TValue> extends ParentComponentProps {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
     initialPageSize?: number;
+}
+
+interface IStyles {
+    styles?: { [key: string]: HTMLProps<HTMLElement>["className"] };
 }
 
 export default function Component<TData, TValue>({
@@ -31,13 +35,39 @@ export default function Component<TData, TValue>({
     );
 }
 
-Component.Title = function () {};
+interface TitleProps extends IStyles {
+    title: string;
+    description: string;
+}
 
-Component.Search = function Component({
+Component.Title = function Component({
     styles,
-}: {
-    styles?: { [key: string]: string };
-}) {
+    title,
+    description,
+}: TitleProps) {
+    return (
+        <div className={cn(styles?.wrapper, "space-y-2")}>
+            <h3
+                className={cn(
+                    styles?.title,
+                    "text-base font-semibold font-inter text-[var(--blue--900)]"
+                )}
+            >
+                {title}
+            </h3>
+            <p
+                className={cn(
+                    styles?.description,
+                    "text-sm font-inter text-[var(--blue--700)]"
+                )}
+            >
+                {description}
+            </p>
+        </div>
+    );
+};
+
+Component.Search = function Component({ styles }: IStyles) {
     const { globalFilter, setGlobalFilter } = useTableContext();
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -76,15 +106,20 @@ Component.Search = function Component({
     );
 };
 
-Component.TableHeader = function Component<T>() {
+Component.TableHeader = function Component<T>({ styles }: IStyles) {
     const { table } = useTableContext<T>();
 
     return (
-        <thead>
+        <thead className={cn(styles?.thead, "border-y")}>
             {table.getHeaderGroups().map((headerGroup) => (
                 <tr key={headerGroup.id}>
                     {headerGroup.headers.map((header) => (
-                        <th key={header.id}>
+                        <th
+                            key={header.id}
+                            className={cn(
+                                "px-2 py-3 text-[var(--blue--700)] text-xs font-inter"
+                            )}
+                        >
                             {flexRender(
                                 header.column.columnDef.header,
                                 header.getContext()
@@ -97,16 +132,30 @@ Component.TableHeader = function Component<T>() {
     );
 };
 
-Component.TableBody = function Component<T>() {
+interface TableBodyProps {
+    leftAlignedColumns: string[];
+}
+
+Component.TableBody = function Component<T>({
+    leftAlignedColumns,
+}: TableBodyProps) {
     const { table } = useTableContext<T>();
 
     return (
         <tbody>
             {table.getRowModel().rows.length ? (
                 table.getRowModel().rows.map((row, index) => (
-                    <tr key={row.id}>
+                    <tr key={row.id} className={cn("border-b")}>
                         {row.getVisibleCells().map((cell) => (
-                            <td key={cell.id}>
+                            <td
+                                key={cell.id}
+                                className={cn(
+                                    "p-2 text-sm font-inter text-[var(--blue--700)]",
+                                    leftAlignedColumns.includes(cell.column.id)
+                                        ? "text-left"
+                                        : "text-center"
+                                )}
+                            >
                                 {cell.column.id === "serialNumber" ? (
                                     <span
                                         className={cn(
@@ -138,4 +187,6 @@ Component.TableBody = function Component<T>() {
     );
 };
 
-Component.TableFooter = function () {};
+Component.TableFooter = function Component() {
+    return <></>;
+};

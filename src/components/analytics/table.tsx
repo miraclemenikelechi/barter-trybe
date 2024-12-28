@@ -30,6 +30,7 @@ import {
 import { PRODUCTS_TABLE } from "@/lib/analytics.config";
 import { cn } from "@/lib/utils";
 import { IProductsTable } from "@/types";
+import { formatValue } from "@/utils/format-value";
 
 const PRODUCTS_TABLE_COLUMNS: ColumnDef<IProductsTable>[] = [
     {
@@ -120,12 +121,16 @@ const PRODUCTS_TABLE_COLUMNS: ColumnDef<IProductsTable>[] = [
     },
     {
         accessorKey: "expiredItems",
-        cell: (info) => <span>{info.getValue() as ReactNode}</span>,
+        cell: (info) => (
+            <span>{formatValue(false, Number(info.getValue()))}</span>
+        ),
         header: () => <span>Expired Items</span>,
     },
     {
         accessorKey: "expiredLoss",
-        cell: (info) => <span>{info.getValue() as ReactNode}</span>,
+        cell: (info) => (
+            <span>{formatValue(true, Number(info.getValue()))}</span>
+        ),
         header: () => <span>Expired Loss</span>,
     },
     {
@@ -159,7 +164,9 @@ const PRODUCTS_TABLE_COLUMNS: ColumnDef<IProductsTable>[] = [
     },
     {
         accessorKey: "shelf",
-        cell: (info) => <span>{info.getValue() as ReactNode}</span>,
+        cell: (info) => (
+            <span className="uppercase">{info.getValue() as ReactNode}</span>
+        ),
         header: ({ column }) => {
             return (
                 <button
@@ -581,9 +588,27 @@ export default function Component() {
             <br /> */}
 
             <DataTable columns={PRODUCTS_TABLE_COLUMNS} data={PRODUCTS_TABLE}>
-                <DataTable.Search />
-                <DataTable.TableHeader />
-                <DataTable.TableBody />
+                <header className={cn("px-5 py-6 flex gap-4 items-center")}>
+                    <DataTable.Title
+                        description="This shows a list of all Products available in the system"
+                        title="Products List"
+                    />
+                    <DataTable.Search />
+                </header>
+
+                <table className={cn("size-full")}>
+                    <DataTable.TableHeader />
+                    <DataTable.TableBody
+                        leftAlignedColumns={[
+                            "batchNumber",
+                            "category",
+                            "name",
+                            "shelf",
+                            "unit",
+                        ]}
+                    />
+                    <DataTable.TableFooter />
+                </table>
             </DataTable>
         </Fragment>
     );
