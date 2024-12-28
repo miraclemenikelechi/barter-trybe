@@ -1,5 +1,5 @@
-import { type ColumnDef, flexRender } from "@tanstack/react-table";
-import { Search } from "lucide-react";
+import { type Column, type ColumnDef, flexRender } from "@tanstack/react-table";
+import { ArrowUpDown, MoveDown, MoveUp, Search } from "lucide-react";
 import {
     type ChangeEvent,
     type FormEvent,
@@ -367,5 +367,33 @@ Component.TableFooter = function Component<T>() {
                 </div>
             </td>
         </tfoot>
+    );
+};
+
+interface TableSortProps<T> {
+    label: string;
+    column: Column<T, unknown>;
+}
+
+Component.TableSort = function Component<T>({
+    label,
+    column,
+}: TableSortProps<T>) {
+    return (
+        <button
+            className={cn("flex items-center justify-start w-full")}
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+            <span>{label}</span>
+            <i className={cn("size-6 flex items-center justify-center")}>
+                {column.getIsSorted() === "asc" ? (
+                    <MoveUp className="w-4 h-4 ml-2" />
+                ) : column.getIsSorted() === "desc" ? (
+                    <MoveDown className="w-4 h-4 ml-2" />
+                ) : (
+                    <ArrowUpDown className="w-4 h-4 ml-2" />
+                )}
+            </i>
+        </button>
     );
 };
