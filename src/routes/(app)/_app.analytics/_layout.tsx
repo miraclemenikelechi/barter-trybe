@@ -1,6 +1,6 @@
 import "@styles/pages/analytics.scss";
 
-import { createFileRoute, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useMatchRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 
 import DashboardPageNavigation from "@/components/dashboard-page-navigation-link";
@@ -21,7 +21,12 @@ const pageNavigation: ILink[] = [
 
 export const Route = createFileRoute("/(app)/_app/analytics/_layout")({
     component: function Component() {
+        const matchRoute = useMatchRoute();
         const { setTitle } = useDashboardPagesTitle();
+
+        const showPageNavigation =
+            matchRoute({ to: "/analytics" }) ||
+            matchRoute({ to: "/analytics/categories" });
 
         useEffect(() => {
             setTitle("Analytics");
@@ -29,11 +34,13 @@ export const Route = createFileRoute("/(app)/_app/analytics/_layout")({
 
         return (
             <section className={cn("analytics")}>
-                <header className={cn("analytics__header")}>
-                    <nav className={cn("analytics__navigation")}>
-                        <DashboardPageNavigation links={pageNavigation} />
-                    </nav>
-                </header>
+                {showPageNavigation ? (
+                    <header className={cn("analytics__header")}>
+                        <nav className={cn("analytics__navigation")}>
+                            <DashboardPageNavigation links={pageNavigation} />
+                        </nav>
+                    </header>
+                ) : null}
 
                 <Outlet />
             </section>

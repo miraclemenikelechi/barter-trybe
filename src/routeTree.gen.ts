@@ -27,6 +27,7 @@ import { Route as appAppDashboardLayoutIndexImport } from './routes/(app)/_app.d
 import { Route as appAppAnalyticsLayoutIndexImport } from './routes/(app)/_app.analytics/_layout.index'
 import { Route as appAppDashboardLayoutChartsImport } from './routes/(app)/_app.dashboard/_layout.charts'
 import { Route as appAppAnalyticsLayoutCategoriesImport } from './routes/(app)/_app.analytics/_layout.categories'
+import { Route as appAppAnalyticsLayoutSlugImport } from './routes/(app)/_app.analytics/_layout.$slug'
 
 // Create Virtual Routes
 
@@ -152,6 +153,12 @@ const appAppAnalyticsLayoutCategoriesRoute =
     getParentRoute: () => appAppAnalyticsLayoutRoute,
   } as any)
 
+const appAppAnalyticsLayoutSlugRoute = appAppAnalyticsLayoutSlugImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => appAppAnalyticsLayoutRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -254,6 +261,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof appAppDashboardLayoutImport
       parentRoute: typeof appAppDashboardRoute
     }
+    '/(app)/_app/analytics/_layout/$slug': {
+      id: '/(app)/_app/analytics/_layout/$slug'
+      path: '/$slug'
+      fullPath: '/analytics/$slug'
+      preLoaderRoute: typeof appAppAnalyticsLayoutSlugImport
+      parentRoute: typeof appAppAnalyticsLayoutImport
+    }
     '/(app)/_app/analytics/_layout/categories': {
       id: '/(app)/_app/analytics/_layout/categories'
       path: '/categories'
@@ -288,11 +302,13 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface appAppAnalyticsLayoutRouteChildren {
+  appAppAnalyticsLayoutSlugRoute: typeof appAppAnalyticsLayoutSlugRoute
   appAppAnalyticsLayoutCategoriesRoute: typeof appAppAnalyticsLayoutCategoriesRoute
   appAppAnalyticsLayoutIndexRoute: typeof appAppAnalyticsLayoutIndexRoute
 }
 
 const appAppAnalyticsLayoutRouteChildren: appAppAnalyticsLayoutRouteChildren = {
+  appAppAnalyticsLayoutSlugRoute: appAppAnalyticsLayoutSlugRoute,
   appAppAnalyticsLayoutCategoriesRoute: appAppAnalyticsLayoutCategoriesRoute,
   appAppAnalyticsLayoutIndexRoute: appAppAnalyticsLayoutIndexRoute,
 }
@@ -413,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/verify': typeof authenticationAuthenticationVerifyRoute
   '/analytics': typeof appAppAnalyticsLayoutRouteWithChildren
   '/dashboard': typeof appAppDashboardLayoutRouteWithChildren
+  '/analytics/$slug': typeof appAppAnalyticsLayoutSlugRoute
   '/analytics/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
   '/analytics/': typeof appAppAnalyticsLayoutIndexRoute
@@ -428,6 +445,7 @@ export interface FileRoutesByTo {
   '/verify': typeof authenticationAuthenticationVerifyRoute
   '/analytics': typeof appAppAnalyticsLayoutIndexRoute
   '/dashboard': typeof appAppDashboardLayoutIndexRoute
+  '/analytics/$slug': typeof appAppAnalyticsLayoutSlugRoute
   '/analytics/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/dashboard/charts': typeof appAppDashboardLayoutChartsRoute
 }
@@ -448,6 +466,7 @@ export interface FileRoutesById {
   '/(app)/_app/analytics/_layout': typeof appAppAnalyticsLayoutRouteWithChildren
   '/(app)/_app/dashboard': typeof appAppDashboardRouteWithChildren
   '/(app)/_app/dashboard/_layout': typeof appAppDashboardLayoutRouteWithChildren
+  '/(app)/_app/analytics/_layout/$slug': typeof appAppAnalyticsLayoutSlugRoute
   '/(app)/_app/analytics/_layout/categories': typeof appAppAnalyticsLayoutCategoriesRoute
   '/(app)/_app/dashboard/_layout/charts': typeof appAppDashboardLayoutChartsRoute
   '/(app)/_app/analytics/_layout/': typeof appAppAnalyticsLayoutIndexRoute
@@ -465,6 +484,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/analytics'
     | '/dashboard'
+    | '/analytics/$slug'
     | '/analytics/categories'
     | '/dashboard/charts'
     | '/analytics/'
@@ -479,6 +499,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/analytics'
     | '/dashboard'
+    | '/analytics/$slug'
     | '/analytics/categories'
     | '/dashboard/charts'
   id:
@@ -497,6 +518,7 @@ export interface FileRouteTypes {
     | '/(app)/_app/analytics/_layout'
     | '/(app)/_app/dashboard'
     | '/(app)/_app/dashboard/_layout'
+    | '/(app)/_app/analytics/_layout/$slug'
     | '/(app)/_app/analytics/_layout/categories'
     | '/(app)/_app/dashboard/_layout/charts'
     | '/(app)/_app/analytics/_layout/'
@@ -596,6 +618,7 @@ export const routeTree = rootRoute
       "filePath": "(app)/_app.analytics/_layout.tsx",
       "parent": "/(app)/_app/analytics",
       "children": [
+        "/(app)/_app/analytics/_layout/$slug",
         "/(app)/_app/analytics/_layout/categories",
         "/(app)/_app/analytics/_layout/"
       ]
@@ -614,6 +637,10 @@ export const routeTree = rootRoute
         "/(app)/_app/dashboard/_layout/charts",
         "/(app)/_app/dashboard/_layout/"
       ]
+    },
+    "/(app)/_app/analytics/_layout/$slug": {
+      "filePath": "(app)/_app.analytics/_layout.$slug.tsx",
+      "parent": "/(app)/_app/analytics/_layout"
     },
     "/(app)/_app/analytics/_layout/categories": {
       "filePath": "(app)/_app.analytics/_layout.categories.tsx",

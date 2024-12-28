@@ -5,6 +5,7 @@ import {
     type FormEvent,
     Fragment,
     type HTMLProps,
+    useState,
 } from "react";
 
 import { PaginationNext, PaginationPrevious } from "@/assets/icons";
@@ -44,7 +45,7 @@ export default function Component<TData, TValue>({
             data={data}
             initialPageSize={initialPageSize}
         >
-            <section className={cn(className, "")}>{children}</section>
+            <section className={cn(className, "size-full")}>{children}</section>
         </TableContextProvider>
     );
 }
@@ -83,9 +84,11 @@ Component.Title = function Component({
 
 Component.Search = function Component({ styles }: IStyles) {
     const { globalFilter, setGlobalFilter } = useTableContext();
+    const [searchValue, setSearchValue] = useState<string>(globalFilter);
 
     function handleSubmit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
+        setGlobalFilter(searchValue);
     }
 
     return (
@@ -104,9 +107,9 @@ Component.Search = function Component({ styles }: IStyles) {
                 type="text"
                 className={cn(styles?.input, "w-full ml-auto")}
                 placeholder="Search..."
-                value={globalFilter ?? ""}
+                value={searchValue}
                 onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                    setGlobalFilter(event?.target.value)
+                    setSearchValue(event?.target.value)
                 }
             />
 
@@ -227,145 +230,150 @@ Component.TableFooter = function Component<T>() {
 
     return (
         <tfoot>
-            <td colSpan={table.getAllColumns().length}>
-                <div className={cn("flex justify-between px-5 py-2.5")}>
-                    <aside
-                        className={cn("flex gap-2 items-center justify-center")}
-                    >
-                        <span
+            <tr>
+                <td colSpan={table.getAllColumns().length}>
+                    <div className={cn("flex justify-between px-5 py-2.5")}>
+                        <aside
                             className={cn(
-                                "font-inter text-sm text-[var(--blue--700)]"
+                                "flex gap-2 items-center justify-center"
                             )}
                         >
-                            Number of Items displayed per page
-                        </span>
-
-                        <Select
-                            onValueChange={(event) =>
-                                table.setPageSize(Number(event))
-                            }
-                        >
-                            <SelectTrigger
+                            <span
                                 className={cn(
-                                    "w-[3.75rem] h-[1.5rem] bg-[var(--blue--100)] text-xs text-white font-inter",
-                                    "focus:ring-0 hover:ring-0 ring-0"
+                                    "font-inter text-sm text-[var(--blue--700)]"
                                 )}
                             >
-                                <SelectValue
-                                    placeholder={
-                                        table.getState().pagination.pageSize
-                                    }
-                                />
-                            </SelectTrigger>
+                                Number of Items displayed per page
+                            </span>
 
-                            <SelectContent>
-                                <SelectGroup>
-                                    {[10, 20, 30, 40, 50]
-                                        .filter(
-                                            (size) =>
-                                                size === 10 ||
-                                                size <=
-                                                    table.getFilteredRowModel()
-                                                        .rows.length
-                                        )
-                                        .map((pageSize) => (
-                                            <SelectItem
-                                                value={String(pageSize)}
-                                                key={pageSize}
+                            <Select
+                                onValueChange={(event) =>
+                                    table.setPageSize(Number(event))
+                                }
+                            >
+                                <SelectTrigger
+                                    className={cn(
+                                        "w-[3.75rem] h-[1.5rem] bg-[var(--blue--100)] text-xs text-white font-inter",
+                                        "focus:ring-0 hover:ring-0 ring-0"
+                                    )}
+                                >
+                                    <SelectValue
+                                        placeholder={
+                                            table.getState().pagination.pageSize
+                                        }
+                                    />
+                                </SelectTrigger>
+
+                                <SelectContent>
+                                    <SelectGroup>
+                                        {[10, 20, 30, 40, 50]
+                                            .filter(
+                                                (size) =>
+                                                    size === 10 ||
+                                                    size <=
+                                                        table.getFilteredRowModel()
+                                                            .rows.length
+                                            )
+                                            .map((pageSize) => (
+                                                <SelectItem
+                                                    value={String(pageSize)}
+                                                    key={pageSize}
+                                                >
+                                                    {pageSize}
+                                                </SelectItem>
+                                            ))}
+                                    </SelectGroup>
+                                </SelectContent>
+                            </Select>
+
+                            <span
+                                className={cn(
+                                    "font-inter text-sm text-[var(--blue--700)]"
+                                )}
+                            >
+                                {texts.firstItemInPage}-{texts.lastItemInPage}{" "}
+                                of {texts.totalItems} items
+                            </span>
+                        </aside>
+
+                        <aside
+                            className={cn(
+                                "flex gap-2 items-center font-inter text-sm"
+                            )}
+                        >
+                            <button
+                                disabled={!table.getCanPreviousPage()}
+                                onClick={() => table.previousPage()}
+                                className={cn(
+                                    "disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--blue--200)] p-2 rounded"
+                                )}
+                            >
+                                <i className="size-4">
+                                    <PaginationPrevious />
+                                </i>
+                            </button>
+
+                            {Array.from(
+                                {
+                                    length: texts.totalPages,
+                                },
+                                (_, i) => i + 1
+                            )
+                                .filter(function (page) {
+                                    return (
+                                        page === 1 ||
+                                        page === texts.totalPages ||
+                                        (page >= texts.currentPage - 1 &&
+                                            page <= texts.currentPage + 1)
+                                    );
+                                })
+                                .map(function (page, index, visiblePages) {
+                                    return (
+                                        <Fragment key={index}>
+                                            {index > 0 ? (
+                                                page >
+                                                visiblePages[index - 1] + 1 ? (
+                                                    <span className="flex items-center justify-center size-8">
+                                                        ...
+                                                    </span>
+                                                ) : null
+                                            ) : null}
+
+                                            <button
+                                                onClick={() =>
+                                                    table.setPageIndex(page - 1)
+                                                }
+                                                className={cn(
+                                                    "size-8 rounded",
+                                                    page - 1 ===
+                                                        table.getState()
+                                                            .pagination
+                                                            .pageIndex
+                                                        ? "bg-[var(--blue--100)] text-white font-bold"
+                                                        : "bg-white text-[var(--blue--700)] hover:bg-[var(--blue--200)]"
+                                                )}
                                             >
-                                                {pageSize}
-                                            </SelectItem>
-                                        ))}
-                                </SelectGroup>
-                            </SelectContent>
-                        </Select>
+                                                {page}
+                                            </button>
+                                        </Fragment>
+                                    );
+                                })}
 
-                        <span
-                            className={cn(
-                                "font-inter text-sm text-[var(--blue--700)]"
-                            )}
-                        >
-                            {texts.firstItemInPage}-{texts.lastItemInPage} of{" "}
-                            {texts.totalItems} items
-                        </span>
-                    </aside>
-
-                    <aside
-                        className={cn(
-                            "flex gap-2 items-center font-inter text-sm"
-                        )}
-                    >
-                        <button
-                            disabled={!table.getCanPreviousPage()}
-                            onClick={() => table.previousPage()}
-                            className={cn(
-                                "disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--blue--200)] p-2 rounded"
-                            )}
-                        >
-                            <i className="size-4">
-                                <PaginationPrevious />
-                            </i>
-                        </button>
-
-                        {Array.from(
-                            {
-                                length: table.getPageCount(),
-                            },
-                            (_, i) => i + 1
-                        )
-                            .filter(function (page) {
-                                return (
-                                    page === 1 ||
-                                    page === texts.totalPages ||
-                                    (page >= texts.currentPage - 1 &&
-                                        page <= texts.currentPage + 1)
-                                );
-                            })
-                            .map(function (page, index, visiblePages) {
-                                return (
-                                    <Fragment key={index}>
-                                        {index > 0 ? (
-                                            page >
-                                            visiblePages[index - 1] + 1 ? (
-                                                <span className="flex items-center justify-center size-8">
-                                                    ...
-                                                </span>
-                                            ) : null
-                                        ) : null}
-
-                                        <button
-                                            onClick={() =>
-                                                table.setPageIndex(page - 1)
-                                            }
-                                            className={cn(
-                                                "size-8 rounded",
-                                                page - 1 ===
-                                                    table.getState().pagination
-                                                        .pageIndex
-                                                    ? "bg-[var(--blue--100)] text-white font-bold"
-                                                    : "bg-white text-[var(--blue--700)] hover:bg-[var(--blue--200)]"
-                                            )}
-                                        >
-                                            {page}
-                                        </button>
-                                    </Fragment>
-                                );
-                            })}
-
-                        <button
-                            onClick={() => table.nextPage()}
-                            disabled={!table.getCanNextPage()}
-                            className={cn(
-                                "disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--blue--200)] p-2 rounded"
-                            )}
-                        >
-                            <i className="size-4">
-                                <PaginationNext />
-                            </i>
-                        </button>
-                    </aside>
-                </div>
-            </td>
+                            <button
+                                onClick={() => table.nextPage()}
+                                disabled={!table.getCanNextPage()}
+                                className={cn(
+                                    "disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--blue--200)] p-2 rounded"
+                                )}
+                            >
+                                <i className="size-4">
+                                    <PaginationNext />
+                                </i>
+                            </button>
+                        </aside>
+                    </div>
+                </td>
+            </tr>
         </tfoot>
     );
 };

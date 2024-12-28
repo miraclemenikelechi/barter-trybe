@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { type ColumnDef } from "@tanstack/react-table";
-import { Fragment, ReactNode, useMemo } from "react";
+import { ReactNode, useMemo } from "react";
 
 import DataTable from "@/components/data-table";
 import { PRODUCTS_TABLE } from "@/lib/analytics.config";
@@ -98,6 +98,8 @@ const PRODUCTS_TABLE_COLUMNS: ColumnDef<IProductsTable>[] = [
                     className={cn(
                         "bg-[var(--blue--100)] h-8 w-16 rounded text-white font-inter text-sm font-medium"
                     )}
+                    to={`/analytics/$slug`}
+                    params={{ slug: data.batchNumber }}
                 >
                     View
                 </Link>
@@ -124,24 +126,20 @@ export default function Component() {
     ];
 
     return (
-        <Fragment>
-            <DataTable columns={config.columns} data={config.data}>
-                <header className={cn("px-5 py-6 flex gap-4 items-center")}>
-                    <DataTable.Title
-                        description="This shows a list of all Products available in the system"
-                        title="Products List"
-                    />
-                    <DataTable.Search />
-                </header>
+        <DataTable columns={config.columns} data={config.data}>
+            <header className={cn("px-5 py-6 flex gap-4 items-center")}>
+                <DataTable.Title
+                    description="This shows a list of all Products available in the system"
+                    title="Products List"
+                />
+                <DataTable.Search />
+            </header>
 
-                <table className={cn("size-full")}>
-                    <DataTable.TableHeader />
-                    <DataTable.TableBody
-                        leftAlignedColumns={leftAlignedColumns}
-                    />
-                    <DataTable.TableFooter />
-                </table>
-            </DataTable>
-        </Fragment>
+            <table className={cn("size-full")}>
+                <DataTable.TableHeader />
+                <DataTable.TableBody leftAlignedColumns={leftAlignedColumns} />
+                <DataTable.TableFooter />
+            </table>
+        </DataTable>
     );
 }
