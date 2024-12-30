@@ -20,7 +20,7 @@ const pageNavigation: ILink[] = [
 ];
 
 export const Route = createFileRoute("/(app)/_app/analytics/_layout")({
-    component: function Component() {
+    component: function Layout() {
         const matchRoute = useMatchRoute();
         const { setTitle } = useDashboardPagesTitle();
 

@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useReducer } from "react";
 
 import Dropdown from "@/components/drop-down";
-import { PRODUCTS_FILTER } from "@/lib/analytics.config";
+import { PRODUCTS_FILTER } from "@/lib/analytics-page.config";
 import { cn } from "@/lib/utils";
 import type { IDropdownOption, ProductsFilter } from "@/types";
 
@@ -185,7 +185,9 @@ function Filter({ onChange, options, title, value, placeholder }: FilterProps) {
     }
 
     return (
-        <section className={cn("flex flex-col max-w-[14.25rem] w-full gap-2.5")}>
+        <section
+            className={cn("flex flex-col max-w-[14.25rem] w-full gap-2.5")}
+        >
             <span
                 className={cn(
                     "font-inter font-semibold text-base text-[var(--black--300)]"

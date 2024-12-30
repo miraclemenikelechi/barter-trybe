@@ -12,6 +12,9 @@ export function generateTableData(length: number) {
             unit: faker.number.int({ min: 10, max: 100 }),
             shelf: faker.number.hex(255),
             category: faker.commerce.department(),
+            // chartData: {
+            //     all: {},
+            // },
         };
     });
 }

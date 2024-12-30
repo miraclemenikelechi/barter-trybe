@@ -175,6 +175,7 @@ export interface IProductsTable {
     unit: number;
     shelf: string;
     category: string;
+    // chartData: IChartFilter;
 }
 
 export interface IProductsTableHeaders {

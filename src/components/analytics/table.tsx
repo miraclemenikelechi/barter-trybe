@@ -3,7 +3,7 @@ import { type ColumnDef } from "@tanstack/react-table";
 import { ReactNode, useMemo } from "react";
 
 import DataTable from "@/components/data-table";
-import { PRODUCTS_TABLE } from "@/lib/analytics.config";
+import { PRODUCTS_TABLE } from "@/lib/analytics-page.config";
 import { cn } from "@/lib/utils";
 import { IProductsTable } from "@/types";
 import { formatValue } from "@/utils/format-value";
